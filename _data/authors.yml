@@ -82,8 +82,9 @@ author2:
     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
   picture:           https://raw.githubusercontent.com/Knight-boy/QQone/gh-pages/public/images/Owner.jpg
-  twitter:           <username>
-  github:            <username>
+  #twitter:           <username>
+  sina-weibo:        hpanw
+  github:            knight-boy
   accent_color:      '#268bd2'
   accent_image:
     background:      '#202020'
