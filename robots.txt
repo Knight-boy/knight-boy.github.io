@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /boyjack
+Disallow: /QQone/Myself/Resume
+Allow: /Blog
+Allow: /trigram
+Sitemap: https://www.knightboy.cn/sitemap.xml
