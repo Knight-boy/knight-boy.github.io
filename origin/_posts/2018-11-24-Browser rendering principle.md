@@ -1,6 +1,6 @@
 ---
 title:  "浏览器原理"
-images: /assets/img/blog/browserthro.jpg
+image: /assets/img/blog/browserthro.jpg
 description: >
   从地址栏到页面呈现过程，从浏览器多进程到JS单线程，从JS单线程最后到JS运行机制
 author: author2

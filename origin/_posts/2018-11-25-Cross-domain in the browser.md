@@ -1,6 +1,6 @@
 ---
 title: "浏览器中的跨域"
-images: /assets/img/blog/crossdomain.jpg
+image: /assets/img/blog/crossdomain.jpg
 description: >
   跨域问题一直是前端领域的重要内容，能够很好的解决跨域问题在前端开发实践中非常重要。
 author: author2

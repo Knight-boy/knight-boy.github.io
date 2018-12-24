@@ -1,6 +1,6 @@
 ---
 title: "JavaScript中的内存回收机制"
-images: /assets/img/blog/recyling.jpg
+image: /assets/img/blog/recyling.jpg
 description: >
   浏览器垃圾回收机制和C/C++中的垃圾回收机制有着天然的区别。垃圾能否及时回收关乎到程序运行的健壮性。
 author: author2
