@@ -7,7 +7,7 @@ author: author2
 comments: true
 ---
 
-源于[浏览器的工作原理：网络浏览器幕后揭秘](https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/)
+​	来源于[浏览器的工作原理：网络浏览器幕后揭秘](https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/)
 
 ## 1 浏览器的高级架构
 
@@ -79,7 +79,9 @@ comments: true
 > + 多进程充分利用多核优势
 > + 方便使用沙盒模型隔离插件等过程，提高浏览器的生存能力 *
 
-**注意：**`这样做会带来内存的不小消耗，但从长远来看，在浏览器中用空间换时间的策略还是值得的。`
+**注意：** 这样做会带来内存的不小消耗，但从长远来看，在浏览器中用空间换时间的策略还是值得的。
+
+{:.message}
 
 ### 4.2 浏览器内核
 
