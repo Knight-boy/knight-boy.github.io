@@ -22,14 +22,14 @@ comments: true
 - 第三阶段：**candidate**(候选)-提案规范通过审查并从厂商那里手机反馈信息
 - 第四阶段：**finished**(完成)-提案已准备好包含在**ECMAScript**中，一个功能只有达到此阶段时才能被视为标准。但是，在浏览器和[**Node.js**](https://nodejs.org)等运行中时可能还需要更长的时间。
 
-### ES2016
+## ES2016
 
 ES2016通过添加两个小功能证明了标准化过程：
 
 1. 数组中添加[include()][include]
 2. 添加[**](pow)运算符，a**b与`Math.pow(a,b)`相同
 
-### ES2017
+## ES2017
 
 ES2017提供了更多的新功能：
 
@@ -43,11 +43,11 @@ ES2017提供了更多的新功能：
 
 关于更多ES2017的信息请参考[What's new in ES2017][ES2017]
 
-### ES2018
+## ES2018
 
 **ECMAScript 2018 (ES9)**现在已经推出，以下功能已经达到第四个阶段，但各个浏览器的运行情况稍有差别。
 
-#### 异步迭代
+### 异步迭代
 
 在**async/await**的某些时刻，你可以尝试在同步循环中调用异步函数。如：
 
@@ -83,11 +83,9 @@ async function process(array) {
 }
 ```
 
-#### Promise.finally()
+### Promise.finally()
 
 **Promise**链要么成功到达最后一个**.then()**，或者触发失败**.catch()**，在某些情况下，你想要无论**Promise**成功还是失败，运行相同的代码，例如清除，删除对话，关闭数据库连接等等。
-
-
 
 **.finally()**允许你指定一个最终的逻辑而不是在最后重复**.then()**，和**.catch()**:
 
@@ -105,7 +103,7 @@ function doSomething() {
 }
 ```
 
-#### Rest/Spread属性
+### Rest/Spread属性
 
 **ES2015**引入了[Rest参数][rest]和[扩展运算符][...]。三点（**...**）表示法仅用于数组操作。**Rest**参数语法将传递给函数的最后一个参数转换为数组：
 
@@ -170,7 +168,7 @@ const obj2 = { ...obj1, z: 5};
 
 您可以使用**Spread运算符**来克隆对象**(obj2 = { ...obj1 });**
 
-#### 正则表达式命名为捕获组
+### 正则表达式命名为捕获组
 
 **JavaScript**正则表达式可以返回匹配对象-一个包含匹配字符串的类数组。例如，要以YYYY-MM-DD格式解析日期：
 
@@ -179,8 +177,8 @@ const
 	reDate = /([0-9]{4})-([0-9]{2}-([0-9]{2})/,
 	match  = reDate.exec('2018-12-30'),
 	year   = match[1],//2018
-    month  = match[2],//12
-    day    = match[3];//30
+	month  = match[2],//12
+	day    = match[3];//30
 ```
 
 它很难阅读，并且更改正则表达式也可能会更改匹配对象索引。
@@ -192,10 +190,10 @@ const
 ```javascript
 const
 	reDate = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/,
-    match  = reDate.exec('2018-12-30'),
-    year   = match.groups.year, //2018
-    month  = match.groups.month,//12
-    day    = match.groups.day;  //30
+	match  = reDate.exec('2018-12-30'),
+	year   = match.groups.year, //2018
+	month  = match.groups.month,//12
+	day    = match.groups.day;  //30
 ```
 
 任何为匹配的命名组都将其属性设置为**undefined**.
@@ -207,18 +205,18 @@ const
 ``` javascript
 const
 	reDate = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/,
-    d      = '2018-12-30',
-    usDate = d.replace(reDate, '$<month>-$<day>-$<year>');
+	d = '2018-12-30',
+	usDate = d.replace(reDate, '$<month>-$<day>-$<year>');
 ```
 
-#### 正则表达式反向断言(lookbehind)
+### 正则表达式反向断言(lookbehind)
 
 目前**JavaScript**在正则表达式中支持**先行断言(lookahead)**。这意味着必须进行匹配但不捕获任何内容，并且断言不包含在整个匹配的字符串中，例如从价格中获取货币符号：
 
 ```javascript
 const
 	reLookahead = /\D(?=\d+)/,
-    match       = reLookahead.exec('$123.89');
+	match = reLookahead.exec('$123.89');
 
 console.log(match[0]);//$
 ```
@@ -230,7 +228,7 @@ console.log(match[0]);//$
 ```javascript
 const
 	reLookbehind = /(?<=\D)\d+/,
-    match        = reLookbehind('$123.89');
+	match = reLookbehind('$123.89');
 
 console.log(match[0]);//123.89
 ```
@@ -240,12 +238,12 @@ console.log(match[0]);//123.89
 ```javascript
 const
   reLookbehindNeg = /(?<!\D)\d+/,
-  match           = reLookbehind.exec('$123.89');
+  match = reLookbehind.exec('$123.89');
 
 console.log(match[0]);//null
 ```
 
-#### 正则表达式s*(dotAll)*标志
+### 正则表达式s*(dotAll)*标志
 
 正则表达式点`.`匹配除回车外的任何单个字符。标志`s`改变这中行为，允许行终止符的出现，例如：
 
@@ -256,7 +254,7 @@ console.log(match[0]);//null
 
 
 
-#### 正则表达式*Unicode*属性转义
+### 正则表达式*Unicode*属性转义
 
 到目前为止，还无法在正则表达式中本机访问**Unicode**字符属性。**ES2018**添加了**Unicode**属性转义-在表单**\p{...}**和**\P{...}**-在正则表达式中使用标记`u`**(unicode)**设置，在`\p`块内，可以使用键值对的方式设置需要匹配的属性而非具体的内容。例如：
 
@@ -267,22 +265,22 @@ reGreekSymbol.test('π');//true
 
 此特性可以避免使用特定的**Unicode**区间来进行内容类型判断，提升可读性和可维护性。
 
-#### 非转义序列的模板字符串
+### 非转义序列的模板字符串
 
 最后，**ES2018**删除了与模板字符串中转义序列相关的所有语法限制。
 
 以前，一个`\u`开始一个**unicode**转义，`\x`开始一个十六进制转义，`\`后跟一个数字开始一个八进制转义。这使得无法创建某些字符串，如Window文件路径**c:\\uuu\\xxx\\111**。更多细节参考[模板字符串][template string]。
 
-### Reference
+## Reference
 
 [What's new in ES2018][ES9]
 
 [What's new in ES2017][ES8]
 
-[ include ]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
-[ pow ]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Exponentiation_%28**%29
-[ ES9 ]: https://link.juejin.im/?target=https%3A%2F%2Fwww.sitepoint.com%2Fes2018-whats-new%2F
-[ ES8 ]: https://link.juejin.im/?target=https%3A%2F%2Fwww.sitepoint.com%2Fes2017-whats-new%2F
-[ rest ]: https://link.juejin.im/?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FJavaScript%2FReference%2FFunctions%2FRest_parameters
-[ ... ]: https://link.juejin.im/?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FJavaScript%2FReference%2FOperators%2FSpread_syntax
-[ template string ]: https://link.juejin.im/?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FJavaScript%2FReference%2Ftemplate_strings
+[include]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
+[pow]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Arithmetic_Operators#Exponentiation_%28**%29
+[ES9]: https://link.juejin.im/?target=https%3A%2F%2Fwww.sitepoint.com%2Fes2018-whats-new%2F
+[ES8]: https://link.juejin.im/?target=https%3A%2F%2Fwww.sitepoint.com%2Fes2017-whats-new%2F
+[rest]: https://link.juejin.im/?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FJavaScript%2FReference%2FFunctions%2FRest_parameters
+[...]: https://link.juejin.im/?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FJavaScript%2FReference%2FOperators%2FSpread_syntax
+[template string]: https://link.juejin.im/?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FJavaScript%2FReference%2Ftemplate_strings
