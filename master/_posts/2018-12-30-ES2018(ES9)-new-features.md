@@ -1,7 +1,7 @@
 ---
 title: ES2018(ES9)的新功能
 date: 2018-12-30
-image: /assets/image/blog/es7-es8-cover.png
+image: /assets/img/blog/es7-es8-cover.png
 description: >
   ECMA2018 New Features!
 author: author2
