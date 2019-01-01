@@ -171,7 +171,7 @@ Cookie: sid=1234567890
 
 ​        **攻击步骤：**
 
-![img](https://images2018.cnblogs.com/blog/1435929/201807/1435929-20180714120256072-239053955.png)
+![pic1](/assets/img/blog/sessionatack1.png)
 
 ​        **会话劫持攻击案例**
 
@@ -195,7 +195,7 @@ Cookie: sid=1234567890
 
 ​        攻击步骤：
 
-![img](https://images2018.cnblogs.com/blog/1435929/201807/1435929-20180714140342571-257118842.png)
+![img](/assets/img/blog/sessionatack2.png)
 
 ​        会话固定攻击案例：
 
