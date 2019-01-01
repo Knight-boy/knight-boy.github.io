@@ -27,7 +27,7 @@ comments: true
 ES2016通过添加两个小功能证明了标准化过程：
 
 1. 数组中添加[include()][include]
-2. 添加[**](pow)运算符，a**b与`Math.pow(a,b)`相同
+2. 添加[\*\*][pow]运算符，`a**b`与`Math.pow(a,b)`相同
 
 ## ES2017
 
