@@ -60,6 +60,7 @@ pre {
   display: block;
   line-height: 1.4;
   font-size: .85em;
+  border-left: .5em, solid var(--code-left);
 }
 
 pre > code {
