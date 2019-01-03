@@ -84,13 +84,13 @@ res.end(`${callback}(${JSON.stringify(student)})`);
 
 ​	比如一个简单的使用GET或POST的请求，它没有自定义的头部，而主体内容是text/plain。在发送该请求时，需要给它附加一个额外的Origin头部，其中包含请求页面的源信息（协议、域名、端口号），以便服务器根据该头部信息来决定是否给予响应。
 
-```php
+```makefile
 Origin: http://www.example.com
 ```
 
 　　如果服务器认为这个请求可以接受，就在Access-Control-Allow-Origin头部中发回相同的源信息（如果是公共资源，可以发“*”）。例如：
 
-```php
+```makefile
 Access-Control-Allow-Origin: http://www.example.com
 ```
 
@@ -242,33 +242,34 @@ req.on("end", () => {
 
 ​	**example 1:**
 
-​	如果想要在你的http://www.knightboy.cn/a.html页面里使用`<iframe>`调用另一个http://knightboy.cn/b.html页面。这时候你想在a页面里面获取b页面里的DOM，然后进行操作。然后你会发现你不能获得b的DOM。document.getEle
+​	如果想要在你的<https://www.knightboy.cn/a.html>页面里使用`<iframe>`调用另一个https://knightboy.cn/b.html页面。这时候你想在a页面里面获取b页面里的DOM，然后进行操作。然后你会发现你不能获得b的**DOM**。`document.getElementById("myIFrame").contentWindow.document`或`window.parent.document.body`因为两个窗口不同源而报错。
 
-mentById("myIFrame").contentWindow.document或window.parent.document.body因为两个窗口不同源而报错。
-
-​	这时候你只需要在a页面里和b页面里把document.domian设置成相同的值就可以在两个页面里操作Dom了。
+​	这时候你只需要在a页面里和b页面里把`document.domian`设置成相同的值就可以在两个页面里操作**Dom**了。
 
 ​	**example 2:**
 
-​	如果你在http://www.knightboy.cn/a.html页面里写入了document.cookie = "key=hello world"；你在http://knightboy.cn/b.html页面是拿不到这个cookie的。
+​	如果你在<https://www.knightboy.cn/a.html>页面里写入了`document.cookie = "key=hello world"`；你在<http://knightboy.cn/b.html>页面是拿不到这个`cookie`的。
 
-​	原因在于，Cookie是服务器写入浏览器的一小段信息，只有同源的网页才能共享。但是，两个网页一级域名相同，二级域名不同，浏览器允许通过设置`document.domain`来共享Cookie。另外，服务器也可以在设置Cookie的时候，指定Cookie的所属域名为一级域名。这样的话，二级域名和三级域名不用做任何设置便可以读取这个Cookie。
+​	原因在于，**Cookie**是服务器写入浏览器的一小段信息，只有同源的网页才能共享。但是，两个网页一级域名相同，二级域名不同，浏览器允许通过设置`document.domain`来共享**Cookie**。另外，服务器也可以在设置**Cookie**的时候，指定**Cookie**的所属域名为一级域名。这样的话，二级域名和三级域名不用做任何设置便可以读取这个**Cookie**。
 
-​	有一点需要注意的是：document.domain虽然可以读写，但只能设置成自身或者是高一级的父域且主域必须相同。所以**只能解决一级域名相同二级域名不同的跨域问题。**还有就是**document.domain只适用于Cookie和iframe窗口，LocalStorage和IndexDB无法通过这种方法跨域。**
+​	有一点需要注意的是：`document.domain`虽然可以读写，但只能设置成自身或者是高一级的父域且主域必须相同。所以**只能解决一级域名相同二级域名不同的跨域问题。**还有就是**`document.domain`只适用于Cookie和iframe窗口，`LocalStorage`和`IndexDB`无法通过这种方法跨域。**
 
 ### **五、window.name跨域**
 
-​	window对象有一个name属性，该属性有个特征：即在一个窗口(window)的生命周期内，窗口载入的所有页面都是共享一个window.name的，每个页面对window.name都有读写的权限，window.name是持久存在一个窗口载入过的所有页面中的，并不会因新页面的载入而进行重置。注意，window.name的值只能是字符串的形式，且这个字符串的大小最大能容许2M左右甚至更大的容量，因浏览器而异，但一般是够用的。
+​	**window**对象有一个`name`属性，该属性有个特征：即在一个窗口(window)的生命周期内，窗口载入的所有页面都是共享一个`window.name`的，每个页面对`window.name`都有读写的权限，`window.name`是持久存在一个窗口载入过的所有页面中的，并不会因新页面的载入而进行重置。
+
+注意: `window.name`的值只能是字符串的形式，且这个字符串的大小最大能容许2M左右甚至更大的容量，因浏览器而异，但一般是够用的。
+{:.message}
 
 ​	**example 1:**
 
-　　现在在一个浏览器的一个标签页里打开http://www.knightboy.cn/a.html页面，你通过location.href = http://baidu.com/b.html，在同一个浏览器标签页里打开了不同域名下的页面。这时候这两个页面你可以使用window.name来传递参数。因为window.name指的是浏览器窗口的名字，只要浏览器窗口相同，那么无论在哪个页面里访问都是一样的。
+　　现在在一个浏览器的一个标签页里打开<https://www.knightboy.cn/a.html>页面，你通过`location.href =` <http://baidu.com/b.html>，在同一个浏览器标签页里打开了不同域名下的页面。这时候这两个页面你可以使用`window.name`来传递参数。因为`window.name`指的是浏览器窗口的名字，只要浏览器窗口相同，那么无论在哪个页面里访问都是一样的。
 
 ​	**example 2:**
 
-　　你的http://www.knightboy.cn/a.html页面里使用`<iframe>`调用另一个http://baidu.com/b.html页面。这时候你想在a页面里获取b页面里的DOM，然后进行操作。结果会发现不能获得b中的DOM。同样会因为不同源而报错，和上面提到的不同之处就是两个页面的一级域名也不相同。这时候`document.domain`就解决不了了。
+　　你的<http://www.knightboy.cn/a.html>页面里使用`<iframe>`调用另一个<http://baidu.com/b.html>页面。这时候你想在a页面里获取b页面里的DOM，然后进行操作。结果会发现不能获得b中的DOM。同样会因为不同源而报错，和上面提到的不同之处就是两个页面的一级域名也不相同。这时候`document.domain`就解决不了了。
 
-​	浏览器窗口有window.name属性。这个属性的最大特点就是，无论是否同源，只要在同一个窗口里，前一个网页设置了这个属性，后一个网页可以读取它。比如当在b页面里设定`window.name="hello"`，你再返回到a页面，在a页面访问window.name，可以得到hello。这种方法的优点是，window.name容量很大，可以放置非常长的字符串；缺点是必须监听子窗口window.name属性的变化，影响网页性能。
+​	浏览器窗口有`window.name`属性。这个属性的最大特点就是，无论是否同源，只要在同一个窗口里，前一个网页设置了这个属性，后一个网页可以读取它。比如当在b页面里设定`window.name="hello"`，你再返回到a页面，在a页面访问`window.name`，可以得到hello。这种方法的优点是，`window.name`容量很大，可以放置非常长的字符串；缺点是必须监听子窗口`window.name`属性的变化，影响网页性能。
 
 ```html
 <!--a.html-->
@@ -307,7 +308,7 @@ mentById("myIFrame").contentWindow.document或window.parent.document.body因为�
 
 ### **六、window.postMessage方法跨域**
 
- 　　window.postMessage是一个安全的跨源通信方法。一般情况下，当且仅当执行脚本的页面使用相同的协议（通常都是http）、相同的端口（http默认80，https默认443）和相同的host(两个页面的document.domain的值相同)时，才允许不同页面上的脚本互相访问。`window.postMessage`提供了一个可控的机制来安全地绕过这一限制，当其在正确使用的情况下。`window.postMessage`解决的不是浏览器与服务器之间的交互，解决的是浏览器不同窗口之间的通信问题，可以做的就是同步两个网页，当然这两个网页需要属于同一个基础域名。
+ 　　`window.postMessage`是一个安全的跨源通信方法。一般情况下，当且仅当执行脚本的页面使用相同的协议（通常都是http）、相同的端口（http默认80，https默认443）和相同的host(两个页面的`document.domain`的值相同)时，才允许不同页面上的脚本互相访问。`window.postMessage`提供了一个可控的机制来安全地绕过这一限制，当其在正确使用的情况下。`window.postMessage`解决的不是浏览器与服务器之间的交互，解决的是浏览器不同窗口之间的通信问题，可以做的就是同步两个网页，当然这两个网页需要属于同一个基础域名。
 
 　　**example 1:**
 
@@ -325,11 +326,11 @@ mentById("myIFrame").contentWindow.document或window.parent.document.body因为�
 
 　　**window.addEventListener("message", onmessage);** `onmessage`接收到的`message`事件包含三个属性：
 
-　　data: 从其他`window`中传递过来的数据。
+　　**data**: 从其他`window`中传递过来的数据。
 
-　　origin: 调用`postMessage`时消息发送窗口的`origin`。这个`origin`不能保证是该窗口的当前或未来`origin`，因为`postMessage`被调用后可能被导航到不同的位置。
+　　**origin**: 调用`postMessage`时消息发送窗口的`origin`。这个`origin`不能保证是该窗口的当前或未来`origin`，因为`postMessage`被调用后可能被导航到不同的位置。
 
-　　source: 对发送消息的窗口对象的引用；您可以使用此来在具有不同origin的两个窗口间建立双向通信。
+　　**source**: 对发送消息的窗口对象的引用；您可以使用此来在具有不同origin的两个窗口间建立双向通信。
 
 ```javascript
 //在a页面执行
@@ -373,7 +374,7 @@ window.addEventListener("message", (e)=>{
 ```
 
 ``` html
-//接收端代码
+<!--接收端代码-->
 <head>
     <script>
         opener.postMessage("ok", opener.domain);
