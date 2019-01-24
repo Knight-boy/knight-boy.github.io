@@ -85,7 +85,7 @@ async function process(array) {
 
 ### Promise.finally()
 
-**Promise**链要么成功到达最后一个**.then()**，或者触发失败**.catch()**，在某些情况下，你想要无论**Promise**成功还是失败，运行相同的代码，例如清除，删除对话，关闭数据库连接等等。
+**Promise**链要么成功执行最后一个**.then()**，或者触发失败**.catch()**，在某些情况下，你想要无论**Promise**成功还是失败，运行相同的代码，例如清除，删除对话，关闭数据库连接等等。
 
 **.finally()**允许你指定一个最终的逻辑而不是在最后重复**.then()**，和**.catch()**:
 
@@ -170,15 +170,15 @@ const obj2 = { ...obj1, z: 5};
 
 ### 正则表达式命名为捕获组
 
-**JavaScript**正则表达式可以返回匹配对象-一个包含匹配字符串的类数组。例如，要以YYYY-MM-DD格式解析日期：
+**JavaScript**正则表达式可以返回匹配对象~一个包含匹配字符串的类数组。例如，要以YYYY-MM-DD格式解析日期：
 
 ``` javascript
 const
 	reDate = /([0-9]{4})-([0-9]{2}-([0-9]{2})/,
-	match  = reDate.exec('2018-12-30'),
-	year   = match[1],//2018
-	month  = match[2],//12
-	day    = match[3];//30
+	matchs  = reDate.exec('2018-12-30'),
+	year   = matchs[1],//2018
+	month  = matchs[2],//12
+	day    = matchs[3];//30
 ```
 
 它很难阅读，并且更改正则表达式也可能会更改匹配对象索引。
@@ -190,13 +190,13 @@ const
 ```javascript
 const
 	reDate = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/,
-	match  = reDate.exec('2018-12-30'),
-	year   = match.groups.year, //2018
-	month  = match.groups.month,//12
-	day    = match.groups.day;  //30
+	matchs  = reDate.exec('2018-12-30'),
+	year   = matchs.groups.year, //2018
+	month  = matchs.groups.month,//12
+	day    = matchs.groups.day;  //30
 ```
 
-任何为匹配的命名组都将其属性设置为**undefined**.
+任何未匹配的命名组都将其属性设置为**undefined**.
 
 
 
@@ -216,9 +216,9 @@ const
 ```javascript
 const
 	reLookahead = /\D(?=\d+)/,
-	match = reLookahead.exec('$123.89');
+	matchs = reLookahead.exec('$123.89');
 
-console.log(match[0]);//$
+console.log(matchs[0]);//$
 ```
 
 
@@ -228,9 +228,9 @@ console.log(match[0]);//$
 ```javascript
 const
 	reLookbehind = /(?<=\D)\d+/,
-	match = reLookbehind('$123.89');
+	matchs = reLookbehind('$123.89');
 
-console.log(match[0]);//123.89
+console.log(matchs[0]);//123.89
 ```
 
 以上是一个**肯定反向断言**，非数字`\D`必须存在。同样的，还存在**否行反向断言**，表示一个值必须不存在，例如：
@@ -238,9 +238,9 @@ console.log(match[0]);//123.89
 ```javascript
 const
   reLookbehindNeg = /(?<!\D)\d+/,
-  match = reLookbehind.exec('$123.89');
+  matchs = reLookbehind.exec('$123.89');
 
-console.log(match[0]);//null
+console.log(matchs[0]);//null
 ```
 
 ### 正则表达式s*(dotAll)*标志
