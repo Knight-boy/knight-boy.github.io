@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Hydejack
 
 The "Best Jekyll Theme by a Mile".
@@ -176,9 +175,3 @@ This table below shows what's included in each version:
 [rouge]: http://rouge.jneen.net
 [katex]: https://khan.github.io/KaTeX/
 [tinyletter]: https://tinyletter.com/
-
-*[FLIP]: First-Last-Invert-Play. A coding technique to achieve performant page transition animations.
-=======
-# knight-boy.github.io
-Simple
->>>>>>> 208265197bba7179a08565d6f9bd6ddee110d6ab
