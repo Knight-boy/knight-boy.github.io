@@ -90,7 +90,7 @@ btn.detachEvent("onclick", handler);//删除事件处理程序
 
 ### **事件对象**
 
-DOM中的事件对象
+*DOM中的事件对象*
 
 - type表示被触发的事件类型
 - target表示事件的目标
@@ -100,7 +100,7 @@ DOM中的事件对象
 - perventDefault()取消事件的默认行为。如果cancelable为true，则可以使用这个方法
 - stopPropagation()取消事件的进一步捕获或冒泡。如果bubbles为true，则可以使用这个方法。
 
-IE中的事件对象
+*IE中的事件对象* 
 
 - type表示被触发的事件类型
 - srcElement表示事件的目标
