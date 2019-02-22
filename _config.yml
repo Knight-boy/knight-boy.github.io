@@ -136,7 +136,7 @@ valine:
   notify: false
   verify: false
   avatar: 'mm'
-  placeholder: 'just go now!'
+  placeholder: 'leave your email and you will receive a reply!'
   guest_info: nick,mail,link
   pageSize: 10
   visitor: true
