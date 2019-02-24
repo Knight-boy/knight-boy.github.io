@@ -261,6 +261,12 @@
 .icon-arrow-left2:before {
   content: "\2190";
 }
+.icon-arrow-top2:before {
+  content: "\2191";
+}
+.icon-arrow-bottom2:brfore {
+  content: "\2193";
+}
 .icon-home3:before {
   content: "\e902";
 }
