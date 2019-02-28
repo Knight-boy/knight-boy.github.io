@@ -51,11 +51,11 @@ copyright:             >
   © 2018-2019. All rights reserved.
 # Add links to the footer.
 # Typically you'll want to link to your impress, cookies or privacy policy, etc.
-# legal:
-#   - title:             Impress
-#     href:              /impress/
-#   - title:             Cookies Policy
-#     href:              /cookies-policy/
+legal:
+   - title:             Impress
+     href:              /impress/
+   - title:             Cookies Policy
+     href:              /cookies-policy/
 
 # Format of the permalinks
 permalink:             /:categories/:year-:month-:day-:title/
