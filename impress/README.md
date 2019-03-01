@@ -5,8 +5,6 @@ hide_description: true
 permalink: /impress/
 ---
 
-## Cookies 政策
-
 ## IMPRESS
 
 **IMPRESS**是新闻界的独立监管机构。我们是专为未来媒体设计的监管机构，建立在过去的核心原则基础上，保护新闻业，同时创新应对数字时代的挑战。
