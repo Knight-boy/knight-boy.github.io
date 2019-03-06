@@ -1,10 +1,10 @@
 ---
 title: "Linux 操作手册"
 date: 2019-03-06
-image: /assets/img/blog/linux.png
+image: /assets/img/blog/linux.gif
 description: >
   常用命令整理中...
-author: author1
+author: author2
 comments: true
 ---
 
