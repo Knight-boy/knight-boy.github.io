@@ -1,5 +1,6 @@
 User-agent: *
 Disallow: /boyjack
+Disallow: /Heaven
 Disallow: /QQone/Myself/Resume
 Allow: /Blog
 Allow: /trigram
