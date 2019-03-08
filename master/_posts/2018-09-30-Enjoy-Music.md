@@ -20,8 +20,6 @@ After a long wait, it finally...
 </figure>
 
 
-
-
 ### Sting
 
 **Shape of my heart** is a song by English musician **Sting** from his album *Ten Summoner's Tales*, released in 1993. from [Wikipedia](https://en.wikipedia.org/wiki/Shape_of_My_Heart_(Sting_song))
@@ -32,8 +30,6 @@ After a long wait, it finally...
 </figure>
 
 
-
-
 ### Eagles
 
 **Hotel California** is the title from the *Eagles' album of the same name* and was released as a single in February 1977. Writing credits for the song are shared by **Don Felder**(music), **Don Henley**, and **Glenn Frey**(lyrics). from [Wikipedia](https://en.wikipedia.org/wiki/Hotel_California)
@@ -42,3 +38,4 @@ After a long wait, it finally...
   <video src="/assets/video/Hotel California.mp4" class="border" controls preload><img data-ignore alt="Scrolling through the blog layout" src="/assets/img/blog/blog-layout.jpg"/></video>
   <figcaption>Hotel California.</figcaption>
 </figure>
+
