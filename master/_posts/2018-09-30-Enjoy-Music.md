@@ -39,3 +39,35 @@ After a long wait, it finally...
   <figcaption>Hotel California.</figcaption>
 </figure>
 
+
+### Gavin Degraw
+
+***Finest Hour: The Best of Gavin DeGraw*** is a compilation album by American singer-songwriter [Gavin DeGraw](https://en.wikipedia.org/wiki/Gavin_DeGraw). It was released on October 17, 2014 by [RCA Records](https://en.wikipedia.org/wiki/RCA_Records). On August 14, 2014 RCA Records announced the release of Gavin DeGraw's first greatest hits album, *Finest Hour*. It contains songs from all his studio albums except *Free* (2009). It also includes the two new tracks "You Got Me" and "Fire". According to the press release a new song titled "Not Our Fault", written by DeGraw, Jake Gosling, Chris Leonard, and Harry Styles.
+
+<figure>
+  <video src="/assets/video/Fire.mp4" class="border" controls preload><img data-ignore alt="Scrolling through the blog layout" src="/assets/img/blog/blog-layout.jpg"/></video>
+  <figcaption>Fire.</figcaption>
+</figure>
+
+
+
+### Taylor Swift
+
+"**Look What You Made Me Do**" is a song recorded by American singer-songwriter [Taylor Swift](https://en.wikipedia.org/wiki/Taylor_Swift), released on August 24, 2017 by **Big Machine Records** as the lead single from her sixth studio album *Reputation* (2017). 
+
+<figure>
+  <video src="/assets/video/Look What You Made Me Do.mp4" class="border" controls preload><img data-ignore alt="Scrolling through the blog layout" src="/assets/img/blog/blog-layout.jpg"/></video>
+  <figcaption>Look What You Made Me Do.</figcaption>
+</figure>
+
+
+
+### Lil Wayne
+
+"**Drop the World**" is a song by American rapper and recording artist [Lil Wayne](https://en.wikipedia.org/wiki/Lil_Wayne), featuring a [guest appearance](https://en.wikipedia.org/wiki/Guest_appearance) from fellow American rapper [Eminem](https://en.wikipedia.org/wiki/Eminem). It serves as the third single from Lil Wayne's seventh studio album, *Rebirth* (2010). 
+
+<figure>
+  <video src="/assets/video/Drop the world.mp4" class="border" controls preload><img data-ignore alt="Scrolling through the blog layout" src="/assets/img/blog/blog-layout.jpg"/></video>
+  <figcaption>Drop the world.</figcaption>
+</figure>
+
