@@ -228,7 +228,7 @@ console.log(matchs[0]);//$
 ```javascript
 const
 	reLookbehind = /(?<=\D)\d+/,
-	matchs = reLookbehind('$123.89');
+	matchs = reLookbehind.exec('$123.89');
 
 console.log(matchs[0]);//123.89
 ```
