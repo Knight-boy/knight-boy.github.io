@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "Markdown Syntax"
-image: /assets/img/blog/hydejack-8.png
+image: /assets/img/blog/Markdown.png
 description: >
-  Hydejack 8 is the best version of Hydejack yet.
+  Markdown is a easy expression of text.
 author: author2
 comments: true
 ---
