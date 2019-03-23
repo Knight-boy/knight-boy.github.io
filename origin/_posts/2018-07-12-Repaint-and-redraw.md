@@ -1,7 +1,7 @@
 ---
 title: "Repaint and redraw"
 date: 2018-07-12
-image: https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/webkitflow.png
+image: /assets/img/blog/webkitflow.png
 description: >
   No pain, no gains!
 author: author2
