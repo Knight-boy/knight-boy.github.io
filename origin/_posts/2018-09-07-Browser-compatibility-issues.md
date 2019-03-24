@@ -150,6 +150,117 @@ line-height: 200px;
 
 > 解决方法是在`<p>`元素前后各加一个`<div></div>`,并对`div`设置`border`属性。
 
+##### IE图片显示有空隙
+
+解决办法包括改变html的排版，设置`img`为`display:block;`或者设置`vertical-align:top|bottom|middle|text-bottom;`来解决.
+
+##### 文本对齐和文本输入框的问题
+
+```css
+input {
+    width: 300px;
+    height: 30px;
+    border: 1px solid red;
+    vertical-align: middle;/*添加该语句*/
+}
+```
+
+##### li中显示省略号
+
+```css
+li {
+    width: 200px;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden;
+}
+```
+
+##### 定义1px高度的容器
+
+在IE6下,因为默认行高造成此类问题,解决方法包括: 设置`overflow:hidden;`,`zoom:0.08;`,`line-height:1px;`
+
+##### div居中的问题
+
+`div`设置`margin: 0 auto;`时已经居中,IE还需要在父级元素中设置`text-align:center;`
+
+##### 使div在浏览器中垂直居中
+
+实现垂直居中有很多种操作方法,详见codepen:
+
+<iframe height="265" style="width: 100%;" scrolling="no" title="Vertical Center" src="//codepen.io/knight-boy/embed/rZPXRG/?height=265&theme-id=0&default-tab=css,result" frameborder="no" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/knight-boy/pen/rZPXRG/'>Vertical Center</a> by Knight
+  (<a href='https://codepen.io/knight-boy'>@knight-boy</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+##### 链接访问样式的设置
+
+注意排列顺序: L-V-H-A,简便记法: 又爱(LoVe)又恨(HAte)
+
+```css
+a:link{}
+a:visited {}
+a:hover{}
+a:active{}
+```
+
+`:hover`必须位于`:link`和`:visited`之后才能生效.
+
+##### `<ul>`的`padding`和`margin`
+
+**ul**在Firefox中默认有`padding`值,而在IE中只有`margin`有默认值,所以先定义: `ul{margin:0;padding:0;}`
+
+##### `<form>`标签
+
+在IE中,会存在`margin`的默认值,在Firefox中,`margin`默认是0;为统一,可以类比`<ul>`标签.
+
+##### 盒模型不一致
+
+在IE和Firefox中Box模型不一致导致`margin`相差2px;解决办法如下:
+
+```css
+div {
+    margin: 30px !important;
+    margin: 28px;
+}
+```
+
+在IE6中不支持!important属性,但其他浏览器支持,如此在IE6中解释成:
+
+```css
+div {
+    margin: 30px;
+    margin: 28px;/*最后一个覆盖前面的同属性值*/
+}
+```
+
+##### float的div闭合,清除浮动
+
+```html
+<div id="floatA"></div>
+<div id="floatB"></div>
+<div id="NOfloat"></div>
+```
+
+对于第三个块元素,不希望继续进行浮动设置,此时在IE中没有问题,但在Firefox中因为float标签需要闭合.采用在`floatA`和`Nofloat`之间添加`<div id="clearfix"></div>`,这个`div`必须和两个具有`float`特性的元素处于同级的状态,之间不能存在嵌套关系,否则会产生异常.并采取如下样式定义:
+
+```css
+.clearfix{clear: both;}
+```
+
+##### Firefox文本无法撑开容器高度
+
+标准浏览器中固定高度值的容器不会像IE6那样被撑开容器,可以采用设置`min-height:200px;`的方式.
+
+```css
+{
+    height:auto !important;
+    height: 200px;/*为了兼顾不能识别min-height的IE6*/
+    min-height: 200px;
+}
+```
+
 
 
 [^1]: <https://en.wikipedia.org/wiki/Web_browser>
