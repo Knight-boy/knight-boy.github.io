@@ -455,7 +455,7 @@ li a {
 
 ###### 判断等于某个IE版本的语法
 
-语法：<!--[if ie [版本号]> 要判断的内容 <![endif]-->
+语法：`<!--[if ie [版本号]> 要判断的内容 <![endif]-->`
 
 ```html
 <!--[if ie 6]
@@ -465,15 +465,15 @@ li a {
 
 ###### 判断IE浏览器的范围：gte(great than equal)、gt(great than)、lte(less than equal)、lt(less than)
 
-语法：<!--[if gte is [版本号]> 要判断的内容<![endif]-->
+语法：`<!--[if gte is [版本号]> 要判断的内容<![endif]-->`
 
 ###### 判断非IE浏览器
 
-语法：<!--[if !ie]><!-->要判断的内容<!--><![endif]-->
+语法：`<!--[if !ie]><!-->要判断的内容<!--><![endif]-->`
 
 ###### 判断是IE浏览器
 
-语法：<!--[if ie]>要判断的内容<![endif]-->
+语法：`<!--[if ie]>要判断的内容<![endif]-->`
 
 ###### !important
 
@@ -502,7 +502,7 @@ li a {
 ```
 
 说明：因为IE系列浏览器可读(`\9`)，IE6和IE7可读(`*`)，另外IE6可识别(`_`)
-{：.message}
+{: .message}
 
 #### 区分IE6、IE7、Firefox
 
