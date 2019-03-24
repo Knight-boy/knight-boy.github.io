@@ -215,6 +215,13 @@ a:active{}
 
 在IE中,会存在`margin`的默认值,在Firefox中,`margin`默认是0;为统一,可以类比`<ul>`标签.
 
+Add:
+
+```css
+cursor:pointer;/*Firefox和IE7+*/
+cursor: hand;/*IE6*/
+```
+
 #### 盒模型不一致
 
 在IE和Firefox中Box模型不一致导致`margin`相差2px;解决办法如下:
