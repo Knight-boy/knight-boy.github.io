@@ -28,7 +28,7 @@ comments: true
 #isfloat{
     float: left;
     margin: 5px;/*IE6会把其作为10px*/
-	display: inline;/*加上之后将其作为5px*/
+    display: inline;/*加上之后将其作为5px*/
 }
 </style>
 ```
@@ -51,7 +51,7 @@ comments: true
 
 > ``` css
 > #box{
->     display: block;
+>        display: block;
 >        display: inline;
 >        display: inline-block;
 >        display: table;
@@ -74,12 +74,12 @@ IE不能识别`min-`这个定义，但实际上它把`width`和`height`当作有
 > 解决方法如下：
 >
 > ```css
-> #box{width:80px;height:35px;}//正常显示
+> #box{width:80px;height:35px;}/*正常显示*/
 > html>body #box {
->     width: auto;
->     height: auto;
->     min-width: 80px;
->     min-height: 35px;
+>  width: auto;
+>  height: auto;
+>  min-width: 80px;
+>  min-height: 35px;
 > }
 > ```
 
