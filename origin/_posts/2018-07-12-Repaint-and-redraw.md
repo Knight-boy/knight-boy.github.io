@@ -31,7 +31,7 @@ comments: true
 4. 元素尺寸的改变——大小，外边距，边框；
 5. 浏览器窗口尺寸的变化（resize事件发生时）；
 6. 填充内容的改变，比如文本的改变或图片大小改变而引起的计算值宽度和高度的改变；
-7. 读取某些元素属性：（**offsetLeft/Top/Height/Width**,　**clientTop/Left/Width/Height**,　**scrollTop/Left/Width/Height**,　**width/height**,　`getComputedStyle()`,　`currentStyle(IE)`)
+7. 读取某些元素属性：**offsetLeft/Top/Height/Width**,**clientTop/Left/Width/Height**,　**scrollTop/Left/Width/Height**,**width/height**,`getComputedStyle()`,　`currentStyle(IE)`
 
 **重绘重排的代价：耗时，导致浏览器卡慢。**
 

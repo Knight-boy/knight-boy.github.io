@@ -56,23 +56,23 @@ cookie和session都是用来跟踪浏览器用户身份的会话方式。
 
    （1）大小受限
 
-　　（2）用户可以操作（禁用）cookie，使功能受限
+   （2）用户可以操作（禁用）cookie，使功能受限
 
-　　（3）安全性较低
+   （3）安全性较低
 
-　　（4）有些状态不可能保存在客户端。
+   （4）有些状态不可能保存在客户端。
 
-　　（5）每次访问都要传送cookie给服务器，浪费带宽。
+   （5）每次访问都要传送cookie给服务器，浪费带宽。
 
-　　（6）cookie数据有路径（path）的概念，可以限制cookie只属于某个路径下。
+   （6）cookie数据有路径（path）的概念，可以限制cookie只属于某个路径下。
 
-​        **session**：
+   **session**：
 
-​	（1）Session保存的东西越多，就越占用服务器内存，对于用户在线人数较多的网站，服务器的内存压力会比较大。
+   （1）Session保存的东西越多，就越占用服务器内存，对于用户在线人数较多的网站，服务器的内存压力会比较大。
 
-　　（2）依赖于cookie（sessionID保存在cookie），如果禁用cookie，则要使用URL重写，不安全
+   （2）依赖于cookie（sessionID保存在cookie），如果禁用cookie，则要使用URL重写，不安全
 
-　　（3）创建Session变量有很大的随意性，可随时调用，不需要开发者做精确地处理，所以，过度使用session变量将会导致代码不可读而且不好维护。
+   （3）创建Session变量有很大的随意性，可随时调用，不需要开发者做精确地处理，所以，过度使用session变量将会导致代码不可读而且不好维护。
 
 ## WebStorage
 
@@ -92,7 +92,7 @@ cookie和session都是用来跟踪浏览器用户身份的会话方式。
 
 4、存储内容类型：**localStorage**和**sessionStorage**只能存储字符串类型，对于复杂的对象可以使用**ECMAScript**提供的**JSON**对象的**stringify**和**parse**来处理
 
-5、获取方式：**localStorage：window.localStorage;**.**sessionStorage：window.sessionStorage;**。
+5、获取方式：**localStorage:window.localStorage;**.**sessionStorage:window.sessionStorage;**。
 
 6、应用场景：**localStoragese**：常用于长期登录（+判断用户是否已登录），适合长期保存在本地的数据。sessionStorage：敏感账号一次性登录；
 
@@ -110,14 +110,14 @@ cookie和session都是用来跟踪浏览器用户身份的会话方式。
 
 （6）WebStorage提供了一些方法，数据操作比cookie方便；
 
-　　　　setItem (key, value) ——  保存数据，以键值对的方式储存信息。
+​	setItem (key, value) ——  保存数据，以键值对的方式储存信息。
 
-​      　　 getItem (key) ——  获取数据，将键值传入，即可获取到对应的value值。
+​	getItem (key) ——  获取数据，将键值传入，即可获取到对应的value值。
 
-​        　　removeItem (key) ——  删除单个数据，根据键值移除对应的信息。
+​	removeItem (key) ——  删除单个数据，根据键值移除对应的信息。
 
-​        　　clear () ——  删除所有的数据
+​	clear () ——  删除所有的数据
 
-​        　　key (index) —— 获取某个索引的key
+​	key (index) —— 获取某个索引的key
 
-转载自：[[浅谈session,cookie,sessionStorage,localStorage的区别及应用场景](https://www.cnblogs.com/cencenyue/p/7604651.html)
+转载自：[浅谈session,cookie,sessionStorage,localStorage的区别及应用场景](https://www.cnblogs.com/cencenyue/p/7604651.html)
