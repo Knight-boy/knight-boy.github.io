@@ -15,10 +15,10 @@ comments: true
 
 ###### #对象语法
 
->```html 
-><div v-bind:class="{active: isActive}"></div><!--"isActive"是一个truthy值-->
-><div v-bind:class="classObject"></div><!--外部引用data-->
->```
+```html
+<div v-bind:class="{active: isActive}"></div><!--"isActive"是一个truthy值-->
+<div v-bind:class="classObject"></div><!--外部引用data-->
+```
 
 ```js
 data: {
@@ -109,9 +109,9 @@ Vue.component('my-component', {
 
 ###### #对象语法
 
-> ```html
-> <div v-bind:style="{color: activeColor, fontSize:fontSize + 'px'}"></div>
-> ```
+ ```html
+<div v-bind:style="{color: activeColor, fontSize:fontSize + 'px'}"></div>
+ ```
 
 ```js
 data: {
@@ -184,7 +184,7 @@ data: {
 
 ###### #修饰符
 
-**.lazy**: 默认情况下，`v-model` 会在每次 `input` 事件触发之后，将数据同步至 input 元素中（除了[上述](https://vue.docschina.org/v2/guide/forms.html#vmodel-ime-tip)提到的输入法组合文字时不会）。可以添加 `lazy` 修饰符，从而转为在触发 `change` 事件后同步：
+**.lazy**: 默认情况下，`v-model` 会在每次 `input` 事件触发之后，将数据同步至 input 元素中。可以添加 `lazy` 修饰符，从而转为在触发 `change` 事件后同步：
 
 **.number**:如果想要将用户的输入，自动转换为 Number 类型（译注：如果转换结果为 NaN 则返回字符串类型的输入值），可以在 `v-model` 之后添加一个 `number` 修饰符，来处理输入值。
 
@@ -197,5 +197,3 @@ HTML 内置的几种 input 类型有时并不总能满足需求。幸运的是�
 详细：[表单input绑定](https://vue.docschina.org/v2/guide/forms.html)
 
 #### 虚拟DOM
-
-#### 框架对比
