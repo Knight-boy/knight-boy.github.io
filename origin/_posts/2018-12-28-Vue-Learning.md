@@ -102,7 +102,7 @@ Vue.component('my-component', {
 同样的，`class`绑定也是如此：
 
 ~~~html
-<my-component class="{active: isActive}>Hello</my-component><!--当isActive值是truthy时，类名active才会有效-->
+<my-component class="{active: isActive}">Hello</my-component><!--当isActive值是truthy时，类名active才会有效-->
 ~~~
 
 ##### style的绑定
