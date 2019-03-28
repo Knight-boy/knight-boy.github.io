@@ -1,7 +1,7 @@
 ---
 title:  "还原MV*模式"
 date: 2018-08-26
-image: /assets/img/blog/token.jpg
+image: /assets/img/blog/MVC.png
 description: >
   Frame model! 
 author: author2
