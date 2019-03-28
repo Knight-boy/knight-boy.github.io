@@ -1,7 +1,7 @@
 ---
-title:  "还原MV*模式"
+title:  "还原MVC/P/VM模式"
 date: 2018-08-26
-image: /assets/img/blog/MVC.png
+image: /assets/img/blog/MVC1.png
 description: >
   Frame model! 
 author: author2
