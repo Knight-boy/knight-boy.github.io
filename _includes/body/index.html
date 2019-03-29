@@ -8,9 +8,11 @@
   prefetch
 >
   {% if page.cover %}
+    {% include templates/index.html %}
     {% include body/sidebar.html %}
     {% include body/main.html %}
   {% else %}
+    {% include templates/index.html %}
     {% include body/main.html %}
     {% include body/sidebar.html %}
   {% endif %}
@@ -18,5 +20,3 @@
 
 {% include body/scripts.html %}
 {% include my-body.html %}
-
-{% include templates/index.html %}
