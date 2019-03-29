@@ -77,18 +77,20 @@ comments: true
 
 <!DOCTYPE html>
 <html>
-  <head></head>
+  <head>
+  <meta charset="utf-8">
+  </head>
   <style>
-    #demore {
+    #demo1 {
       background: beige;
     }
-    div section {
+    div section{
       display: block;
       width: 400px;
       height: 160px;
       background: lightgray;
     }
-    section p {
+    section p{
       width: 50%;
       height: 25%;
       margin: 5%;
@@ -97,10 +99,11 @@ comments: true
     } 
   </style>
   <body>
-    <div id="demore">
-      <section>
-        <p id ="demorep">This is a paragraph!</p>
+    <div id="demo1">
+      <section id="sec1">
+        <p id ="demop1">This is a paragraph!</p>
       </section>
     </div>
   </body>
 </html>
+</!doctype>
