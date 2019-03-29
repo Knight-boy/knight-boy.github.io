@@ -39,7 +39,7 @@ Controller和View都依赖Model层，Controller和View可以互相依赖。在�
 
 用户的对View操作以后，View捕获到这个操作，会把处理的权利交移给Controller（Pass calls）；Controller会对来自View数据进行预处理、决定调用哪个Model的接口；然后由Model执行相关的业务逻辑；当Model变更了以后，会通过**观察者模式（Observer Pattern）通知View；View通过观察者模式**收到Model变更的消息以后，会向Model请求最新的数据，然后重新更新界面。如下图：
 
-![](/assets/img/blog/MVC3.png)
+![](/assets/img/blog/MVC3.png){:width="50%" height="50%"}
 
 看似没有什么特别的地方，但是由几个需要特别关注的关键点：
 
@@ -67,7 +67,7 @@ Controller和View都依赖Model层，Controller和View可以互相依赖。在�
 
 在Web服务端开发的时候也会接触到MVC模式，而这种MVC模式不能严格称为MVC模式。经典的MVC模式只是解决客户端图形界面应用程序的问题，而对服务端无效。服务端的MVC模式又自己特定的名字：MVC Model 2，或者叫JSP Model 2，或者直接就是Model 2 。Model 2客户端服务端的交互模式如下：
 
-![](/assets/img/blog/MVCm2.png)
+![](/assets/img/blog/MVCm2.png){:width="50%" height="50%"}
 
 服务端接收到来自客户端的请求，服务端通过路由规则把这个请求交由给特定的Controller进行处理，Controller执行相应的应用逻辑，对Model进行操作，Model执行业务逻辑以后；然后用数据去渲染特定的模版，返回给客户端。
 
@@ -96,7 +96,7 @@ MVP模式是MVC模式的改良。在上个世纪90年代，IBM旗下的子公司
 
 MVP模式把MVC模式中的Controller换成了Presenter。MVP层次之间的依赖关系如下：
 
-![](/assets/img/blog/MVP.png)
+![](/assets/img/blog/MVP.png){:width="50%" height="50%"}
 
 MVP打破了View原来对于Model的依赖，其余的依赖关系和MVC模式一致。
 
@@ -104,7 +104,7 @@ MVP打破了View原来对于Model的依赖，其余的依赖关系和MVC模式�
 
 既然View对Model的依赖被打破了，那View如何同步Model的变更？看看MVP的调用关系：
 
-![](/assets/img/blog/MVP2.png)
+![](/assets/img/blog/MVP2.png){:width="50%" height="50%"}
 
 和MVC模式一样，用户对View的操作都会从View交移给Presenter。Presenter会执行相应的应用程序逻辑，并且对Model进行相应的操作；而这时候Model执行完业务逻辑以后，也是通过观察者模式把自己变更的消息传递出去，但是是传给Presenter而不是View。Presenter获取到Model变更的消息以后，**通过View提供的接口更新界面**。
 
@@ -134,7 +134,7 @@ MVP模式，这里也提供一个用[JavaScript编写的例子](https://github.c
 
 Supervising Controller模式下的依赖和调用关系：
 
-![](/assets/img/blog/MVP3.png)
+![](/assets/img/blog/MVP3.png){:width="50%" height="50%"}
 
 因为Supervising Controller用得比较少，对它的讨论就到这里为止。
 
@@ -156,13 +156,13 @@ MVVM代表的是Model-View-ViewModel，这里需要解释一下什么是ViewMode
 
 MVVM的依赖关系和MVP依赖，只不过是把P换成了VM。
 
-![](/assets/img/blog/MVVM1.png)
+![](/assets/img/blog/MVVM1.png){:width="50%" height="50%"}
 
 ### MVVM的调用关系
 
 MVVM的调用关系和MVP一样。但是，在ViewModel当中会有一个叫Binder，或者是Data-binding engine的东西。以前全部由Presenter负责的View和Model之间数据同步操作交由给Binder处理。你只需要在View的模版语法当中，指令式地声明View上的显示的内容是和Model的哪一块数据绑定的。当ViewModel对进行Model更新的时候，Binder会自动把数据更新到View上去，当用户对View进行操作（例如表单输入），Binder也会自动把数据更新到Model上去。这种方式称为：Two-way data-binding，双向数据绑定。可以简单而不恰当地理解为一个模版引擎，但是会根据数据变更实时渲染。
 
-![](/assets/img/blog/MVVM2.png)
+![](/assets/img/blog/MVVM2.png){:width="50%" height="50%"}
 
 也就是说，MVVM把View和Model的同步逻辑自动化了。以前Presenter负责的View和Model同步不再手动地进行操作，而是交由框架所提供的Binder进行负责。只需要告诉Binder，View显示的数据对应的是Model哪一部分即可。
 
