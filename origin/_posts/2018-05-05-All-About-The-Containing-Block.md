@@ -50,16 +50,18 @@ comments: true
 
 ```html
 <div id="demo">
-    <section>
-        <p>This is a paragraph!</p>
-    </section>
+  <section>
+    <p>This is a paragraph!</p>
+  </section>
 </div>
 ```
 
 - `<p>`标签是静态定位时，它的包含块是离它最近的块祖先元素`section`。
 
   ```css
-  
+  div {
+    background: beige;
+  }
   section {
     display: block;
     width: 400px;
@@ -68,7 +70,7 @@ comments: true
   }
   p {
     width: 50%;
-    height: 25%;
+    height: 50%;
     margin: 5%;
     padding: 5%;
     background: blue;
