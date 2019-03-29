@@ -31,7 +31,7 @@ comments: true
 
 MVC出了把应用程序分成View、Model层，还额外的加了一个Controller层，它的职责为**进行Model和View之间的协作（路由、输入预处理等）的应用逻辑（application logic）**；Model进行处理业务逻辑。Model、View、Controller三个层次的依赖关系如下：
 
-![MVC](/assets/img/blog/MVC2.png)
+![MVC](/assets/img/blog/MVC2.png){:width="50%",height="50%"}
 
 Controller和View都依赖Model层，Controller和View可以互相依赖。在一些网上的资料Controller和View之间的依赖关系可能不一样，有些是单向依赖，有些是双向依赖，这个其实关系不大，后面会看到它们的依赖关系都是为了把处理用户行为触发的事件处理权交给Controller。
 
