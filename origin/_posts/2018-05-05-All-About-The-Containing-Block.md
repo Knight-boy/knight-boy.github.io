@@ -10,13 +10,13 @@ comments: true
 
 一个元素的尺寸和位置经常受到包含块的影响，大多数情况下，包含块就是这个元素的祖先块元素的内容区，但并不总是这样。
 
-当一个客户端代理如浏览器展示一个文档时，对于每一个元素，他都产生了一个盒模型。每一个盒子都被化成了四个区域：
+​        当一个客户端代理如浏览器展示一个文档时，对于每一个元素，他都产生了一个盒模型。每一个盒子都被化成了四个区域：
 
 ![盒子区域](/assets/img/blog/CSSbox.png)
 
-元素的尺寸及位置，常常会受到它的包含块的影响。对于一些属性，例如`width`,`height`,`padding`,`margin`,绝对定位元素的偏移值(如`position`被设置成`absolute`或`fixed`,当对其赋予百分比值时,这些值的计算值就是通过元素的包含块计算得来的)
+​        元素的尺寸及位置，常常会受到它的包含块的影响。对于一些属性，例如`width`,`height`,`padding`,`margin`,绝对定位元素的偏移值(如`position`被设置成`absolute`或`fixed`,当对其赋予百分比值时,这些值的计算值就是通过元素的包含块计算得来的)
 
-确定一个元素的包含块的过程完全依赖于这个元素的`position`属性:
+​        确定一个元素的包含块的过程完全依赖于这个元素的`position`属性:
 
 1. 如果`position`属性为`static`或`relative`,包含块就是由它的最近的祖先块元素(如`inline-block`,`block`或`list-item`元素)或格式化上下文(如 table container,flex container,grid container or the block container itself)的内容边缘组成的.
 
@@ -39,7 +39,7 @@ comments: true
 **注意：**根元素`<html>`所在的包含块是一个被称作**初始包含块**的矩形。它是页面区域(分页媒体)或视口的区域(连续媒体)
 {: .message}
 
-如上所述，如果某些属性被赋予百分比的话，它的计算值是由这个元素的包含块决定的。这些属性包括盒模型属性和偏移属性。
+​        如上所述，如果某些属性被赋予百分比的话，它的计算值是由这个元素的包含块决定的。这些属性包括盒模型属性和偏移属性。
 
 1. 要计算`height，top`及`bottom`中的百分比值是通过包含块的**`height`**值。如果包含块的`height`值会根据它的内容变化，而且包含块的`position`属性的值被赋予`relative`或`static`，那么这种情况百分比值为`0`。
 2. 要计算`width`，`left`，`right`，`padding`，`margin`这些属性由包含块的**`width`**属性的值来计算它的百分比。
@@ -69,7 +69,7 @@ comments: true
   p {
     width: 50%;
     height: 25%;
-    margin: 5%;a
+    margin: 5%;
     padding: 5%;
     background: blue;
   }
@@ -92,7 +92,7 @@ comments: true
     }
     section p{
       width: 50%;
-      height: 25%;
+      height: 50%;
       margin: 5%;
       padding: 5%;
       background: blue;
@@ -106,4 +106,3 @@ comments: true
     </div>
   </body>
 </html>
-</!doctype>
