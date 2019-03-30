@@ -182,30 +182,38 @@ axios('/user/12345');
 
 For convenience aliases have been provided for all supported request methods.
 
-##### axios.request(config)
-##### axios.get(url[, config])
-##### axios.delete(url[, config])
-##### axios.head(url[, config])
-##### axios.options(url[, config])
-##### axios.post(url[, data[, config]])
-##### axios.put(url[, data[, config]])
-##### axios.patch(url[, data[, config]])
+**axios.request(config)**
 
-###### NOTE
-When using the alias methods `url`, `method`, and `data` properties don't need to be specified in config.
+**axios.get(url[, config])**
+
+**axios.delete(url[, config])**
+
+**axios.head(url[, config])**
+
+**axios.options(url[, config])**
+
+**axios.post(url[, data[, config]])**
+
+**axios.put(url[, data[, config]])**
+
+**axios.patch(url[, data[, config]])**
+
+**NOTE:**When using the alias methods `url`, `method`, and `data` properties don't need to be specified in config.
+{: .message}
 
 ### Concurrency
 
 Helper functions for dealing with concurrent requests.
 
-##### axios.all(iterable)
-##### axios.spread(callback)
+**axios.all(iterable)**
+
+**axios.spread(callback)**
 
 ### Creating an instance
 
 You can create a new instance of axios with a custom config.
 
-##### axios.create([config])
+**axios.create([config])**
 
 ```js
 const instance = axios.create({
@@ -219,15 +227,23 @@ const instance = axios.create({
 
 The available instance methods are listed below. The specified config will be merged with the instance config.
 
-##### axios#request(config)
-##### axios#get(url[, config])
-##### axios#delete(url[, config])
-##### axios#head(url[, config])
-##### axios#options(url[, config])
-##### axios#post(url[, data[, config]])
-##### axios#put(url[, data[, config]])
-##### axios#patch(url[, data[, config]])
-##### axios#getUri([config])
+**axios#request(config)**
+
+**axios#get(url[, config])**
+
+**axios#delete(url[, config])**
+
+**axios#head(url[, config])**
+
+**axios#options(url[, config])**
+
+**axios#post(url[, data[, config]])**
+
+**axios#put(url[, data[, config]])**
+
+**axios#patch(url[, data[, config]])**
+
+**axios#getUri([config])**
 
 ## Request Config
 
@@ -648,8 +664,8 @@ axios.post('http://something.com/', querystring.stringify({ foo: 'bar' }));
 
 You can also use the [`qs`](https://github.com/ljharb/qs) library.
 
-###### NOTE
-The `qs` library is preferable if you need to stringify nested objects, as the `querystring` method has known issues with that use case (https://github.com/nodejs/node-v0.x-archive/issues/1665).
+**NOTE:** The `qs` library is preferable if you need to stringify nested objects, as the `querystring` method has known issues with that use case (https://github.com/nodejs/node-v0.x-archive/issues/1665).
+{: .message}
 
 ## Semver
 
