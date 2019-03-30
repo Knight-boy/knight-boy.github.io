@@ -198,7 +198,7 @@ For convenience aliases have been provided for all supported request methods.
 
 **axios.patch(url[, data[, config]])**
 
-**NOTE:**When using the alias methods `url`, `method`, and `data` properties don't need to be specified in config.
+**NOTE:** When using the alias methods `url`, `method`, and `data` properties don't need to be specified in config.
 {: .message}
 
 ### Concurrency
@@ -664,7 +664,7 @@ axios.post('http://something.com/', querystring.stringify({ foo: 'bar' }));
 
 You can also use the [`qs`](https://github.com/ljharb/qs) library.
 
-**NOTE:** The `qs` library is preferable if you need to stringify nested objects, as the `querystring` method has known issues with that use case (https://github.com/nodejs/node-v0.x-archive/issues/1665).
+**NOTE:** The `qs` library is preferable if you need to stringify nested objects, as the `querystring` method has known issues with that use case (<https://github.com/nodejs/node-v0.x-archive/issues/1665>).
 {: .message}
 
 ## Semver
