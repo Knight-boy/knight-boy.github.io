@@ -113,14 +113,14 @@ comments: true
 
 ```css
 div {
-	background:beige;
+  background:beige;
 }
 section {
-	dispaly: inline;
-	background: lightgray;
+  dispaly: inline;
+  background: lightgray;
 }
 p {
-	width: 50%; /* => half of the div's width*/
+  width: 50%; /* => half of the div's width*/
   height: 200px;/* => 固定高度*/
   background: blue;
 }
@@ -130,20 +130,20 @@ p {
 
 ```css
 div {
-	background:beige;
+  background:beige;
 }
 section {
-	position: absolute;
+  position: absolute;
   left: 30px;
   top: 30px;
   width: 400px;
   height: 160px;
   padding: 30px 20px;
-	background: lightgray;
+  background: lightgray;
 }
 p {
   position: absolute;
-	width: 50%; /* => (400px+20px+20px)*.5 = 220px*/
+  width: 50%; /* => (400px+20px+20px)*.5 = 220px*/
   height: 25%;/* => (160px+30px+30px)*.25 = 55px*/
   margin: 5%; /* => (400px+20px+20px)*.05 = 22px*/
   padding: 5%;/* => (400px+20px+20px)*.05 = 22px*/
@@ -155,18 +155,18 @@ p {
 
 ```css
 body {
-	background:beige;
+  background:beige;
 }
 section {
   width: 400px;
   height: 480px;
   margin: 30px;
   padding: 15px;
-	background: lightgray;
+  background: lightgray;
 }
 p {
   positin: fixed;
-	width: 50;  /* == (50vw - (width of vertical scrollbar)) */
+  width: 50;  /* == (50vw - (width of vertical scrollbar)) */
   height: 50%;/* == (50vh - (height of horizontal scrollbar)) */
   margin: 5%; /* == (5vw - (width of vertical scrollbar)) */
   padding: 5%;/* == (5vw - (width of vertical scrollbar)) */
