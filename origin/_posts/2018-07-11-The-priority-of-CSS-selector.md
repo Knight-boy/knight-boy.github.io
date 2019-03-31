@@ -51,6 +51,6 @@ comments: true
 
 
 
-
+[更多](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Introduction_to_CSS/Cascade_and_inheritance)
 
 [^1]: https://developer.mozilla.org/zh-CN/docs/Learn/CSS
