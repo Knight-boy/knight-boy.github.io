@@ -69,10 +69,10 @@ comments: true
     background: lightgray;
   }
   p {
-    width: 50%;
-    height: 50%;
-    margin: 5%;
-    padding: 5%;
+    width: 50%; /* => 400px*.5 = 200px*/
+    height: 50%;/* => 160px*.5 = 80px*/
+    margin: 5%; /* => 400px*.05 = 20px*/
+    padding: 5%;/* => 400px*.05 = 20px*/
     background: blue;
   }
   ```
@@ -108,3 +108,94 @@ comments: true
     </div>
   </body>
 </html>
+
+- 当`<p>`标签包含块为`<div>`元素，此时`<section>`不再是一个块容器(*inline*内联)，所以此时不会在此处形成块级格式化上下文。会在`<div>`处形式格式化上下文，代码如下：
+
+```css
+div {
+	background:beige;
+}
+section {
+	dispaly: inline;
+	background: lightgray;
+}
+p {
+	width: 50%; /* => half of the div's width*/
+  height: 200px;/* => 固定高度*/
+  background: blue;
+}
+```
+
+- 当`<section>`的**`position`**被设置成`absolute`；此时`<p>`元素的包含块是`<section>`。`<p>`元素的`padding`的百分比值会受到其包含块的影响。但是，如果包含块的**`box-sizing`**被设置成`border-box`，就不会存在这个问题。
+
+```css
+div {
+	background:beige;
+}
+section {
+	position: absolute;
+  left: 30px;
+  top: 30px;
+  width: 400px;
+  height: 160px;
+  padding: 30px 20px;
+	background: lightgray;
+}
+p {
+  position: absolute;
+	width: 50%; /* => (400px+20px+20px)*.5 = 220px*/
+  height: 25%;/* => (160px+30px+30px)*.25 = 55px*/
+  margin: 5%; /* => (400px+20px+20px)*.05 = 22px*/
+  padding: 5%;/* => (400px+20px+20px)*.05 = 22px*/
+  background: blue;
+}
+```
+
+- 当把`<p>`元素的`position`设置为`fixed`，所以它的包含块就是初始包含块(在屏幕上就是viewport)。如此，`p`元素的尺寸大小会随着浏览器窗口的大小而变化。
+
+```css
+body {
+	background:beige;
+}
+section {
+  width: 400px;
+  height: 480px;
+  margin: 30px;
+  padding: 15px;
+	background: lightgray;
+}
+p {
+  positin: fixed;
+	width: 50;  /* == (50vw - (width of vertical scrollbar)) */
+  height: 50%;/* == (50vh - (height of horizontal scrollbar)) */
+  margin: 5%; /* == (5vw - (width of vertical scrollbar)) */
+  padding: 5%;/* == (5vw - (width of vertical scrollbar)) */
+  background: blue;
+}
+```
+
+- 当把`<p>`的`position`设置为`absolute`，它的包含块是`<section>`,因为此时距离它最近的一个`transform`值不为`none`的父元素；
+
+```css
+body{
+  background: beige;
+}
+section {
+  transform: rotate(0deg);
+  width: 400px;
+  height: 160px;
+  background: lightgray;
+}
+
+p {
+  position: absolute;
+  left: 80px;
+  top: 30px;
+  width: 50%;   /* == 200px */
+  height: 25%;  /* == 40px */
+  margin: 5%;   /* == 20px */
+  padding: 5%;  /* == 20px */
+  background: cyan;
+}
+```
+
