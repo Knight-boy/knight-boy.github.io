@@ -46,8 +46,6 @@ comments: true
 </html>
 ```
 
-
-
 #### MySql的读和写
 
 #### 资源：

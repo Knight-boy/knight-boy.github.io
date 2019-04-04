@@ -1,7 +1,7 @@
 ---
 title: "Fetch函数"
 date: 2018-10-06
-image: /assets/img/blog/fetch.png
+image: /assets/img/blog/default.png
 description: >
   Frame model! 
 author: author2
@@ -13,6 +13,7 @@ comments: true
 　　上面这种功能以前是使用`XMLHttpRequest`实现的。**Fetch**提供了一个更好的替代方案，可以比较容易地被其他技术使用，如`Sevice Work`。Fetch还提供了单个逻辑位置来定义其它HTTP相关概念，例如**CORS**和**HTTP**的扩展。
 
 **注意：**`fetch`规范与`jquery.ajax()`主要有两种方式的不同，牢记：
+
 - 当接收到一个代表错误的HTTP状态码时，从`fetch()`返回的**Promise**不会被标记为**reject**，即使该状态码是**404**和**500**。相反，它会将Promise状态标记为**resolve**(但会将resolve的返回值的`ok`属性设置为`false`)，仅当网络故障时或请求被阻止时，才会标记为`reject`。
 - 默认情况下，`fetch`不会从服务端发送或接收任何Cookies，如果站点依赖于用户`session`，则会导致未经认证的请求(会发送cookies,必须设置`credentials`选项)。
 {: .message}
