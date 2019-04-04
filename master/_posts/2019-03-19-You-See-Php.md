@@ -14,7 +14,7 @@ comments: true
 
 举例：
 
-```php+HTML
+```php
 //handle "\n"
 <?php
   $document_root = $_SERVER['DOCUMENT_ROOT'];
