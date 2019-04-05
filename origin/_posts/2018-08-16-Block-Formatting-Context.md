@@ -10,8 +10,6 @@ comments: true
 
 **块格式化上下文(Block Format Context,BFC)**是Web页面的可视化CSS渲染的一部分，是块盒子的布局过程发生变化的区域，也是浮动元素与其它元素相交的区域。
 
-
-
 下列方式会创建**块级格式化上下文**：
 
 - 根元素或包含根元素的元素
@@ -34,7 +32,7 @@ comments: true
 
 块格式化上下文对浮动定位（参见 [`float`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/float)）与清除浮动（参见 [`clear`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/clear)）都很重要。浮动定位和清除浮动时只会应用于同一个BFC内的元素。浮动不会影响其它BFC中元素的布局，而清除浮动只能清除同一BFC中在它前面的元素的浮动。外边距折叠（[Margin collapsing](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing)）也只会发生在属于同一BFC的块级元素之间。
 
-# 范例
+## 范例
 
 ### 让浮动的内容可以撑开容器高度
 
