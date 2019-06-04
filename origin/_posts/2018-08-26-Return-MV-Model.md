@@ -65,7 +65,7 @@ Controller和View都依赖Model层，Controller和View可以互相依赖。在�
 
 ## MVC Model 2
 
-在Web服务端开发的时候也会接触到MVC模式，而这种MVC模式不能严格称为MVC模式。经典的MVC模式只是解决客户端图形界面应用程序的问题，而对服务端无效。服务端的MVC模式又自己特定的名字：MVC Model 2，或者叫JSP Model 2，或者直接就是Model 2 。Model 2客户端服务端的交互模式如下：
+在Web服务端开发的时候也会接触到MVC模式，而这种MVC模式不能严格称为MVC模式。经典的MVC模式只是解决客户端图形界面应用程序的问题，而对服务端无效。服务端的MVC模式有自己特定的名字：MVC Model 2，或者叫JSP Model 2，或者直接就是Model 2 。Model 2客户端服务端的交互模式如下：
 
 ![](/assets/img/blog/MVCm2.png){:width="50%" height="50%"}
 
@@ -111,7 +111,7 @@ MVP打破了View原来对于Model的依赖，其余的依赖关系和MVC模式�
 关键点：
 
 1. View不再负责同步的逻辑，而是由Presenter负责。Presenter中既有应用程序逻辑也有同步逻辑。
-2. View需要提供操作界面的接口给Presenter进行调用。（关键）
+2. View需要提供操作界面的接口给Presenter进行调用。(关键)
 
 对比在MVC中，Controller是不能操作View的，View也没有提供相应的接口；而在MVP当中，Presenter可以操作View，View需要提供一组对界面操作的接口给Presenter进行调用；Model仍然通过事件广播自己的变更，但由Presenter监听而不是View。
 
