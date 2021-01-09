@@ -130,8 +130,8 @@ disqus:                1588cf7e6529b6563ce0bf499ffb08d6
 # valine
 valine:
   enable: true
-  appid: To6nWhByc3X1KaCaFnzWP5dY-gzGzoHsz
-  appkey: p14LXvfFMxUj57aY5n9Fx53t
+  appid: 3o1jzA0gJVUlcoKEpLtLK3uE-gzGzoHsz
+  appkey: zPeaCmqF1O3KlX8k5gcMSDBw
   avatar: ''
   placeholder: 'Leave your email and you will receive a reply!'
   guest_info: nick,mail,link
