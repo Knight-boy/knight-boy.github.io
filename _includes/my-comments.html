@@ -1,7 +1,7 @@
 {% if site.valine.enable %}
 <div id="disqus_thread"></div>
-<script src="//cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
-<script src="https://www.knightboy.cn/assets/js/valine.js"></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
 <script type="text/javascript">
   var GUEST = ['nick','mail','link'];
   var guest = '{{site.valine.guest_info}}';
@@ -10,8 +10,8 @@
   });
   new Valine({
     el: '#disqus_thread',
-    appId: '{{ site.valine.appid }}',
-    appKey: '{{ site.valine.appkey }}',
+    appId: '{{site.valine.appid}}',
+    appKey: '{{site.valine.appkey}}',
     placeholder: '{{site.valine.placeholder}}',
     avatar: '{{site.valine.avatar}}',
     meta: guest,
