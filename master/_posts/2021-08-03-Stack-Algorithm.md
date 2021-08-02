@@ -1,6 +1,11 @@
 ---
-title:"Stack Algorithm"
+title: "Stack Algorithm"
 date: 2021-08-03
+image: /assets/img/blog/default.png
+description: >
+  Stack Algorithm!
+author: author2
+comments: true
 ---
 
  **Next Greater Element II**
@@ -37,7 +42,7 @@ public:
         }
         for (int j = nums.size() - 1; j >= 0; j--) {
             while (!stk.empty() && (nums[j] >= stk.top())) {
-                stk.pop();
+            2    stk.pop();
             }
             vec[j] = (stk.empty()) ? -1 : stk.top();
             // vec[j] = Alternative(stk.empty(), -1, stk.top());
