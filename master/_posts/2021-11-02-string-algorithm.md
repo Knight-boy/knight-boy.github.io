@@ -1,15 +1,13 @@
 ---
 title: "string"
 date: 2021-11-02
-image: /assets/img/blog/default.jpg
+image: /assets/img/blog/default.png
 description: >
   常见字符串求解法
 author: author2
 comments: true
 ---
-
 双指针法(快慢指针法)在数组和链表的操作中是非常常见的，很多考察数组、链表、字符串等操作的面试题，都使用双指针法。
-
 ### 字符串去重
 
 #### 从数组中移除重复元素 [LeetCode_27](https://leetcode-cn.com/problems/remove-element/)
@@ -68,8 +66,6 @@ void removeExtraSpaces(string& s) {
     }
 }
 ```
-
-
 
 ### 字符串反转
 
@@ -305,8 +301,6 @@ string reverseLeftWords(string s, int n) {
 }
 ```
 
-
-
 ### 字符串匹配
 
 #### KMP算法
@@ -322,8 +316,6 @@ KMP的主要思想是 **当出现字符串不匹配时，可以知道一部分�
 后缀 是指**不包含第一个字符的所有以最后一个字符结尾的连续子串**；
 
 **前缀表** 前缀表就是一系列由**最长相同前后缀**长度组合的表。前缀表对应位置的数字表示的就是：**下标i之前(包括i)的字符串中，最长的相同前缀后缀长度是多少。**
-
-
 
 **next数组** 可以既是前缀表，又可以把前缀表统一减一(右移一位，初始位置为-1)之后作为next数组。还可以把前缀表加一来表示next数组。
 
@@ -345,8 +337,6 @@ int GetNext(string str, int *next) {
     }
 }
 ```
-
-
 
 <video src="https://cn-sdjn2-cu-v-02.bilivideo.com/upgcxcode/62/98/311669862/311669862-1-208.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1641729009&gen=playurlv2&os=bcache&oi=1866715013&trid=0000d10cb766676b4280ae0d79681c4af890T&platform=html5&upsig=5b4e3199b42684b15ddaf5ec5ade09e6&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&cdnid=8169&mid=0&bvc=vod&nettype=0&bw=65128&orderid=0,1&logo=80000000" controls preload></video>
 
@@ -377,6 +367,4 @@ int GetNext(string str, int *next) {
 > 输出: True
 >
 > 解释: 可由子字符串 "abc" 重复四次构成。 (或者子字符串 "abcabc" 重复两次构成。)
-
-
 
