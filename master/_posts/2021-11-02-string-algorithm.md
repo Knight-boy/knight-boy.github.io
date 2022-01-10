@@ -8,15 +8,11 @@ author: author2
 comments: true
 ---
 
-
-
 **双指针法**(快慢指针法)在数组和链表的操作中是非常常见的，很多考察数组、链表、字符串等操作题，都使用双指针法。
 
 **KMP算法**解决字符串匹配问题
 
 **滑动窗口**解决最长子串问题
-
-
 
 ### 字符串去重
 
@@ -345,7 +341,6 @@ int GetNext(string str, int *next) {
 [求解NEXT数组](https://www.bilibili.com/video/BV16X4y137qw/?spm_id_from=autoNext)
 
 <video src="https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/62/98/311669862/311669862-1-208.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1641803411&gen=playurlv2&os=cosbv&oi=1866715013&trid=15a75dc0c13c41cc9da7906b7270f17bT&platform=html5&upsig=8bf41aea597a6bfc8c2b36068e6bb6b7&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&mid=0&bvc=vod&nettype=0&bw=65128&orderid=0,1&logo=80000000" controls preload></video>
-
 #### 实现strStr() [LeetCode_28](https://leetcode-cn.com/problems/implement-strstr/)
 
 给你两个字符串 haystack 和 needle ，请你在 haystack 字符串中找出 needle 字符串出现的第一个位置（下标从 0 开始）。如果不存在，则返回  -1 。

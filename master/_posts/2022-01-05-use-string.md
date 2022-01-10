@@ -42,4 +42,3 @@ int FindCynical(const string &str)
 ```
 
 
-

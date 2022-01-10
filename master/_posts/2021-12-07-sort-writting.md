@@ -8,8 +8,9 @@ author: author2
 comments: true
 ---
 
-```c++
+五种排序方法
 
+```c++
 std::array<int, 10> s = {5, 7, 4, 2, 8, 6, 1, 9, 0, 3}; 
 
 // 用默认的 operator< 排序
