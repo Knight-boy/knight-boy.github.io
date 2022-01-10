@@ -7,7 +7,17 @@ description: >
 author: author2
 comments: true
 ---
-双指针法(快慢指针法)在数组和链表的操作中是非常常见的，很多考察数组、链表、字符串等操作的面试题，都使用双指针法。
+
+
+
+**双指针法**(快慢指针法)在数组和链表的操作中是非常常见的，很多考察数组、链表、字符串等操作题，都使用双指针法。
+
+**KMP算法**解决字符串匹配问题
+
+**滑动窗口**解决最长子串问题
+
+
+
 ### 字符串去重
 
 #### 从数组中移除重复元素 [LeetCode_27](https://leetcode-cn.com/problems/remove-element/)
@@ -17,8 +27,6 @@ comments: true
 不要使用额外的数组空间，你必须仅使用 **O(1)** 额外空间并原地修改输入数组。
 
 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
-
-
 
 思路：快慢指针，**双指针法（快慢指针法）在数组和链表的操作中是非常常见的，很多考察数组、链表、字符串等操作的面试题，都使用双指针法。**
 
@@ -83,8 +91,6 @@ void reverseString(vector<char>& s) {
 }
 ```
 
-
-
 #### 反转字符串II [LeetCode_541](https://leetcode-cn.com/problems/reverse-string-ii/)
 
 题目：给定一个字符串 s 和一个整数 k，从字符串开头算起，每计数至 2k 个字符，就反转这 2k 字符中的前 k 个字符。
@@ -130,8 +136,6 @@ string reverseStr(string s, int k) {
 输入："Let's take LeetCode contest"
 输出："s'teL ekat edoCteeL tsetnoc"
 ```
-
-
 
 #### 翻转字符串中的单词 [LeetCode_151](https://leetcode-cn.com/problems/reverse-words-in-a-string/)
 
@@ -205,7 +209,7 @@ public:
         return s;
     }
 
-    // 精简之后的主函数为：
+    // 精简之后
     string reverseWords(string s) {
         removeExtraSpaces(s);
         reverse(s, 0, s.size() - 1);
@@ -266,8 +270,6 @@ string replaceSpace(string s) {
 }
 ```
 
-
-
 #### 左旋转字符串 [Offer_58](https://leetcode-cn.com/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/submissions/)
 
 题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串"abcdefg"和数字2，该函数将返回左旋转两位得到的结果"cdefgab"。
@@ -317,11 +319,11 @@ KMP的主要思想是 **当出现字符串不匹配时，可以知道一部分�
 
 **前缀表** 前缀表就是一系列由**最长相同前后缀**长度组合的表。前缀表对应位置的数字表示的就是：**下标i之前(包括i)的字符串中，最长的相同前缀后缀长度是多少。**
 
-**next数组** 可以既是前缀表，又可以把前缀表统一减一(右移一位，初始位置为-1)之后作为next数组。还可以把前缀表加一来表示next数组。
+**next数组** 可以既是前缀表，又可以把前缀表统一减一(右移一位，初始位置为-1)之后作为next数组。还可以把前缀表用成下标i之前(不包括包括i)的字符串中，最长的相同前缀后缀长度加1表示，见[求解next数组](https://www.bilibili.com/video/BV16X4y137qw/?spm_id_from=autoNext)。
 
 ![使用next数组KMP匹配](https://code-thinking.cdn.bcebos.com/gifs/KMP%E7%B2%BE%E8%AE%B24.gif)
 
-构造next数组：前缀和加1
+构造next数组
 
 ```c++
 int GetNext(string str, int *next) {
@@ -338,7 +340,11 @@ int GetNext(string str, int *next) {
 }
 ```
 
-<video src="https://cn-sdjn2-cu-v-02.bilivideo.com/upgcxcode/62/98/311669862/311669862-1-208.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1641729009&gen=playurlv2&os=bcache&oi=1866715013&trid=0000d10cb766676b4280ae0d79681c4af890T&platform=html5&upsig=5b4e3199b42684b15ddaf5ec5ade09e6&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&cdnid=8169&mid=0&bvc=vod&nettype=0&bw=65128&orderid=0,1&logo=80000000" controls preload></video>
+
+
+[求解NEXT数组](https://www.bilibili.com/video/BV16X4y137qw/?spm_id_from=autoNext)
+
+<video src="https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/62/98/311669862/311669862-1-208.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1641803411&gen=playurlv2&os=cosbv&oi=1866715013&trid=15a75dc0c13c41cc9da7906b7270f17bT&platform=html5&upsig=8bf41aea597a6bfc8c2b36068e6bb6b7&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&mid=0&bvc=vod&nettype=0&bw=65128&orderid=0,1&logo=80000000" controls preload></video>
 
 #### 实现strStr() [LeetCode_28](https://leetcode-cn.com/problems/implement-strstr/)
 
@@ -368,3 +374,24 @@ int GetNext(string str, int *next) {
 >
 > 解释: 可由子字符串 "abc" 重复四次构成。 (或者子字符串 "abcabc" 重复两次构成。)
 
+### 子串问题
+
+#### 无重复字符的最长子串 [LeetCode_3](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
+
+给定一个字符串 `s` ，请你找出其中不含有重复字符的 **最长子串** 的长度。
+
+**示例 1:**
+
+> 输入: s = "abcabcbb"
+> 输出: 3 
+> 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+
+
+
+滑动窗口求解
+
+题中的 **abcabcbb**，进入这个队列（窗口）为 `abc` 满足题目要求，当再进入 a，队列变成了 `abca`，这时候不满足要求。此时，我们要移动这个队列！
+
+我们只要把队列的左边的元素移出就行了，直到满足题目要求
+
+一直维持这样的队列，找出队列满足题目要求时出现最长的长度时候，求出解
