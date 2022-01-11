@@ -1,5 +1,5 @@
 ---
-title: "string"
+title: "how to use string"
 date: 2022-01-05
 image: /assets/img/blog/default.png
 description: >

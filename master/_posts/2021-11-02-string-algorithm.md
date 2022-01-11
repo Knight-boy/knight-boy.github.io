@@ -1,5 +1,5 @@
 ---
-title: "string"
+title: string algorithm
 date: 2021-11-02
 image: /assets/img/blog/default.png
 description: >
@@ -10,9 +10,9 @@ comments: true
 
 **双指针法**(快慢指针法)在数组和链表的操作中是非常常见的，很多考察数组、链表、字符串等操作题，都使用双指针法。
 
-**KMP算法**解决字符串匹配问题
+**KMP算法**解决字符串匹配问题。
 
-**滑动窗口**解决最长子串问题
+**滑动窗口**解决最长子串问题。
 
 ### 字符串去重
 
