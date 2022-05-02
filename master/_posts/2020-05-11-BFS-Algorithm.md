@@ -1,5 +1,5 @@
 ---
-title: "BSF Algorithm"
+title: "BFS Algorithm"
 date: 2020-05-13
 image: /assets/img/blog/default.png
 description: >

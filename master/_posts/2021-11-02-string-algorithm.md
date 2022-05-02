@@ -1,5 +1,5 @@
 ---
-title: string algorithm
+title: "string algorithm"
 date: 2021-11-02
 image: /assets/img/blog/default.png
 description: >
@@ -8,15 +8,19 @@ author: author2
 comments: true
 ---
 
+
+
 **双指针法**(快慢指针法)在数组和链表的操作中是非常常见的，很多考察数组、链表、字符串等操作题，都使用双指针法。
 
 **KMP算法**解决字符串匹配问题。
 
 **滑动窗口**解决最长子串问题。
 
-### 字符串去重
 
-#### 从数组中移除重复元素 [LeetCode_27](https://leetcode-cn.com/problems/remove-element/)
+
+## 字符串去重
+
+### 从数组中移除重复元素 [LeetCode_27](https://leetcode-cn.com/problems/remove-element/)
 
 题目：给你一个数组 **nums** 和一个值 **val**，你需要 原地 移除所有数值等于 **val** 的元素，并返回移除后数组的新长度。
 
@@ -40,7 +44,7 @@ int removeElement(vector<int>& nums, int val) {
 }
 ```
 
-#### 移除多余的空格
+### 移除多余的空格
 
 ```c++
 // 移除冗余空格：使用双指针（快慢指针法）O(n)的算法
@@ -71,9 +75,9 @@ void removeExtraSpaces(string& s) {
 }
 ```
 
-### 字符串反转
+## 字符串反转
 
-#### 反转字符串 [LeetCode_344](https://leetcode-cn.com/problems/reverse-string/)
+### 反转字符串 [LeetCode_344](https://leetcode-cn.com/problems/reverse-string/)
 
 思路：双指针反转单词
 
@@ -87,7 +91,7 @@ void reverseString(vector<char>& s) {
 }
 ```
 
-#### 反转字符串II [LeetCode_541](https://leetcode-cn.com/problems/reverse-string-ii/)
+### 反转字符串II [LeetCode_541](https://leetcode-cn.com/problems/reverse-string-ii/)
 
 题目：给定一个字符串 s 和一个整数 k，从字符串开头算起，每计数至 2k 个字符，就反转这 2k 字符中的前 k 个字符。
 
@@ -122,7 +126,7 @@ string reverseStr(string s, int k) {
 }
 ```
 
-#### 反转字符串中的单词III [LeetCode_557](https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/)
+### 反转字符串中的单词III [LeetCode_557](https://leetcode-cn.com/problems/reverse-words-in-a-string-iii/)
 
 给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。
 
@@ -133,7 +137,7 @@ string reverseStr(string s, int k) {
 输出："s'teL ekat edoCteeL tsetnoc"
 ```
 
-#### 翻转字符串中的单词 [LeetCode_151](https://leetcode-cn.com/problems/reverse-words-in-a-string/)
+### 翻转字符串中的单词 [LeetCode_151](https://leetcode-cn.com/problems/reverse-words-in-a-string/)
 
 如果字符串为："  the     sky is   blue       "
 
@@ -223,9 +227,11 @@ public:
 };
 ```
 
-### 字符串修改
 
-#### 替换空格 [Offer_05](https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/)
+
+## 字符串修改
+
+### 替换空格 [Offer_05](https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/)
 
 题目：请实现一个函数，把字符串 `s` 中的每个空格替换成"%20"。
 
@@ -266,7 +272,7 @@ string replaceSpace(string s) {
 }
 ```
 
-#### 左旋转字符串 [Offer_58](https://leetcode-cn.com/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/submissions/)
+### 左旋转字符串 [Offer_58](https://leetcode-cn.com/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/submissions/)
 
 题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串"abcdefg"和数字2，该函数将返回左旋转两位得到的结果"cdefgab"。
 
@@ -299,9 +305,9 @@ string reverseLeftWords(string s, int n) {
 }
 ```
 
-### 字符串匹配
+## 字符串匹配
 
-#### KMP算法
+### KMP算法
 
 KMP的主要思想是 **当出现字符串不匹配时，可以知道一部分之前已经匹配的文本内容，可以利用这些信息避免从头再去做匹配。**
 
@@ -340,12 +346,11 @@ int GetNext(string str, int *next) {
 
 [求解NEXT数组](https://www.bilibili.com/video/BV16X4y137qw/?spm_id_from=autoNext)
 
-<video src="https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/62/98/311669862/311669862-1-208.mp4?e=ig8euxZM2rNcNbRVhwdVhwdlhWdVhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1641803411&gen=playurlv2&os=cosbv&oi=1866715013&trid=15a75dc0c13c41cc9da7906b7270f17bT&platform=html5&upsig=8bf41aea597a6bfc8c2b36068e6bb6b7&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,platform&mid=0&bvc=vod&nettype=0&bw=65128&orderid=0,1&logo=80000000" controls preload></video>
-#### 实现strStr() [LeetCode_28](https://leetcode-cn.com/problems/implement-strstr/)
+### 实现strStr() [LeetCode_28](https://leetcode-cn.com/problems/implement-strstr/)
 
 给你两个字符串 haystack 和 needle ，请你在 haystack 字符串中找出 needle 字符串出现的第一个位置（下标从 0 开始）。如果不存在，则返回  -1 。
 
-#### 重复的子字符串 [LeetCode_459](https://leetcode-cn.com/problems/repeated-substring-pattern/)
+### 重复的子字符串 [LeetCode_459](https://leetcode-cn.com/problems/repeated-substring-pattern/)
 
 给定一个非空的字符串，判断它是否可以由它的一个子串重复多次构成。给定的字符串只含有小写英文字母，并且长度不超过10000。
 
@@ -369,9 +374,9 @@ int GetNext(string str, int *next) {
 >
 > 解释: 可由子字符串 "abc" 重复四次构成。 (或者子字符串 "abcabc" 重复两次构成。)
 
-### 子串问题
+## 子串问题
 
-#### 无重复字符的最长子串 [LeetCode_3](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
+### 无重复字符的最长子串 [LeetCode_3](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
 
 给定一个字符串 `s` ，请你找出其中不含有重复字符的 **最长子串** 的长度。
 
