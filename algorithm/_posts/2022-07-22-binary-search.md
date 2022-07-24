@@ -48,7 +48,7 @@ comments: true
 
 
 
-**二分搜索模拟**
+**二分搜索**
 
 ![binary_search](/assets/img/blog/binary_search.png){:align="center"}
 
