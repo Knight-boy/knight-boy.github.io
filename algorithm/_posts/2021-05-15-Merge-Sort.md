@@ -1,7 +1,7 @@
 ---
 title: "归并排序"
 date: 2021-05-15
-image: /assets/img/blog/default.png
+image: /assets/img/blog/IMG_0291.JPG
 description: >
   merge sort!
 author: author2

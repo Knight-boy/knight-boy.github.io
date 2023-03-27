@@ -1,7 +1,7 @@
 ---
 title: "Stack Algorithm"
 date: 2021-08-03
-image: /assets/img/blog/default.png
+image: /assets/img/blog/IMG_0314.JPG
 description: >
   Stack Algorithm!
 author: author2

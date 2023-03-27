@@ -1,7 +1,7 @@
 ---
 title: 选择排序
 date: 2020-04-25
-image: /assets/img/blog/default.png
+image: /assets/img/blog/IMG_0263.JPG
 description: >
   selection sort!
 author: author2

@@ -1,7 +1,7 @@
 ---
 title: "sort writting"
 date: 2021-12-07
-image: /assets/img/blog/default.png
+image: /assets/img/blog/IMG_0257.JPG
 description: >
   five sort algorithm writting!
 author: author2

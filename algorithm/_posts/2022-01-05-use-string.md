@@ -1,7 +1,7 @@
 ---
 title: "how to use string"
 date: 2022-01-05
-image: /assets/img/blog/default.png
+image: /assets/img/blog/IMG_0256.JPG
 description: >
   use string easily!
 author: author2

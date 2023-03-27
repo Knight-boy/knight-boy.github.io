@@ -1,7 +1,7 @@
 ---
 title: 希尔排序
 date: 2020-04-25
-image: /assets/img/blog/default.png
+image: /assets/img/blog/IMG_0262.JPG
 description: >
   shell sort!
 author: author2

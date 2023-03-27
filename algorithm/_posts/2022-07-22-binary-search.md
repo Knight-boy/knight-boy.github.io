@@ -1,7 +1,7 @@
 ---
 title: "binary-search"
 date: 2022-07-22
-image: /assets/img/blog/default.png
+image: /assets/img/blog/IMG_0326.JPG
 description: >
   search algorithm!
 author: author2

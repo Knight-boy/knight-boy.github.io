@@ -1,7 +1,7 @@
 ---
 title: JS实现快速排序
 date: 2020-04-25
-image: /assets/img/blog/default.png
+image: /assets/img/blog/IMG_0383.JPG
 description: >
   quick-sort!
 author: author2
