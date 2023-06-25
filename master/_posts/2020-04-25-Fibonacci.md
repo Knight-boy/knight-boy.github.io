@@ -1,7 +1,7 @@
 ---
 title: 斐波那契数列
 date: 2020-04-25
-image: /assets/img/blog/default.png
+image: /assets/img/blog/IMG_0391.JPG
 description: >
   Fibonacci!
 author: author2

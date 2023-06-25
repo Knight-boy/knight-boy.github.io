@@ -1,7 +1,7 @@
 ---
 title: "Four caculation"
 date: 2019-11-22
-image: /assets/img/blog/default.png
+image: /assets/img/blog/IMG_0269.JPG
 description: >
   BigInteger?
 author: author2

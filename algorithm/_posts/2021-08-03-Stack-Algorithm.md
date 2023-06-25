@@ -1,7 +1,7 @@
 ---
 title: "Stack Algorithm"
 date: 2021-08-03
-image: /assets/img/blog/default.png
+image: /assets/img/blog/IMG_0314.JPG
 description: >
   Stack Algorithm!
 author: author2
@@ -36,16 +36,15 @@ class Solution1 {
 public:
     vector<int> nextGreaterElements(vector<int>& nums) {
         ::stack<int> stk;
-        ::vector<int> vec(nums.size(), 0);
+        ::vector<int> vec(nums.size());
         for (int i = nums.size() - 1; i >= 0; i--) {
             stk.push(nums[i]);
         }
         for (int j = nums.size() - 1; j >= 0; j--) {
             while (!stk.empty() && (nums[j] >= stk.top())) {
-            2    stk.pop();
+                stk.pop();
             }
-            vec[j] = (stk.empty()) ? -1 : stk.top();
-            // vec[j] = Alternative(stk.empty(), -1, stk.top());
+            vec[j] = stk.empty() ? -1 : stk.top();
             stk.push(nums[j]);
         }
         return vec;

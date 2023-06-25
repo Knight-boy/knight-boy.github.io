@@ -1,7 +1,7 @@
 ---
 title: 防抖和节流
 date: 2018-06-17
-image: /assets/img/blog/default.png
+image: /assets/img/blog/IMG_0392.JPG
 description: >
   throttle and debounce!
 author: author2

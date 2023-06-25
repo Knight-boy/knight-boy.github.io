@@ -1,7 +1,7 @@
 ---
 title: 插入排序
 date: 2020-04-25
-image: /assets/img/blog/default.png
+image: /assets/img/blog/IMG_0264.JPG
 description: >
   insert sort!
 author: author2

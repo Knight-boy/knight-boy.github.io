@@ -1,7 +1,7 @@
 ---
 title: 拼车
 date: 2020-04-10
-image: /assets/img/blog/default.png
+image: /assets/img/blog/IMG_0268.JPG
 description: >
   car pooling!
 author: author2

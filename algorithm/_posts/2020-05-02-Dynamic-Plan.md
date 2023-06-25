@@ -1,7 +1,7 @@
 ---
 title: "DP 问题"
 date: 2020-05-02
-image: /assets/img/blog/default.png
+image: /assets/img/blog/IMG_0258.JPG
 description: >
   DP Algorithm!
 author: author2
