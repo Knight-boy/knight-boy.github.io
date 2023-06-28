@@ -1,5 +1,5 @@
 ---
-title:"DFS Algorithm"
+title: "DFS Algorithm"
 date: 2020-05-11
 image: /assets/img/blog/IMG_0289.JPG
 description: >
