@@ -8,7 +8,7 @@ author: author2
 comments: true
 ---
 
-边的权重是负数，且有边数限制的最短路。
+边的权重是负数，且有边数限制的最短路通常用bellmanford算法。
 
 ## bellmanford算法
 
@@ -34,21 +34,21 @@ public:
     int bellmanford(vector<tuple<int, int, int>> &edges, int n, int k)
     {
         int m = edges.size();
-		dist.resize(2 * m);
+        dist.resize(2 * m);
         std::generate(dist.begin(), dist.end(), []() mutable {return INF;});
         dist[1] = 0;
-        
+
         for (int i = 0; i < k; i++) {
             backup = dist;
             for (int j = 0; j < m; j++) {
-                auto [a, b, w] = edges[j];
+                const auto &[a, b, w] = edges[j];
                 dist[b] = min(dist[b], backup[a] + w);
             }
         }
-        
+
         return dist[n] > INF / 2 ? INT_MIN : dist[n];
     }
-    
+
     vector<int> dist;
     vector<int> backup;
 }
