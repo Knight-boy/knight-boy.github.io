@@ -72,5 +72,46 @@ public:
 };
 ```
 
+### 子集问题
+
+举例：给一个整数数组，数组中的元素互不相同，返回该数组中所有可能的子集(幂集)
+
+实例1：
+
+> **输入**：nums = [1,2,3];
+>
+> **输出**：[[], [1], [2], [1,2], [3], [1,3], [2,3], [1,2,3]]
+
+```c++
+class Solution {
+public:
+    void handle(const vector<int> &nums, int u, int &k)
+    {
+        if (path.size() == k) {
+            result.push_back(path);
+            return;
+        }
+        
+        for (int i = u; i < nums.size(); i++) {
+            path.push_back(nums[i]);
+            handle(nums, i + 1, k);
+            path.pop_back();
+        }
+    }
+
+    vector<vector<int>> SubSets(vector<int> &nums)
+    {
+        for (int i = 0; i <= nums.size(); i++) {
+        	handle(nums, 0, i);
+        }
+        return result;
+    }
+    
+private:
+    vector<int> path;
+    vector<vector<int>> result;
+};
+```
+
 
 
