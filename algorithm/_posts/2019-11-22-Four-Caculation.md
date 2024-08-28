@@ -3,14 +3,12 @@ title: "Four caculation"
 date: 2019-11-22
 image: /assets/img/blog/IMG_0269.JPG
 description: >
-  BigInteger?
+  BigInteger Caculate
 author: author2
 comments: true
 ---
 
 大数问题归类....
-
-
 
 # 减法
 
