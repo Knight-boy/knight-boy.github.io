@@ -121,7 +121,7 @@ defaults:
 
 # Set your Google Analytics id to receive `pageview` events.
 # To remove Google Anaylics from your page, remove the line below.
-google_analytics:      UA-130421911-1
+google_analytics:      G-BWECVTLEHF #UA-130421911-1
 # baidu_analytics
 disqus:                1588cf7e6529b6563ce0bf499ffb08d6
 
