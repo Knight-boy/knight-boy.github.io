@@ -119,13 +119,15 @@ private:
 
 **输入**：
 
+{% raw %}
+
 > text: "   a   "
 >
 > checkSum: 97
 >
 > patterns: {{‘t’, 'f'}, {'b', 'l'}}
 
-
+{% endraw %}
 
 **输出**：
 
