@@ -86,3 +86,20 @@ int main()
 }
 ```
 
+使用递归的归并排序算法
+
+```c++
+template <typename T>
+void MergeSort(vector<T> a, int front, int end)
+{
+    if (front >= end) {
+        return;
+    }
+    
+    int mid = front + (end - front) / 2;
+    MergeSort(a, front, mid);
+    MergeSort(a, mid + 1, end);
+    std::merge(a, front, mid, end);
+}
+```
+
