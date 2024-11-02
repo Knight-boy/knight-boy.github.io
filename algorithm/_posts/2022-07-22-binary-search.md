@@ -1,5 +1,5 @@
 ---
-title: "binary-search"
+title: "二分搜索"
 date: 2022-07-22
 image: /assets/img/blog/IMG_0326.JPG
 description: >
