@@ -24,11 +24,11 @@ title:                 Knight's Blog
 # A short description (~150 chars) of the page used for the meta description tag.
 # Can use markdown, but no more than one paragraph (enforced by `>`)
 description:           >
-  Best Jekyll Theme by a Mile.
+  记录算法、前端开发与生活所感的个人博客。
 
 # A shorter description for the sidebar.
 tagline:               >
-  My brother once told me that nothing someone says before the word 'but' really counts.
+  代码与生活的随笔
 
 # A list of keywords for your blog
 keywords:              []
@@ -51,9 +51,9 @@ copyright:             >
 # Add links to the footer.
 # Typically you'll want to link to your impress, cookies or privacy policy, etc.
 legal:
-   - title:             Impress
+   - title:             站点声明
      href:              /impress/
-   - title:             Cookies Policy
+   - title:             Cookies 政策
      href:              /cookies-policy/
 
 # Format of the permalinks
@@ -121,9 +121,8 @@ defaults:
 
 # Set your Google Analytics id to receive `pageview` events.
 # To remove Google Anaylics from your page, remove the line below.
-google_analytics:      G-BWECVTLEHF #UA-130421911-1
-# baidu_analytics
-disqus:                1588cf7e6529b6563ce0bf499ffb08d6
+google_analytics:      G-BWECVTLEHF
+baidu_analytics:       1588cf7e6529b6563ce0bf499ffb08d6
 
 # Setting a disqus shortname will enable the comment section on
 # pages with `comments: true` in the front matter.
@@ -246,6 +245,7 @@ exclude:
   - _js
   - _plugins
   - .sass-cache
+  - docs
 include:
   - LICENSE.md
 

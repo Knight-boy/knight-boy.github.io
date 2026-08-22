@@ -1,73 +1,43 @@
 ---
 description: >
-  cookies
+  本站 Cookies 政策
 hide_description: true
 permalink: /cookies-policy/
 ---
 
 ## Cookies 政策
 
-**什么是Cookies？**
+本政策说明本站（www.knightboy.cn，以下简称"本站"）如何使用 Cookies 及同类技术。使用本站即表示您理解并同意按本政策所述方式使用这些技术。
 
-Cookies是当您在您的设备上（电脑，平板电脑或手机）访问互联网（包括我们的网站）时储存到您的电脑上的小型文本文档。
+### 什么是 Cookies？
 
-我们网站的Cookies主要让您的浏览更加愉悦，同时提升网站的使用和其功能性；例如，Cookies用作您再次登录本网站的身份识别，或者根据您的期望及兴趣提供网站内容。
+Cookies 是当您访问网站时，由网站存储在您的设备（电脑、平板或手机）上的小型文本文件，通常用于记住您的偏好、统计访问情况等。类似技术还包括 localStorage、像素标签等。
 
-同时，我们也会用这些文档进行通信量统计来判断您如何找到我们网站。
+### 本站使用哪些 Cookies 及其用途？
 
-我们不会将 Cookies 用于本政策所述目的之外的任何用途。
+本站是一个静态个人博客，不设账号登录，不投放广告，不进行任何用户画像或跨站追踪。我们仅在以下场景使用 Cookies 及同类存储：
 
- 
+- **Google Analytics（网站统计）**：用于统计页面浏览量等匿名访问数据。本站已开启 `anonymizeIp`（IP 匿名化）。在您通过 Cookie 同意横幅明确同意之前，Google Analytics 不会在本地存储任何与您相关的数据。
+- **百度统计**：用于统计访问来源与页面热度，帮助改进内容。
+- **评论系统（Valine / LeanCloud）**：当您使用评论功能时，相关数据将由 LeanCloud 按其自身政策处理。
 
-**我们为何使用Cookies 以及我们使用哪些Cookies？**
+除上述用途外，本站不会将 Cookies 用于身份识别、广告定向或其他目的。
 
-根据您的设备不同，我们为以下目的使用Cookies：
+### 如何管理 Cookies？
 
-- 识别您的身份并更多了解您，以便提供您定制化的浏览；
-- 保证安全的浏览并抵制欺诈行为；
-- 根据您的兴趣提供您相关内容；
-- 根据您的偏好和最近购物，提供商品。
-- 除 Cookies 外，我们还会在网站上使用网站信标或像素标签同类工具。
+您可以随时通过浏览器设置删除或禁用 Cookies：
 
- 
+- Chrome：<https://support.google.com/chrome/answer/95647?hl=zh-CN>
+- Firefox：<https://support.mozilla.org/zh-CN/kb/enable-and-disable-cookies-website-preferences>
+- Safari：<https://support.apple.com/zh-cn/guide/safari/sfri11471/mac>
+- Edge：设置 → Cookie 和网站权限
 
-**如何在我的网络浏览器上设置Cookies？**
+请注意，禁用 Cookies 不影响您正常阅读本站文章，但可能影响部分统计的准确性。
 
-网页浏览器的默认设置通常被设为接收Cookies，但是您可以通过改变浏览器设置而轻松更改。
+### 政策更新
 
-但是，您一旦选择在浏览器上关闭Cookies，那么您可能无法享受本网站提供的全部功能。
+本政策如有修订，将在本页面发布并更新生效日期。重大变更会在站内公告。
 
-更多关于Cookies设置的信息，请咨询以下链接：<http://www.aboutCookies.org/>;
+### 联系方式
 
-对Internet Explorer™：
-
-<http://windows.microsoft.com/en-us/windows7/how-to-manage-Cookies-in-internet-explorer-9>;
-
-对Safari™：<http://support.apple.com/kb/HT1677?viewlocale=en_US>;
-
-对Chrome™：<https://support.google.com/chrome/answer/95647?hl=en>;
-
-对For Firefox™:
-
-<https://support.mozilla.org/en-US/kb/enable-and-disable-Cookies-website-preferences>; 
-
-对 Opera™: <http://help.opera.com/Windows/10.20/en/Cookies.html>.
-
- 
-
-**我们接受第三方Cookies吗？**
-
-在您浏览网页的过程中，第三方网站也会将一些Cookies 以定制化和/或升级内容（包括广告）的目的储存在您的设备中。根据支持内容不同，以下第三方的Cookies可能被储存，包括：
-
-社交网站内容：我们会在网站上发布部分社交网站的支持内容，因此，为翻阅此类支持的内容，此社交网站的Cookies将会储存在您的设备上。
-我们请您阅读这些社交网站的隐私政策获得更多信息。
-
-闪存：闪存Cookies是储存在闪存软件上的文档。该工具经常作为网页浏览器的延伸来展示动态对象，例如动画或视频。因此，使用该软件将会储存闪存Cookies。我们请您通过网站www.adobe.com了解其Cookies 政策。
-
-**我们在第三方平台上放置Cookies吗？**
-
-我们会在展示有关我们品牌和/或产品的广告合作伙伴的网站上放置Cookies。这些Cookies主要为您展示符合您兴趣的恰当内容，并评估对我们内容（包括广告）的访问。
-
-在此提醒，通过网络浏览器禁用Cookies，所有的Cookies，包括优化我们网站功能的Cookies将会被禁止使用。
-
-{: .message}
+如对本政策有任何疑问，请联系：hpanw@foxmail.com

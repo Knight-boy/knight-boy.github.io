@@ -38,8 +38,8 @@ continue_reading:      >
 
 cookies_banner:
   text:                >
-    This site uses cookies. [Cookies Policy](/hydejack/cookies-policy/).
-  okay:                Okay
+    本站使用 Cookies 进行访问统计。[Cookies 政策](/cookies-policy/)。
+  okay:                好
 
 not_found:
   title:               '404: Page Not Found'
