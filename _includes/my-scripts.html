@@ -197,8 +197,11 @@ It has two modes:
           if (!subUl) { subUl = d.createElement('ul'); lastLi.appendChild(subUl); }
           subUl.appendChild(li);
         } else if (h.tagName === 'H3') {
-          // h3 without a preceding h2 (flat articles): render as a top-level
-          // item WITHOUT becoming the parent of later h3 items.
+          /* NOTE: avoid `//` line comments in this inline script — the
+             compress layout strips newlines, which would comment out the
+             rest of the script. h3 without a preceding h2 (flat articles):
+             render as a top-level item WITHOUT becoming the parent of
+             later h3 items. */
           outUl.appendChild(li);
         } else {
           outUl.appendChild(li);
