@@ -226,7 +226,7 @@ It has two modes:
   !function (w, d) {
     var KEY = 'hy-theme';
     var body = d.body;
-    var btns = d.querySelectorAll('#_theme-toggle, #_theme-toggle-mobile');
+    var btn = d.getElementById('_theme-toggle-mobile');
 
     function resolve() {
       var saved = null;
@@ -239,26 +239,16 @@ It has two modes:
       return body.classList.contains('dark-mode');
     }
 
-    function paint() {
-      /* The sidebar button shows a text label; the navbar icon (mobile) is
-         static (icon-contrast fits both modes). */
-      var label = isDark() ? '☀️ 日间模式' : '🌙 夜间模式';
-      var sidebarBtn = d.getElementById('_theme-toggle');
-      if (sidebarBtn) sidebarBtn.textContent = label;
-    }
-
     /* The html-level class was only needed before first paint. */
     d.documentElement.classList.remove('dark-mode-early');
 
     if (body) body.classList[resolve() === 'dark' ? 'add' : 'remove']('dark-mode');
-    paint();
 
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].addEventListener('click', function () {
+    if (btn) {
+      btn.addEventListener('click', function () {
         var next = isDark() ? 'light' : 'dark';
         body.classList[next === 'dark' ? 'add' : 'remove']('dark-mode');
         try { localStorage.setItem(KEY, next); } catch (e) { /* ignore */ }
-        paint();
       });
     }
   }(window, document);

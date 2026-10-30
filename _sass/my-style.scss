@@ -148,43 +148,10 @@ html.dark-mode-early body {
   transition: none;
 }
 
-// The toggle button registered in `_includes/body/sidebar.html` and wired up
-// from `_includes/my-scripts.html`.
-.theme-toggle-wrap {
-  margin-top: 0.75rem;
-}
-
-button.theme-toggle {
-  display: inline-block;
-  padding: 0.25rem 1rem;
-
-  font: inherit;
-  font-weight: var(--font-weight-heading);
-  color: rgba(255, 255, 255, 0.75);
-  background: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0.25rem;
-  cursor: pointer;
-
-  &:hover,
-  &:focus {
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.8);
-    outline: none;
-  }
-}
-
-// The navbar copy of the toggle (next to the hamburger) is for narrow
-// screens, where the drawer is hidden until opened. Desktop uses the
-// sidebar button instead.
+// The theme toggle lives in the top navbar (next to the hamburger), the
+// single entry point visible on all screen sizes — see `body/menu.html`.
 .theme-toggle-mobile {
   display: inline-block;
-}
-
-@media screen and (min-width: 64em) {
-  .theme-toggle-mobile {
-    display: none;
-  }
 }
 
 // Thicken the back-to-top arrow (icon font strokes are quite thin).
