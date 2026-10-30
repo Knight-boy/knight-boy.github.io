@@ -61,16 +61,22 @@
     margin-bottom: 0.25rem;
   }
 
-  ul {
+  // Top-level list (the only direct child ul — the panel's previous child
+  // is the .toc-title div, so :first-child selectors would miss it).
+  > ul {
     list-style: none;
     margin: 0;
     padding: 0;
     border-left: 1px solid var(--border-color);
+  }
 
-    &:not(:first-child) {
-      margin-left: 0.75rem;
-      border-left-color: rgba(235, 235, 235, 0.75);
-    }
+  // Nested (h3) lists indent uniformly relative to their parent item.
+  ul ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-left: 0.75rem;
+    border-left: 1px solid rgba(235, 235, 235, 0.75);
   }
 
   a {
@@ -82,16 +88,14 @@
     text-overflow: ellipsis;
     word-break: break-all;
 
+    // Active item: color + background highlight only. No font-weight or left
+    // border, so the first (usually active) item keeps the exact same
+    // indentation and text metrics as every other item.
     &.active {
       color: var(--body-color);
-      font-weight: var(--font-weight-bold);
-      border-left: none; // keep layout stable, marker drawn separately
-      box-shadow: inset 2px 0 0 0 var(--theme-color, #193747);
+      background: var(--gray-bg);
+      border-radius: 0.25rem;
     }
-  }
-
-  li > ul {
-    margin-left: -0.35rem;
   }
 
   @media print {
