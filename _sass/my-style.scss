@@ -174,6 +174,19 @@ button.theme-toggle {
   }
 }
 
+// The navbar copy of the toggle (next to the hamburger) is for narrow
+// screens, where the drawer is hidden until opened. Desktop uses the
+// sidebar button instead.
+.theme-toggle-mobile {
+  display: inline-block;
+}
+
+@media screen and (min-width: 64em) {
+  .theme-toggle-mobile {
+    display: none;
+  }
+}
+
 // The toggle button pinned to the right edge in overlay mode
 // (created and shown/hidden from `_includes/my-scripts.html`).
 .toc-btn {
