@@ -196,6 +196,10 @@ It has two modes:
         if (h.tagName === 'H3' && lastLi) {
           if (!subUl) { subUl = d.createElement('ul'); lastLi.appendChild(subUl); }
           subUl.appendChild(li);
+        } else if (h.tagName === 'H3') {
+          // h3 without a preceding h2 (flat articles): render as a top-level
+          // item WITHOUT becoming the parent of later h3 items.
+          outUl.appendChild(li);
         } else {
           outUl.appendChild(li);
           lastLi = li;
