@@ -7,3 +7,72 @@
     margin: 1.5rem 0;
   }
 }
+
+// Right-hand table-of-contents panel for posts.
+// Positioning is done in `_includes/my-scripts.html`, which measures the
+// content column (`#_main`) and only shows the panel if there is room.
+.toc-panel {
+  position: fixed;
+  z-index: 10;
+  top: 2.5rem;
+  bottom: 2rem;
+
+  display: none; // shown by script after measuring the content column
+  overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
+  padding: 0.75rem 0.6rem 0.75rem 0.9rem;
+
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+
+  border-left: 1px solid var(--border-color);
+  background: var(--body-bg);
+
+  .toc-title {
+    font-size: 0.75rem;
+    color: var(--gray-text);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 1px solid var(--border-color);
+
+    &:not(:first-child) {
+      margin-left: 0.75rem;
+      border-left-color: rgba(235, 235, 235, 0.75);
+    }
+  }
+
+  a {
+    display: block;
+    padding: 0.15rem 0.4rem 0.15rem 0.75rem;
+    color: inherit;
+    font-size: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+
+    &.active {
+      color: var(--body-color);
+      font-weight: var(--font-weight-bold);
+      border-left: none; // keep layout stable, marker drawn separately
+      box-shadow: inset 2px 0 0 0 var(--theme-color, #193747);
+    }
+  }
+
+  li > ul {
+    margin-left: -0.35rem;
+  }
+
+  @media print {
+    display: none !important;
+  }
+}

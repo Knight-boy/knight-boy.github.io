@@ -1,10 +1,142 @@
 {% comment %}
 <!--
-Example code for the CloudFlare mail protection script.
-CloudFlare will inject this on every page, but due to Hydejack's push state approach to page loading,
-it will only run on the initial page.
-The snippet below will run the code on every `hy-push-state-load` event instead.
+User scripts hook. Runs on the initial page load and (via the
+hy-push-state-load listener below, cf. the CloudFlare example) again after
+every client-side navigation handled by <hy-push-state>.
+
+Currently hosts the right-hand table-of-contents panel for posts.
 -->
+{% endcomment %}
+<script>
+  !function (w, d) {
+    var pushStateEl = d.getElementsByTagName('hy-push-state')[0];
+    var panel = null;
+    var items = [];
+
+    function isPostPage() {
+      var main = d.getElementById('_main');
+      return !!(main && main.classList.contains('layout-post'));
+    }
+
+    function collectHeadings() {
+      var doc = d.querySelector('#_main article.page.post');
+      if (!doc) return [];
+      var nodes = doc.querySelectorAll('h2[id], h3[id]');
+      var out = [];
+      for (var i = 0; i < nodes.length; i++) {
+        var el = nodes[i];
+        if (el.hidden || el.classList.contains('page-title') || el.classList.contains('sr-only') || el.classList.contains('hr')) continue;
+        out.push(el);
+      }
+      return out;
+    }
+
+    function headingText(h) {
+      var clone = h.cloneNode(true);
+      var junk = clone.querySelectorAll('.permalink, a.anchor');
+      for (var j = 0; j < junk.length; j++) junk[j].parentNode.removeChild(junk[j]);
+      return (clone.textContent || '').trim();
+    }
+
+    function onClick(e) {
+      var id = this.getAttribute('data-target');
+      var h = id ? d.getElementById(id) : null;
+      if (!h) return;
+      e.preventDefault();
+      h.scrollIntoView({ 'behavior': 'smooth' });
+      if (w.history && w.history.replaceState) {
+        try { w.history.replaceState(null, '', '#' + id); } catch (err) { /* ignore */ }
+      }
+    }
+
+    function hide() {
+      if (panel) panel.style.display = 'none';
+    }
+
+    function apply() {
+      if (!panel) return;
+      var main = d.getElementById('_main');
+      if (!main || w.innerWidth < 1000) { hide(); return; }
+      var rect = main.getBoundingClientRect();
+      var width = Math.min(280, w.innerWidth - rect.right - 28);
+      if (!(width >= 200)) { hide(); return; }
+      panel.style.display = 'block';
+      panel.style.left = Math.round(rect.right + 16) + 'px';
+      panel.style.width = Math.round(width) + 'px';
+      highlight();
+    }
+
+    function highlight() {
+      if (!items.length || !panel || panel.style.display === 'none') return;
+      var current = 0;
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].heading.getBoundingClientRect().top <= 140) current = i;
+      }
+      // At the very bottom of the page, highlight the last item.
+      if (w.innerHeight + w.scrollY >= d.documentElement.scrollHeight - 4) current = items.length - 1;
+      for (var k = 0; k < items.length; k++) {
+        items[k].anchor.classList[k === current ? 'add' : 'remove']('active');
+      }
+    }
+
+    function buildPanel() {
+      if (!panel) {
+        panel = d.createElement('aside');
+        panel.className = 'toc-panel';
+        d.body.appendChild(panel);
+        w.addEventListener('resize', apply, { 'passive': true });
+        w.addEventListener('scroll', highlight, { 'passive': true });
+      }
+      panel.innerHTML = '';
+      items = [];
+
+      var headings = isPostPage() ? collectHeadings() : [];
+      if (headings.length < 2) { hide(); return; }
+
+      var title = d.createElement('div');
+      title.className = 'toc-title';
+      title.textContent = '文章目录';
+      panel.appendChild(title);
+
+      var outUl = d.createElement('ul');
+      var lastLi = null;
+      var subUl = null;
+      for (var i = 0; i < headings.length; i++) {
+        var h = headings[i];
+        var a = d.createElement('a');
+        a.textContent = headingText(h);
+        a.href = '#' + h.id;
+        a.setAttribute('data-target', h.id);
+        a.addEventListener('click', onClick);
+
+        var li = d.createElement('li');
+        li.appendChild(a);
+
+        if (h.tagName === 'H3' && lastLi) {
+          if (!subUl) { subUl = d.createElement('ul'); lastLi.appendChild(subUl); }
+          subUl.appendChild(li);
+        } else {
+          outUl.appendChild(li);
+          lastLi = li;
+          subUl = null;
+        }
+        items.push({ 'heading': h, 'anchor': a });
+      }
+      panel.appendChild(outUl);
+      apply();
+    }
+
+    buildPanel();
+    if (pushStateEl) {
+      pushStateEl.addEventListener('hy-push-state-load', buildPanel);
+      pushStateEl.addEventListener('hy-push-state-after', buildPanel);
+    }
+  }(window, document);
+</script>
+{% comment %}
+<!-- Example for the CloudFlare mail protection script.
+CloudFlare will inject this on every page, but due to Hydejack's push state approach to page loading,
+it will only run on the initial page. The code below would run on every page load instead. -->
 <script>
   document.getElementsByTagName('hy-push-state')[0].addEventListener('hy-push-state-load', function (e) {
     function e(e){
