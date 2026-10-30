@@ -24,14 +24,17 @@ int main()
   int x[m],y[m];
   char b[m],c[m];
   int i,s,r,t,z; 
-  gets(b);
-  gets(c);
+  scanf("%s", b);
+  scanf("%s", c);
   s=strlen(b);
   r=strlen(c);
   if(s>r) t=s;
   else t=r;
-  for(int i=0;i<s;i++) x[i]=b[s-i-1]-'0';
-  for(int i=0;i<r;i++) y[i]=c[r-i-1]-'0';
+  for(int i=0;i<t;i++)
+  {
+    x[i] = i<s ? b[s-i-1]-'0' : 0;
+    y[i] = i<r ? c[r-i-1]-'0' : 0;
+  }
   for(int i=0;i<t;i++)
   {
     x[i]-=y[i];
@@ -49,7 +52,7 @@ int main()
 }
 ```
 
-
+> 注：以上减法实现只适用于被减数不小于减数的情形（位数不同的借位、结果为负的情况未处理）。
 
 # 乘法
 
@@ -121,7 +124,7 @@ int main() {
                 count++;
             }
             if (count > mi[j]) mi[j] = count;
-            if (k == 0) break;
+            if (k == 1) break;
         }
     }
 

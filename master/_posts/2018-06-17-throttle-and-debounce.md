@@ -21,7 +21,7 @@ function throttle(fn, interval) {
         if(isFirst) {                            //如果是第一次调用，不许延迟执行；
             fn.apply(that, args)
             return isFirst = false;
-　　　　 }
+        }
         if(timer) {                              //如果定时器还在，说明前一次延迟执行还未完成；
             return false;
         }
@@ -54,10 +54,10 @@ function debounce(fn, interval) {
             setTimeout(() => {
                 can = true;
             }, interval || 1000);
-　　　　 }
+        }
         else if(can) {
             timer = setTimeout(() => {
-                fn.apply(null, args);
+                fn.apply(that, args);
             }, interval || 1000);
         }
     }

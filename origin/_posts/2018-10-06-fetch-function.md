@@ -54,7 +54,7 @@ function postData(url,data) {
     cache: 'no-cache',// *default, no-cache, reload, force-cache, only-if-cached
     credentials: 'same-origin',// include, same-origin, *omit
     headers: {
-      'user-agent': 'Mozilla/4.0 MDN Sxample',
+      'user-agent': 'Mozilla/4.0 MDN Sample',
       'content-type': 'application/json'
     },
     method: 'POST',// *GET, POST, PUT, DELETE, etc.
@@ -132,8 +132,8 @@ fetch(url,{
 如果遇到网络故障，`fetch()`promise将会reject，并附加一个`TypeError`对象。虽然这个情况经常是遇到了权限问题或类似问题——404(并不是一个安全故障).若想要精确判断是否fetch成功，需要包含promise resolved的情况，此时再判断`Response.ok()`是否为`true`。如下：
 
 ~~~js
-fetch('flowers.jpg', {
-  if(response.ok) {
+fetch('flowers.jpg').then(function(response) {
+  if (response.ok) {
     return response.blob();
   }
   throw new Error('Network response was not ok.');

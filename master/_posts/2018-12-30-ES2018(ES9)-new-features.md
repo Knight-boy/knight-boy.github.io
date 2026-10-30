@@ -73,12 +73,12 @@ async function(array) {
 
 
 
-**ES2018**引入了异步迭代器(**asyncchronous iterators**)，它与常规迭代器一样，只是返回一个**Promise**。因此，**await**关键字可以和**for...in**循环一起使用，以串行方式运行异步操作。例如：
+**ES2018**引入了异步迭代器(**asynchronous iterators**)，它与常规迭代器一样，只是返回一个**Promise**。因此，**await**关键字可以和**for...of**循环一起使用，以串行方式运行异步操作。例如：
 
 ``` javascript
 async function process(array) {
-    for await(let i in array) {
-        doSomething(i);
+    for await (const i of array) {
+        await doSomething(i);
     }
 }
 ```
@@ -174,7 +174,7 @@ const obj2 = { ...obj1, z: 5};
 
 ``` javascript
 const
-	reDate = /([0-9]{4})-([0-9]{2}-([0-9]{2})/,
+	reDate = /([0-9]{4})-([0-9]{2})-([0-9]{2})/,
 	matchs  = reDate.exec('2018-12-30'),
 	year   = matchs[1],//2018
 	month  = matchs[2],//12
@@ -233,14 +233,14 @@ const
 console.log(matchs[0]);//123.89
 ```
 
-以上是一个**肯定反向断言**，非数字`\D`必须存在。同样的，还存在**否行反向断言**，表示一个值必须不存在，例如：
+以上是一个**肯定反向断言**，非数字`\D`必须存在。同样的，还存在**否定反向断言**，表示一个值必须不存在，例如：
 
 ```javascript
 const
   reLookbehindNeg = /(?<!\D)\d+/,
-  matchs = reLookbehind.exec('$123.89');
+  matchs = reLookbehindNeg.exec('$123.89');
 
-console.log(matchs[0]);//null
+console.log(matchs[0]);//23
 ```
 
 ### 正则表达式s*(dotAll)*标志

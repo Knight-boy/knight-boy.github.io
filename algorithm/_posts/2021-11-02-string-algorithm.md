@@ -320,12 +320,12 @@ KMP的主要思想是 **当出现字符串不匹配时，可以知道一部分�
 构造next数组[^1]
 
 ```c++
-int GetNext(string str, int *next) {
-    next[1] = 0;
-    int i = 1;
-    int j = 0;
-    while (i <= str.size()) {
-        if ((j == 0) || (str[i] == str[j])) {
+void GetNext(const string &str, int *next) {
+    next[0] = -1;
+    int i = 0;
+    int j = -1;
+    while (i < str.size()) {
+        if ((j == -1) || (str[i] == str[j])) {
             next[++i] = ++j;
         } else {
             j = next[j];

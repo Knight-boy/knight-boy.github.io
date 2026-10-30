@@ -116,7 +116,7 @@ div {
   background:beige;
 }
 section {
-  dispaly: inline;
+  display: inline;
   background: lightgray;
 }
 p {
@@ -165,8 +165,8 @@ section {
   background: lightgray;
 }
 p {
-  positin: fixed;
-  width: 50;  /* == (50vw - (width of vertical scrollbar)) */
+  position: fixed;
+  width: 50%;  /* == (50vw - (width of vertical scrollbar)) */
   height: 50%;/* == (50vh - (height of horizontal scrollbar)) */
   margin: 5%; /* == (5vw - (width of vertical scrollbar)) */
   padding: 5%;/* == (5vw - (width of vertical scrollbar)) */

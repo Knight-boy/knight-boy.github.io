@@ -57,7 +57,7 @@ var QuickSort = function(arr) {
     if(arr.length <= 1) {return arr;}
     let start=0;
     let end = arr.length-1;
-    let pivotIndex = Math.floor(Math.random()*(end-start+1))+1;
+    let pivotIndex = Math.floor(Math.random()*(end-start+1));
     // console.log(pivotIndex);
     //从数组中删除基准元素(改变原始数组),返回被删除的数组[arr[pivotIndex]]，
     //并将数组中的元素赋给pivot;

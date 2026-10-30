@@ -45,7 +45,7 @@ function f(n) {
 f(9);
 
 // 3.async
-0 1 1 2 3 5...
+// 输出序列: 0 1 1 2 3 5...
 var Fibonacci = (async function(n) {
     let [prev,curr] = [0,1];
     for(let i=0;i<n;i++) {

@@ -70,30 +70,34 @@ void SelectionSort(int a[], int n)
  */
 void SelectSort(int r[], int n)
 {
-	int i=0,j=0, min, max, tmp;
-	for(i=0;j<n/2;i++)
+	int i, min, max;
+	for(i=0; i<n/2; i++)
 	{
-		min = i;max=i;
-		for(j=i;j<n-i;j++)
+		min=i;max=i;
+		for(int j=i;j<n-i;j++)
 		{
 			if(r[j]<r[min])
 			{
-				min=j;continue;
+				min=j;
 			}
 			if(r[j]>r[max])
 			{
 				max=j;
 			}
 		}
-		int mintmp=0;
-		int maxtmp=0;
-		mintmp = r[min];
-		r[min]=r[n-i-1]; 
-		r[n-i-1]=mintmp;
-	
-    maxtmp = r[max];
-	  r[max]=r[i];
-	  r[i]= maxtmp;
+		//最小值交换到头部
+		int mintmp=r[min];
+		r[min]=r[i];
+		r[i]=mintmp;
+		//若最大值本在头部，其位置已被上一步换走，修正其下标
+		if(max==i)
+		{
+			max=min;
+		}
+		//最大值交换到尾部
+		int maxtmp=r[max];
+		r[max]=r[n-i-1];
+		r[n-i-1]=maxtmp;
 	}
 	for(i=0;i<n;i++)
 		cout<<r[i]<<" ";

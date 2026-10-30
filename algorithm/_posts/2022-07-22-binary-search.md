@@ -69,6 +69,7 @@ int main() {
     }
     int k = 0;
     while (q--) {
+        cin >> k;
         // 核心代码
         int l = 0;
         int r = n - 1;
@@ -81,7 +82,7 @@ int main() {
             }
         }
 
-        if (v[l] != k) {
+        if (l >= n || v[l] != k) {
             cout << "-1 -1" << endl;
             continue;
         }

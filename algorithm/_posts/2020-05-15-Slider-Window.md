@@ -30,7 +30,7 @@ class Solution {
 public:
     void SlideWindow(const vector<int> &nums, int k)
     {
-        constexpr int N = nums.size();
+        const int N = nums.size();
         vector<int> que(N);
         int hh = 0;
         int tt = -1;
@@ -50,7 +50,9 @@ public:
         }
         cout << endl;
 
-        que.clear();
+        //重新初始化队列指针，复用 que 记录下标，再求最大值
+        hh = 0;
+        tt = -1;
         // 求最大值
         for (int j = 0; j < N; j++) {
             if ((hh <= tt) && (j - que[hh] + 1 > k)) {

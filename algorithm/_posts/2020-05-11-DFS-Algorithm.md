@@ -14,7 +14,7 @@ comments: true
 
 ### 全排列问题
 
-给定一个不含数字的数组`nums`，返回其所有可能的全排列。
+给定一个不含重复元素的数组`nums`，返回其所有可能的全排列。
 
 ```c++
 class Solution1 {
@@ -140,10 +140,13 @@ private:
 ```c++
 class Solution {
 public:
+    //按 path 中记录的规则下标，将规则依次应用到 text 上，再校验非空格字符的 ASSIC 码之和
     bool IsMatchOk(const string &text, int checkSum, const vector<pair<char, char>> &patterns)
     {
-		string temp = text;
-        for (auto &[o_, n_] : patterns) {
+        string temp = text;
+        for (const auto &idx : path) {
+            char o_ = patterns[idx].first;
+            char n_ = patterns[idx].second;
             for (int i = 0; i < temp.size(); i++) {
                 if (temp[i] == o_) {
                     temp[i] = n_;
@@ -151,45 +154,47 @@ public:
             }
         }
         
-        int res = 0;
+        int sum = 0;
         for (const auto &c : temp) {
             if (c != ' ') {
-                res += (int)c;
+                sum += (int)c;
             }
         }
-        return res == checkSum;
+        return sum == checkSum;
     }
 
-    void handle(const vector<pair<char, char>> &patterns, int idx, int &k)
+    //dfs 枚举规则的组合：从 idx 开始的规则中，每入选一条就 push_back 记录其下标，回溯时 pop_back
+    void dfs(const vector<pair<char, char>> &patterns, int idx, int need)
     {
-        if (path.size() == k) {
+        if (path.size() == need) {
             res.push_back(path);
             return;
         }
         
         for (int i = idx; i < patterns.size(); i++) {
-            path.push_back();
-            handle(patterns, i + 1, k);
+            path.push_back(i);
+            dfs(patterns, i + 1, need);
             path.pop_back();
         }
     }
 
-    string Translate(const string &text, int checkSum, const vector<pair<int, int>> &patterns)
+    string Translate(const string &text, int checkSum, const vector<pair<char, char>> &patterns)
     {
-        for (size_t i = 0; i <= patterns.size(); i++) {
-            handle(patterns, 0, i);
-        }
-        
-        for (const auto &p : res) {
-            if (IsMatchOk(text, checkSum, p)) {
-                return text;
+        //依次枚举选择 0 条、1 条、……、全部规则的组合，选中 0 条时 text 原样参与匹配
+        for (int need = 0; need <= patterns.size(); need++) {
+            dfs(patterns, 0, need);
+            for (const auto &p : res) {
+                if (IsMatchOk(text, checkSum, patterns)) {
+                    return text;
+                }
             }
+            res.clear();
         }
         return "";
     }
     
-    vector<pair<int, int>> path;
-    vector<vector<pair<int, int>>> res;
+    vector<int> path;
+    vector<vector<int>> res;
 };
 ```
 

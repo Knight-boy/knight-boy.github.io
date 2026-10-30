@@ -8,7 +8,7 @@ author: author2
 comments: true
 ---
 
-对于web开发而言，php是一种必不可少的脚本语言，可以通过它在客户端与服务器间进行数据交换。虽然现在各种框架层出不穷，但绝大多数的公司仍然以[Php](https://www.php.net/manual/en/)、[Ｍysql](https://dev.mysql.com/doc/)、[Nginx](https://nginx.org/en/)、[Apache](https://www.apache.org/)等搭配作为服务器器前后端的基本架构。
+对于web开发而言，php是一种必不可少的脚本语言，可以通过它在客户端与服务器间进行数据交换。虽然现在各种框架层出不穷，但绝大多数的公司仍然以[Php](https://www.php.net/manual/en/)、[Mysql](https://dev.mysql.com/doc/)、[Nginx](https://nginx.org/en/)、[Apache](https://www.apache.org/)等搭配作为服务器前后端的基本架构。
 
 #### 文本信息的读写
 
@@ -26,17 +26,17 @@ comments: true
   </head>
   <body>
     <?php
-    	@$fp = fopen('$document_root/../girl.txt');
-    	flock($fp,LOCK_SH);
+    	@$fp = fopen("$document_root/../girl.txt", 'r');
     if(!$fp) {
       echo "<p><strong>No data pending.<br/>
       	Please try again later.</strong></p>";
       exit;
     }
+    flock($fp,LOCK_SH);
     while(!feof($fp)) {
       $char = fgetc($fp);
       if(!feof($fp)) {
-        echo ($char='\n' ? "" : $char);
+        if($char != "\n") echo $char;
       }
     }
     flock($fp,LOCK_UN);

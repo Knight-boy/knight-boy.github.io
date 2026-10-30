@@ -12,7 +12,7 @@ comments: true
 
 ### **JavaScript的变量类型**
 
-　　对于引用类型，是存放在栈中的对象，变量保存的是一个指针，这个指针指向另一个位置。当需要访问引用类型（如对象，数组等）的值时，首先从栈中获取该对象的地址指针，然后再从堆内存中取得所需的数据。**JavaScript**存储对象都是存地址的，所以浅拷贝会导致`obj1`和`obj2`只想同一块内存地址。改变了其中一方的内容，都是在原来的内存上做修改会导致拷贝对象和原对象都发生改变，而深拷贝是开辟一块新的内存地址，将原对象的各个属性逐个复制进去。对拷贝对象和原对象各自的操作各不影响。
+　　对于引用类型，是存放在堆内存中的对象，栈中保存的变量名是一个指针，这个指针指向堆内存中的数据。当需要访问引用类型（如对象，数组等）的值时，首先从栈中获取该对象的地址指针，然后再从堆内存中取得所需的数据。**JavaScript**存储对象都是存地址的，所以浅拷贝会导致`obj1`和`obj2`只想同一块内存地址。改变了其中一方的内容，都是在原来的内存上做修改会导致拷贝对象和原对象都发生改变，而深拷贝是开辟一块新的内存地址，将原对象的各个属性逐个复制进去。对拷贝对象和原对象各自的操作各不影响。
 
 **eg1**:
 
@@ -35,6 +35,7 @@ function shallowClone(copyObj) {
   for(var i in copyObj) {
     obj[i] = copyObj[i];
   }
+  return obj;
 }
 var x = {
   a:1,
@@ -50,8 +51,8 @@ console.log(y.b.d===x.b.d);//true;
 　　Object.assign方法用于对象的合并，并将源对象(source)的所有可枚举属性，复制到目标对象(target)。当目标对象和源对象有同名属性时，或多个源对象有同名属性，则后面的属性会覆盖前面的属性。
 
 ```javascript
-const target = {a: 1，b: 1};
-const source1 = {b: 2}；
+const target = {a: 1, b: 1};
+const source1 = {b: 2};
 const source2 = {c: 3};
 Object.assign(target, source1, source2);
 console.log(target) //{a: 1, b: 2, c: 3}
@@ -73,7 +74,7 @@ Object.assign({b: 'c'},
 
 ```javascript
 const obj1 = {a: {b: 5}};
-const obj2 = Object.assign({}, x);
+const obj2 = Object.assign({}, obj1);
 obj1.a.b=2;
 console.log(obj2.a.b) //2
 ```

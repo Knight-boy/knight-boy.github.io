@@ -51,7 +51,7 @@ btn.onclick = null; //删除事件处理程序
 
 ```javascript
 var btn = document.getElementById("myBtn");
-btn.addEventListener("click", functioin() {
+btn.addEventListener("click", function() {
     alert(this.id);
 }, false);
 btn.addEventListener("click", function() {

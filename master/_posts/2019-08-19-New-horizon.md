@@ -35,8 +35,8 @@ docs
 ## Dockerfile
 
 ```dockerfile
-FROM node: 10
-COPY ./app
+FROM node:10
+COPY ./app /app
 WORKDIR /app
 RUN npm install --registry=https://registry.npm.taobao.org
 EXPOSE 3000
@@ -46,8 +46,8 @@ CMD ["node","app.js"]
 # 创建镜像
 
 ```bash
-$ docker image build -t demo
-$ docker image build -t demo:1.0.0
+$ docker image build -t demo .
+$ docker image build -t demo:1.0.0 .
 ```
 
 ![docker](/assets/img/blog/docker_images.png)
@@ -55,7 +55,7 @@ $ docker image build -t demo:1.0.0
 ```bash
 $ docker images
 $ docker image ls
-$ docker image ls -all
+$ docker image ls -a
 $ docker image rm [imageName]
 ```
 

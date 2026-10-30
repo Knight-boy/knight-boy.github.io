@@ -59,6 +59,10 @@ legal:
 # Format of the permalinks
 permalink:             /:categories/:year-:month-:day-:title/
 
+# 让构建时区与发布者的时区一致：避免当天文章在 UTC 视角下被当作"未来文章"而不渲染
+timezone:              Asia/Shanghai
+future:                true
+
 # Pagination configuration (used by the `blog` layout)
 paginate:              5
 paginate_path:         /page-:num/

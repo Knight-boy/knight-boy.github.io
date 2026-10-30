@@ -25,7 +25,7 @@ comments: true
 ​        一个简单的例子：
 
 ``` javascript
-var script = doxument.createElement("script");
+var script = document.createElement("script");
 script.setAttribute("type", "text/javascript");
 script.src="http://example.com/ip?callback=handleResponse";
 document.body.appendChild(script);
@@ -56,7 +56,7 @@ function jsonp(callback) {
     document.querySelector("head").appendChild(script);
 }
 function show(data) {
-    concole.log(`学生姓名为: ${data.name}，年龄为: ${data.age}，性别为: ${data.sex}`);
+    console.log(`学生姓名为: ${data.name}，年龄为: ${data.age}，性别为: ${data.sex}`);
 }
 jsonp("show");
 ```
@@ -103,7 +103,7 @@ Access-Control-Allow-Origin: http://www.example.com
 　　假若请求是POST的话，Content-Type必须为下列之一：
 
 > - application/x-www-form-urlencoded
-> - mutipart/form-data
+> - multipart/form-data
 > - text/plain
 
 　　不含有自定义头；
@@ -273,7 +273,7 @@ req.on("end", () => {
 
 ```html
 <!--a.html-->
-<DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -289,8 +289,9 @@ req.on("end", () => {
          iframe.src="data.html";//这里的data.html为随便的一个页面，
             					//目的是，使得a.html能访问到iframe里的内容，
             					//也可设置成about:blank
+            }
     </script>    
-<head>
+</head>
 <body>
     <iframe id="proxy" src="http://baidu.com/b.html" 
             style="display:none" onload="getData()">
@@ -308,7 +309,7 @@ req.on("end", () => {
 
 ### **六、window.postMessage方法跨域**
 
- 　　`window.postMessage`是一个安全的跨源通信方法。一般情况下，当且仅当执行脚本的页面使用相同的协议（通常都是http）、相同的端口（http默认80，https默认443）和相同的host(两个页面的`document.domain`的值相同)时，才允许不同页面上的脚本互相访问。`window.postMessage`提供了一个可控的机制来安全地绕过这一限制，当其在正确使用的情况下。`window.postMessage`解决的不是浏览器与服务器之间的交互，解决的是浏览器不同窗口之间的通信问题，可以做的就是同步两个网页，当然这两个网页需要属于同一个基础域名。
+ 　　`window.postMessage`是一个安全的跨源通信方法。一般情况下，当且仅当执行脚本的页面使用相同的协议（通常都是http）、相同的端口（http默认80，https默认443）和相同的host(两个页面的`document.domain`的值相同)时，才允许不同页面上的脚本互相访问。`window.postMessage`提供了一个可控的机制来安全地绕过这一限制，当其在正确使用的情况下。`window.postMessage`解决的不是浏览器与服务器之间的交互，解决的是浏览器不同窗口之间的通信问题，可以做的就是同步两个网页。
 
 　　**example 1:**
 
