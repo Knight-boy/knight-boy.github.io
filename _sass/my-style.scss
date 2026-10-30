@@ -187,6 +187,13 @@ button.theme-toggle {
   }
 }
 
+// Thicken the back-to-top arrow (icon font strokes are quite thin).
+a.back-to-top .icon-arrow-top2 {
+  font-weight: 700;
+  -webkit-text-stroke: 1px currentColor;
+  text-shadow: 0 0 .5px currentColor;
+}
+
 // The toggle button pinned to the right edge in overlay mode
 // (created and shown/hidden from `_includes/my-scripts.html`).
 .toc-btn {
