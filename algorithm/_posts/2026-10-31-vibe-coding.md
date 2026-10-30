@@ -10,7 +10,7 @@ comments: true
 
 ## 什么是 Vibe Coding
 
-**Vibe Coding**（氛围编程）是 AI 领域大神 **Andrej Karpathy** 在 2025 年 2 月提出的概念。他这样描述：
+**Vibe Coding**（氛围编程）是AI领域大神 **Andrej Karpathy** 在 2025 年 2 月提出的概念。他这样描述：
 
 > There's a new kind of coding I call "vibe coding", where you fully give in to the vibes, embrace exponentials, and forget that the code even exists.
 
