@@ -123,11 +123,83 @@ html.dark-mode-early body {
 
   color-scheme: dark;
 
-  // Code blocks use a light "One Light" palette with hardcoded colors —
-  // invert them into a dark one instead of retinting every token.
+  // Code blocks: explicit dark palette (One Dark, contrast-tuned) instead of
+  // an invert filter — inverting the light grays (comments/line numbers)
+  // produced low-contrast dark-on-dark tokens.
+  .highlight,
+  .highlight pre {
+    background: #20242a;
+  }
+
   .highlight {
-    border-radius: 0.25rem;
-    filter: invert(1) hue-rotate(180deg);
+    color: #d7dce1;
+
+    .n, .nf, .nn, .o, .p {
+      color: #d7dce1;
+    }
+
+    .c, .c1, .cm, .cp, .cs, .cpf {
+      color: #98a4b0;
+      font-style: italic;
+    }
+
+    .sr, .ss {
+      color: #66c2dd;
+    }
+
+    .k, .kc, .kd, .kn, .kp, .kr, .kt {
+      color: #cf9af2;
+    }
+
+    .l, .ld, .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx {
+      color: #90d277;
+    }
+
+    .nt, .nx, .vi {
+      color: #ef7d71;
+    }
+
+    .il, .m, .mf, .mh, .mi, .mo, .na {
+      color: #eebf6b;
+    }
+
+    .bp, .nb, .nc, .nd, .ne, .ni, .nl, .no, .nv, .py, .vc, .vg {
+      color: #e8c86e;
+    }
+
+    .gd {
+      color: #ff6b6b;
+    }
+
+    .gi {
+      color: #6fd35e;
+    }
+
+    .w {
+      color: #cfd6dd;
+    }
+
+    .gu {
+      color: #b3ae9e;
+    }
+
+    .lineno, .ln {
+      color: #7c8794;
+      user-select: none;
+    }
+
+    .hll, .hl {
+      color: #d7dce1;
+      background-color: #3a3f4b;
+    }
+
+    .language-json .w + .s2 {
+      color: #ef7d71;
+    }
+
+    .language-json .kc {
+      color: #66c2dd;
+    }
   }
 
   // Keep photos/videos from blasting in dark surroundings.
