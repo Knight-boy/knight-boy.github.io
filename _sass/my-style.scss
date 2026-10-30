@@ -103,6 +103,77 @@
   }
 }
 
+// ============================================================================
+// Dark ("night") theme.
+// The `dark-mode` class is set on <body> from `_includes/my-scripts.html`
+// (user preference persisted in localStorage, falling back to
+// prefers-color-scheme). `dark-mode-early` on <html> is set while the page is
+// still in <head> (from `_includes/my-head.html`) to avoid a flash of the
+// light theme; it is removed once the body class takes over.
+// ============================================================================
+body.dark-mode,
+html.dark-mode-early body {
+  --body-bg: #191c20;
+  --body-color: #cfd6dd;
+  --text-muted: #8b97a3;
+  --gray-bg: rgba(255, 255, 255, 0.07);
+  --gray-text: #97a1aa;
+  --menu-text: #9aa4ad;
+  --border-color: #34383d;
+
+  color-scheme: dark;
+
+  // Code blocks use a light "One Light" palette with hardcoded colors —
+  // invert them into a dark one instead of retinting every token.
+  .highlight {
+    border-radius: 0.25rem;
+    filter: invert(1) hue-rotate(180deg);
+  }
+
+  // Keep photos/videos from blasting in dark surroundings.
+  img,
+  video {
+    filter: brightness(0.9);
+  }
+
+  // The sticky/drawer sidebar carries its own dark background image and
+  // light text — leave it untouched.
+  .sidebar {
+    filter: none;
+  }
+}
+
+html.dark-mode-early body {
+  // Suppress the 1s background transition on the very first paint.
+  transition: none;
+}
+
+// The toggle button registered in `_includes/body/sidebar.html` and wired up
+// from `_includes/my-scripts.html`.
+.theme-toggle-wrap {
+  margin-top: 0.75rem;
+}
+
+button.theme-toggle {
+  display: inline-block;
+  padding: 0.25rem 1rem;
+
+  font: inherit;
+  font-weight: var(--font-weight-heading);
+  color: rgba(255, 255, 255, 0.75);
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.25rem;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.8);
+    outline: none;
+  }
+}
+
 // The toggle button pinned to the right edge in overlay mode
 // (created and shown/hidden from `_includes/my-scripts.html`).
 .toc-btn {

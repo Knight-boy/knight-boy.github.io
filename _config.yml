@@ -201,8 +201,10 @@ hydejack:
     # Set to `true` to always use the dark theme.
     always:            false
 
-    # Set to `true` to use the dark theme based on visitors' local time.
-    dynamic:           true
+    # The built-in time-based class toggling is disabled here — a custom
+    # implementation with a manual toggle + persistence lives in
+    # `_includes/my-head.html`, `_includes/my-scripts.html` and `my-style.scss`.
+    dynamic:           false
     sunrise:           6
     sunset:            18
 

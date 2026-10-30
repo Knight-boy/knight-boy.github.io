@@ -221,6 +221,43 @@ It has two modes:
       pushStateEl.addEventListener('hy-push-state-after', buildPanel);
     }
   }(window, document);
+
+  /* === Dark (night) theme toggle ========================================= */
+  !function (w, d) {
+    var KEY = 'hy-theme';
+    var body = d.body;
+    var btn = d.getElementById('_theme-toggle');
+
+    function resolve() {
+      var saved = null;
+      try { saved = localStorage.getItem(KEY); } catch (e) { saved = null; }
+      if (saved === 'dark' || saved === 'light') return saved;
+      return (w.matchMedia && w.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    }
+
+    function isDark() {
+      return body.classList.contains('dark-mode');
+    }
+
+    function paint() {
+      if (btn) btn.textContent = isDark() ? '☀️ 日间模式' : '🌙 夜间模式';
+    }
+
+    /* The html-level class was only needed before first paint. */
+    d.documentElement.classList.remove('dark-mode-early');
+
+    if (body) body.classList[resolve() === 'dark' ? 'add' : 'remove']('dark-mode');
+    paint();
+
+    if (btn) {
+      btn.addEventListener('click', function () {
+        var next = isDark() ? 'light' : 'dark';
+        body.classList[next === 'dark' ? 'add' : 'remove']('dark-mode');
+        try { localStorage.setItem(KEY, next); } catch (e) { /* ignore */ }
+        paint();
+      });
+    }
+  }(window, document);
 </script>
 {% comment %}
 <!-- Example for the CloudFlare mail protection script.

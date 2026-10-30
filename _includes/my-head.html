@@ -1,13 +1,20 @@
+<script>
+/* Anti-FOUC: apply the persisted/planned theme before first paint.
+   Must not use `//` line comments — the compress layout strips all newlines,
+   which would comment out the rest of the page. */
+(function () {
+  var b = null;
+  try { b = localStorage.getItem('hy-theme'); } catch (e) { b = null; }
+  var dark = b === 'dark' || (!b && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  if (dark && document.documentElement) document.documentElement.className += ' dark-mode-early';
+})();
+</script>
 {% comment %}
 <!--
-Using `preload` so that page rendering doesn't get blocked.
+Example for preloading custom assets:
 Fill in `href`. You may have to adjust `as` and `onload`/`rel`, depending on content.
--->
 <link href="<path/to/content.css>" rel="preload" as="style" onload="this.rel='stylesheet'">
-
-<!--
-Fallback in case JavaScript isn't enabled.
-Fill in `href`. You may have to adjust `rel`.
--->
+Fallback in case JavaScript isn't enabled. Fill in `href`. You may have to adjust `rel`.
 <noscript><link href="<path/to/content.css>" rel="stylesheet"></noscript>
+-->
 {% endcomment %}
