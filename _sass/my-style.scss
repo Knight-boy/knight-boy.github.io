@@ -174,7 +174,10 @@ a.back-to-top .icon-arrow-top2 {
   }
 
   html.sidebar-collapsed {
+    /* display:none is immune to whatever inline width the drawer
+       component sets on its host at runtime (width:0 alone was not). */
     hy-drawer {
+      display: none !important;
       width: 0 !important;
     }
 
