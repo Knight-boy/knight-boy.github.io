@@ -5,13 +5,21 @@ hy-push-state-load listener below, cf. the CloudFlare example) again after
 every client-side navigation handled by <hy-push-state>.
 
 Currently hosts the right-hand table-of-contents panel for posts.
+It has two modes:
+  * inline:  the content column leaves enough room on the right, the panel
+             sits next to the content column;
+  * overlay: not enough room (narrow screens), a small button pinned to the
+             right edge toggles an overlay panel sliding in from the right.
 -->
 {% endcomment %}
 <script>
   !function (w, d) {
     var pushStateEl = d.getElementsByTagName('hy-push-state')[0];
     var panel = null;
+    var btn = null;
     var items = [];
+    var overlay = false;
+    var open = false;
 
     function isPostPage() {
       var main = d.getElementById('_main');
@@ -43,27 +51,57 @@ Currently hosts the right-hand table-of-contents panel for posts.
       var h = id ? d.getElementById(id) : null;
       if (!h) return;
       e.preventDefault();
+      if (overlay && open) close();
       h.scrollIntoView({ 'behavior': 'smooth' });
       if (w.history && w.history.replaceState) {
         try { w.history.replaceState(null, '', '#' + id); } catch (err) { /* ignore */ }
       }
     }
 
-    function hide() {
-      if (panel) panel.style.display = 'none';
+    function setBtn() {
+      if (!btn) return;
+      btn.style.display = (overlay && !open && items.length) ? 'flex' : 'none';
     }
 
-    function apply() {
-      if (!panel) return;
+    function close() {
+      if (!overlay) return;
+      open = false;
+      if (panel) panel.classList.remove('toc-open');
+      setBtn();
+    }
+
+    function handleOutside(e) {
+      if (!overlay || !open) return;
+      var t = e.target;
+      var inPanel = panel && (t === panel || panel.contains(t));
+      var inBtn = btn && (t === btn || btn.contains(t));
+      if (!inPanel && !inBtn) close();
+    }
+
+    function onKey(e) {
+      if (e.key === 'Escape') close();
+    }
+
+    function toggle(e) {
+      e && e.preventDefault();
+      if (!overlay) return;
+      open = !open;
+      apply();
+    }
+
+    function hide() {
+      if (panel) panel.style.display = 'none';
+      if (btn) btn.style.display = 'none';
+    }
+
+    function computeMode() {
       var main = d.getElementById('_main');
-      if (!main || w.innerWidth < 1000) { hide(); return; }
+      if (!main) return 'hidden';
       var rect = main.getBoundingClientRect();
-      var width = Math.min(280, w.innerWidth - rect.right - 28);
-      if (!(width >= 200)) { hide(); return; }
-      panel.style.display = 'block';
-      panel.style.left = Math.round(rect.right + 16) + 'px';
-      panel.style.width = Math.round(width) + 'px';
-      highlight();
+      var inlineWidth = Math.min(280, w.innerWidth - rect.right - 28);
+      if (inlineWidth >= 200) return 'inline';
+      if (w.innerWidth >= 764) return 'overlay';
+      return 'hidden';
     }
 
     function highlight() {
@@ -72,11 +110,39 @@ Currently hosts the right-hand table-of-contents panel for posts.
       for (var i = 0; i < items.length; i++) {
         if (items[i].heading.getBoundingClientRect().top <= 140) current = i;
       }
-      // At the very bottom of the page, highlight the last item.
       if (w.innerHeight + w.scrollY >= d.documentElement.scrollHeight - 4) current = items.length - 1;
       for (var k = 0; k < items.length; k++) {
         items[k].anchor.classList[k === current ? 'add' : 'remove']('active');
       }
+    }
+
+    function apply() {
+      if (!panel) return;
+      if (!items.length || !isPostPage()) { hide(); return; }
+
+      var mode = computeMode();
+      var main = d.getElementById('_main');
+      var rect = main ? main.getBoundingClientRect() : null;
+
+      if (mode === 'inline' && rect) {
+        overlay = false;
+        open = false;
+        panel.classList.remove('overlay', 'toc-open');
+        panel.style.display = 'block';
+        panel.style.left = Math.round(rect.right + 16) + 'px';
+        panel.style.width = Math.round(Math.min(280, w.innerWidth - rect.right - 28)) + 'px';
+      } else if (mode === 'overlay') {
+        overlay = true;
+        panel.classList.add('overlay');
+        panel.classList[open ? 'add' : 'remove']('toc-open');
+        panel.style.display = 'block';
+        panel.style.left = '';
+        panel.style.width = Math.min(280, Math.round(w.innerWidth * 0.76)) + 'px';
+      } else {
+        hide();
+      }
+      setBtn();
+      highlight();
     }
 
     function buildPanel() {
@@ -84,8 +150,23 @@ Currently hosts the right-hand table-of-contents panel for posts.
         panel = d.createElement('aside');
         panel.className = 'toc-panel';
         d.body.appendChild(panel);
+
+        btn = d.createElement('div');
+        btn.className = 'toc-btn';
+        btn.setAttribute('role', 'button');
+        btn.setAttribute('aria-label', '打开文章目录');
+        btn.setAttribute('tabindex', '0');
+        btn.textContent = '目录';
+        btn.addEventListener('click', toggle);
+        btn.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(e); }
+        });
+        d.body.appendChild(btn);
+
         w.addEventListener('resize', apply, { 'passive': true });
         w.addEventListener('scroll', highlight, { 'passive': true });
+        d.addEventListener('click', handleOutside);
+        d.addEventListener('keydown', onKey);
       }
       panel.innerHTML = '';
       items = [];
@@ -123,6 +204,7 @@ Currently hosts the right-hand table-of-contents panel for posts.
         items.push({ 'heading': h, 'anchor': a });
       }
       panel.appendChild(outUl);
+      open = false;
       apply();
     }
 

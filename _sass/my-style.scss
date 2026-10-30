@@ -31,6 +31,28 @@
   border-left: 1px solid var(--border-color);
   background: var(--body-bg);
 
+  // Overlay mode (narrow screens): the panel covers the right side of the
+  // viewport and slides in when toggled from the `.toc-btn` button.
+  &.overlay {
+    left: auto!important; // inline width/position is managed from script
+    right: 0;
+    z-index: 30;
+
+    box-shadow: -0.5rem 0 1.5rem rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, visibility 0.3s;
+    will-change: transform;
+
+    &:not(.toc-open) {
+      transform: translateX(105%);
+      visibility: hidden;
+    }
+
+    &.toc-open {
+      transform: none;
+      visibility: visible;
+    }
+  }
+
   .toc-title {
     font-size: 0.75rem;
     color: var(--gray-text);
@@ -70,6 +92,40 @@
 
   li > ul {
     margin-left: -0.35rem;
+  }
+
+  @media print {
+    display: none !important;
+  }
+}
+
+// The toggle button pinned to the right edge in overlay mode
+// (created and shown/hidden from `_includes/my-scripts.html`).
+.toc-btn {
+  display: none; // shown by script in overlay mode
+  position: fixed;
+  z-index: 30;
+  top: 50%;
+  right: 0;
+  margin-top: -1.75rem;
+
+  writing-mode: vertical-rl;
+  letter-spacing: 0.25em;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  background: var(--body-bg);
+  border: 1px solid var(--border-color);
+  border-right: none;
+  border-radius: 0.5rem 0 0 0.5rem;
+  padding: 0.75rem 0.35rem;
+
+  cursor: pointer;
+  user-select: none;
+
+  &:hover,
+  &:focus {
+    color: var(--body-color);
+    outline: none;
   }
 
   @media print {
