@@ -274,6 +274,8 @@ It has two modes:
           root.classList.add('sidebar-collapsed');
           try { localStorage.setItem(KEY, 'hidden'); } catch (e) { /* ignore */ }
         }
+        /* Let fixed-position widgets (e.g. the TOC panel) realign. */
+        if (w.dispatchEvent) w.dispatchEvent(new Event('resize'));
       });
     }
   }(window, document);

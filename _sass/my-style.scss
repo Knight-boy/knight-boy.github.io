@@ -186,8 +186,9 @@ a.back-to-top .icon-arrow-top2 {
     }
 
     .content {
-      margin-left: 3rem !important;
-      transition: margin-left 0.25s ease, margin-right 0.25s ease;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      transition: margin 0.25s ease;
     }
   }
 }
