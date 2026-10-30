@@ -161,6 +161,45 @@ a.back-to-top .icon-arrow-top2 {
   text-shadow: 0 0 .5px currentColor;
 }
 
+// ============================================================================
+// Collapsible left sidebar (desktop only, ≥64em).
+// Toggled via the `_sidebar-toggle` navbar button (see `body/menu.html`),
+// state persisted in localStorage(hy-sidebar) and applied early from
+// `_includes/my-head.html`. Pure CSS collapse — overrides the hy-drawer
+// widths and content offsets measured/expected by the theme.
+// ============================================================================
+@media screen and (min-width: 64em) {
+  hy-drawer {
+    transition: width 0.25s ease;
+  }
+
+  html.sidebar-collapsed {
+    hy-drawer {
+      width: 0 !important;
+    }
+
+    body::before {
+      width: 0.5rem;
+    }
+
+    .content {
+      margin-left: 3rem !important;
+      transition: margin-left 0.25s ease, margin-right 0.25s ease;
+    }
+  }
+}
+
+@media screen and (min-width: 1666px) {
+  html.sidebar-collapsed body::before {
+    width: calc(50% - 28rem);
+  }
+}
+
+// Flip the arrow when the sidebar is hidden (= click to reveal).
+html.sidebar-collapsed .sidebar-toggle .icon-arrow-left2 {
+  transform: scaleX(-1);
+}
+
 // The toggle button pinned to the right edge in overlay mode
 // (created and shown/hidden from `_includes/my-scripts.html`).
 .toc-btn {

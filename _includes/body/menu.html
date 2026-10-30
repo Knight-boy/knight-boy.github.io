@@ -6,10 +6,15 @@
         <span class="sr-only">{{ site.data.strings.navigation | default:"Navigation" }}</span>
         <span class="icon-menu"></span>
       </a>
-      <!-- 主题切换(窄屏专用, 与抽屉内的 .theme-toggle 同一逻辑) -->
+      <!-- 主题切换(与抽屉内同一逻辑) -->
       <a id="_theme-toggle-mobile" class="nav-btn theme-toggle-mobile fl" href="javascript:;" role="button" title="切换夜间/日间主题">
         <span class="icon-contrast"></span>
         <span class="sr-only">切换夜间/日间主题</span>
+      </a>
+      <!-- 隐藏/显示左侧边栏(桌面有效, 状态本地记忆) -->
+      <a id="_sidebar-toggle" class="nav-btn sidebar-toggle fl" href="javascript:;" role="button" title="隐藏/显示左侧边栏">
+        <span class="icon-arrow-left2"></span>
+        <span class="sr-only">隐藏/显示左侧边栏</span>
       </a>
       <a class="nav-btn back-to-top" href="javascript:;" style="position:fixed" onclick="window.scrollTo(0,0);return false;" title="ScrollToTop">
       	<span class="icon-arrow-top2"></span>

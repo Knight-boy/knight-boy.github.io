@@ -1,12 +1,16 @@
 <script>
-/* Anti-FOUC: apply the persisted/planned theme before first paint.
-   Must not use `//` line comments — the compress layout strips all newlines,
-   which would comment out the rest of the page. */
+/* Anti-FOUC: apply the persisted/planned theme and sidebar layout before
+   first paint. Must not use `//` line comments — the compress layout strips
+   all newlines, which would comment out the rest of the page. */
 (function () {
   var b = null;
   try { b = localStorage.getItem('hy-theme'); } catch (e) { b = null; }
   var dark = b === 'dark' || (!b && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
   if (dark && document.documentElement) document.documentElement.className += ' dark-mode-early';
+
+  var s = null;
+  try { s = localStorage.getItem('hy-sidebar'); } catch (e) { s = null; }
+  if (s === 'hidden' && document.documentElement) document.documentElement.className += ' sidebar-collapsed';
 })();
 </script>
 {% comment %}

@@ -252,6 +252,31 @@ It has two modes:
       });
     }
   }(window, document);
+
+  /* === Collapsible left sidebar (desktop) =================================
+     Pure CSS collapse via the `sidebar-collapsed` class on <html>; the
+     preference is persisted and already applied early from my-head.html. */
+  !function (w, d) {
+    var KEY = 'hy-sidebar';
+    var root = d.documentElement;
+    var btn = d.getElementById('_sidebar-toggle');
+
+    function hidden() {
+      return root.classList.contains('sidebar-collapsed');
+    }
+
+    if (btn) {
+      btn.addEventListener('click', function () {
+        if (hidden()) {
+          root.classList.remove('sidebar-collapsed');
+          try { localStorage.setItem(KEY, 'open'); } catch (e) { /* ignore */ }
+        } else {
+          root.classList.add('sidebar-collapsed');
+          try { localStorage.setItem(KEY, 'hidden'); } catch (e) { /* ignore */ }
+        }
+      });
+    }
+  }(window, document);
 </script>
 {% comment %}
 <!-- Example for the CloudFlare mail protection script.
