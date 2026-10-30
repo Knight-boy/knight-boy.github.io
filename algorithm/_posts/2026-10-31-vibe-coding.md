@@ -1,7 +1,7 @@
 ---
 title: 什么是 Vibe Coding
 date: 2026-10-31
-image: /assets/img/blog/Rock-roll.gif
+image: /assets/img/blog/github-header-banner.png
 description: >
   当 AI 会写代码之后，编程的方式正在被重新定义
 author: author2
