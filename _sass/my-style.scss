@@ -192,13 +192,12 @@ a.back-to-top .icon-arrow-top2 {
   }
 }
 
-@media screen and (min-width: 1666px) {
-  html.sidebar-collapsed body::before {
-    width: calc(50% - 28rem);
-  }
+// Flip the arrow when the sidebar is hidden (= click to reveal).
+// The icon spans are inline — transform needs a block-level box.
+.sidebar-toggle .icon-arrow-left2 {
+  display: inline-block;
 }
 
-// Flip the arrow when the sidebar is hidden (= click to reveal).
 html.sidebar-collapsed .sidebar-toggle .icon-arrow-left2 {
   transform: scaleX(-1);
 }
