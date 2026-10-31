@@ -313,6 +313,28 @@ It has two modes:
     w.addEventListener('scroll', onScroll, { 'passive': true });
     update();
   }(window, document);
+
+  /* === Drawer covers the TOC ==============================================
+     The sidebar drawer overlay (menu button) spans the whole page. While it
+     is expanded, the TOC button/panel must go away instead of stacking on
+     top of it. hy-drawer fires `hy-drawer-transitioned` with a boolean
+     detail (opened) — mirror it into a `drawer-open` class on <html>;
+     the CSS side lives in my-style.scss. */
+  !function (w, d) {
+    var root = d.documentElement;
+    var drawer = d.getElementsByTagName('hy-drawer')[0];
+    if (!drawer) return;
+
+    function apply(opened) {
+      root.classList[opened ? 'add' : 'remove']('drawer-open');
+    }
+
+    apply(drawer.hasAttribute('opened'));
+
+    drawer.addEventListener('hy-drawer-transitioned', function (e) {
+      apply(!!(e && e.detail));
+    });
+  }(window, document);
 </script>
 {% comment %}
 <!-- Example for the CloudFlare mail protection script.

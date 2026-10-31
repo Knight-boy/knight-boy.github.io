@@ -274,6 +274,16 @@ a.back-to-top .icon-arrow-top2 {
   text-shadow: 0 0 .5px currentColor;
 }
 
+// ============================================================================
+// Drawer open state (mirrored into `html.drawer-open` from my-scripts):
+// when the drawer overlay spans the page, the TOC button and panel would
+// otherwise stack above it — hide them completely until it slides away.
+// ============================================================================
+html.drawer-open .toc-btn,
+html.drawer-open .toc-panel {
+  display: none;
+}
+
 @media print {
   a.back-to-top {
     display: none !important;
