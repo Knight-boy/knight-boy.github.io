@@ -2,19 +2,19 @@
   <div class="content">
     <div class="nav-btn-bar">
       <span class="sr-only">{{ site.data.strings.jump_to | default:"Jump to" }}{{ site.data.strings.colon | default:":" }}</span>
-      <a id="_menu" class="nav-btn no-hover fl" href="#_navigation">
-        <span class="sr-only">{{ site.data.strings.navigation | default:"Navigation" }}</span>
-        <span class="icon-menu"></span>
+      <!-- 隐藏/显示左侧边栏(桌面有效, 状态本地记忆) -->
+      <a id="_sidebar-toggle" class="nav-btn sidebar-toggle fl" href="javascript:;" role="button" title="隐藏/显示左侧边栏">
+        <span class="icon-arrow-left2"></span>
+        <span class="sr-only">隐藏/显示左侧边栏</span>
       </a>
       <!-- 主题切换(与抽屉内同一逻辑) -->
       <a id="_theme-toggle-mobile" class="nav-btn theme-toggle-mobile fl" href="javascript:;" role="button" title="切换夜间/日间主题">
         <span class="icon-contrast"></span>
         <span class="sr-only">切换夜间/日间主题</span>
       </a>
-      <!-- 隐藏/显示左侧边栏(桌面有效, 状态本地记忆) -->
-      <a id="_sidebar-toggle" class="nav-btn sidebar-toggle fl" href="javascript:;" role="button" title="隐藏/显示左侧边栏">
-        <span class="icon-arrow-left2"></span>
-        <span class="sr-only">隐藏/显示左侧边栏</span>
+      <a id="_menu" class="nav-btn no-hover fl" href="#_navigation">
+        <span class="sr-only">{{ site.data.strings.navigation | default:"Navigation" }}</span>
+        <span class="icon-menu"></span>
       </a>
     </div>
   </div>
