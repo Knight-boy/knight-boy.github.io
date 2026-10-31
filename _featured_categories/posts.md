@@ -1,6 +1,6 @@
 ---
 layout: list
-title: Posts
+title: 笔记
 slug: posts
 menu: true
 order: 1
