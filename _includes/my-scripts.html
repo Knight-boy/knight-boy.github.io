@@ -440,7 +440,10 @@ It has two modes:
         var block = blocks[i];
         /* Rouge nests `.highlight` twice (outer div + inner pre). Only the
            outermost element gets a bar — skip anything inside one. */
-        if (block.closest && block.closest('.highlight') !== block) continue;
+        /* Rouge nests `.highlight` twice (outer div + inner pre, both carry
+           the class). Skip any block whose ANCESTORS already have one — the
+           outermost element is the only one that gets a bar. */
+        if (block.parentElement && block.parentElement.closest && block.parentElement.closest('.highlight')) continue;
         if (block.getAttribute('data-cb')) continue;
         block.setAttribute('data-cb', '1');
 
