@@ -12,7 +12,8 @@
     {% if image.overlay %}data-overlay{% endif %}
   {% endunless %}
   >
-  {{ content }}
+  {% assign content_lazy = content | replace: '<img ', '<img loading="lazy" decoding="async" ' %}
+  {{ content_lazy }}
   {% include body/comments.html %}
   {% include body/footer.html %}
 </main>
