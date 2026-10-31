@@ -365,3 +365,57 @@ html.sidebar-collapsed .sidebar-toggle .icon-arrow-left2 {
     display: none !important;
   }
 }
+
+// ============================================================================
+// Compact typography (tighter rhythm, same font sizes).
+// Applied to `.markdown` (Hydejack's prose container) so the sidebar and
+// navbar keep the theme's original spacing.
+// ============================================================================
+body {
+  line-height: 1.62;
+}
+
+.markdown {
+  p,
+  ul,
+  ol,
+  dl,
+  figure,
+  blockquote,
+  table,
+  .highlight {
+    margin-bottom: 1rem;
+  }
+
+  // Headings: pull in the empty space above/below.
+  h1, h2, h3, h4, h5, h6 {
+    margin: 1.4em 0 0.4em;
+  }
+
+  li {
+    margin-bottom: 0.2rem;
+  }
+
+  hr {
+    margin: 1.6rem 0;
+  }
+}
+
+// ============================================================================
+// Rounded corners for article media and code blocks.
+// ============================================================================
+.markdown {
+  img,
+  video,
+  pre,
+  .highlight {
+    border-radius: 0.65rem;
+  }
+
+  // The highlight block paints its own background — clip children so the
+  // rounded corners are not overdrawn by inner rects.
+  .highlight {
+    overflow: hidden;
+  }
+}
+
