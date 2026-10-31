@@ -449,6 +449,14 @@ article.post {
 
     background: var(--gray-bg);
     border-bottom: 1px solid var(--border-color);
+
+    /* The theme paints `.highlight`/`.highlight pre` with solid #20242a in
+       dark mode; the bar must match that instead of the translucent
+       --gray-bg (which lets the page background leak through). */
+    html.dark-mode-early body &,
+    body.dark-mode & {
+      background: #20242a;
+    }
   }
 
   .cb-lang {
