@@ -413,6 +413,22 @@ article.post {
   }
 }
 
+// Align decorated code blocks: the theme bleeds `pre` 1rem past its parent
+// (`margin: 0 -1rem`), which made the header bar narrower than the code
+// body. Inside our blocks, kill the bleed so bar and code share edges, and
+// round only the bottom corners of `pre` — the bar caps the top.
+article.post {
+  .highlight {
+    overflow: hidden;
+  }
+
+  .highlight pre {
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 0 0 0.65rem 0.65rem;
+  }
+}
+
 // ============================================================================
 // Code block header bar (markup injected from my-scripts.html):
 // language label on the left, copy-to-clipboard button on the right.
