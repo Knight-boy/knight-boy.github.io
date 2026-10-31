@@ -279,6 +279,40 @@ It has two modes:
       });
     }
   }(window, document);
+
+  /* === Floating back-to-top ===============================================
+     Pinned to the bottom-right (markup in `_includes/body/menu.html`,
+     styles in my-style.scss). Shows only after scrolling past ~one screen. */
+  !function (w, d) {
+    var btn = d.getElementById('_back-to-top');
+    if (!btn) return;
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      var y = w.pageYOffset || d.documentElement.scrollTop || 0;
+      var threshold = Math.round((d.documentElement.clientHeight || 600) * 0.6);
+      btn.classList[y > threshold ? 'add' : 'remove']('show');
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      if (w.requestAnimationFrame) w.requestAnimationFrame(update);
+      else update();
+    }
+
+    btn.addEventListener('click', function () {
+      if ('scrollBehavior' in d.documentElement.style) {
+        w.scrollTo({ 'top': 0, 'behavior': 'smooth' });
+      } else {
+        w.scrollTo(0, 0);
+      }
+    });
+
+    w.addEventListener('scroll', onScroll, { 'passive': true });
+    update();
+  }(window, document);
 </script>
 {% comment %}
 <!-- Example for the CloudFlare mail protection script.

@@ -226,11 +226,58 @@ html.dark-mode-early body {
   display: inline-block;
 }
 
-// Thicken the back-to-top arrow (icon font strokes are quite thin).
+// ============================================================================
+// Floating back-to-top button (markup in `_includes/body/menu.html`).
+// Pinned to the bottom-right corner of the viewport; hidden until the page is
+// scrolled past roughly one screenful (`.show` is toggled from
+// `_includes/my-scripts.html`). Theme CSS variables keep it correct in both
+// the light and the dark palettes.
+// ============================================================================
+a.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 30;
+  width: 2.75rem;
+  height: 2.75rem;
+  line-height: 2.6rem;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--body-bg);
+  border: 1px solid var(--border-color);
+  color: var(--menu-text);
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.5rem);
+  transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+}
+
+a.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+a.back-to-top:hover,
+a.back-to-top:focus {
+  color: var(--body-color);
+  border-color: var(--body-color);
+  outline: none;
+}
+
+// Thicken the arrow (icon font strokes are quite thin) and hide on print.
 a.back-to-top .icon-arrow-top2 {
   font-weight: 700;
   -webkit-text-stroke: 1px currentColor;
   text-shadow: 0 0 .5px currentColor;
+}
+
+@media print {
+  a.back-to-top {
+    display: none !important;
+  }
 }
 
 // ============================================================================
