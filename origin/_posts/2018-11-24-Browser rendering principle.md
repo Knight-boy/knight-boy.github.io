@@ -21,7 +21,7 @@ comments: true
 6. **JavaScript解释器(Javascript interpreter)**。用于解析和执行JavaScript代码。
 7. **数据存储(Data storage)**。这是一个持久层。浏览器可能需要在本地保存各种数据，例如cookie。浏览器还支持存储机制，例如localStorage，IndexedDB，WebSQL和FileSystem。
 
-![浏览器组件](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/layers.png)
+![浏览器组件](/assets/img/blog/ext/hw-layers.png)
 
 <center><b>图0 </b>浏览器组件</center>
 
@@ -37,7 +37,7 @@ comments: true
 
 ​	解析html用以构建DOM树，然后构建Render树(呈现树)，接着布局Render树，最后绘制Render树。流程如**图1**所示。
 
-![渲染流程](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/flow.png)
+![渲染流程](/assets/img/blog/ext/hw-flow.png)
 
 <center><b>图1 </b>渲染引擎基本流程</center>
 
@@ -49,11 +49,11 @@ comments: true
 
 - 值得注意的是，这个过程是逐步完成的，为了更好的用户体验，渲染引擎将会尽可能早的将内容呈现到屏幕上，并不会等到所有的html都解析完成之后再去构建和布局Render树。它是边解析边显示，解析一部分内容就显示一部分内容，同时，可能还会通过网络下载其余内容。
 
-![Webkit引擎解析模式](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/webkitflow.png)
+![Webkit引擎解析模式](/assets/img/blog/ext/hw-webkitflow.png)
 
 <center><b>图2 </b>Webkit引擎渲染主流程</center>
 
-![Gecko渲染主流程](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/image008.jpg)
+![Gecko渲染主流程](/assets/img/blog/ext/hw-image008.jpg)
 
 <center><b>图3 </b>Gecko引擎渲染主流程</center>
 

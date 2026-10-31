@@ -1,7 +1,7 @@
 ---
 title: 什么是 Vibe Coding
 date: 2026-10-31
-image: /assets/img/blog/github-header-banner.png
+image: /assets/img/blog/github-header-banner.jpg
 redirect_from:
   - /algorithm/2026-10-31-vibe-coding/
 description: >

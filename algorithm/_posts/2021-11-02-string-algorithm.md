@@ -22,7 +22,7 @@ comments: true
 
 思路：快慢指针，**双指针法（快慢指针法）在数组和链表的操作中是非常常见的，很多考察数组、链表、字符串等操作的面试题，都使用双指针法。**
 
-![快慢指针删除重复元素](https://tva1.sinaimg.cn/large/008eGmZEly1gntrds6r59g30du09mnpd.gif)
+![快慢指针删除重复元素](/assets/img/blog/ext/sina-gntrds6r.gif)
 
 ```c++
 int removeElement(vector<int>& nums, int val) {
@@ -73,7 +73,7 @@ void removeExtraSpaces(string& s) {
 
 思路：双指针反转单词
 
-![反转单词hello](https://tva1.sinaimg.cn/large/008eGmZEly1gp0fvi91pfg30de0akwnq.gif)
+![反转单词hello](/assets/img/blog/ext/sina-p0fvi91p.gif)
 
 ```c++
 void reverseString(vector<char>& s) {
@@ -234,7 +234,7 @@ public:
 
 思路：
 
-![替换空格](https://tva1.sinaimg.cn/large/e6c9d24ely1go6qmevhgpg20du09m4qp.gif)
+![替换空格](/assets/img/blog/ext/sina-o6qmevhg.gif)
 
 ```c++
 string replaceSpace(string s) {
@@ -305,7 +305,7 @@ KMP的主要思想是 **当出现字符串不匹配时，可以知道一部分�
 
 如下图：从文本串 **aabaabaafa** 中匹配模式串 **aabaaf**，返回匹配到模式串的first_index
 
-![使用前缀表KMP匹配](https://code-thinking.cdn.bcebos.com/gifs/KMP%E7%B2%BE%E8%AE%B22.gif)
+![使用前缀表KMP匹配](/assets/img/blog/ext/kmp-simplified-2.gif)
 
 前缀 是指**不包含最后一个字符的所有以第一个字符开头的连续子串**；
 
@@ -315,7 +315,7 @@ KMP的主要思想是 **当出现字符串不匹配时，可以知道一部分�
 
 **next数组** 可以既是前缀表，又可以把前缀表统一减一(右移一位，初始位置为-1)之后作为next数组。还可以把前缀表用成下标i之前(不包括包括i)的字符串中，最长的相同前缀后缀长度加1表示，见[求解next数组](https://www.bilibili.com/video/BV16X4y137qw/?spm_id_from=autoNext)。
 
-![使用next数组KMP匹配](https://code-thinking.cdn.bcebos.com/gifs/KMP%E7%B2%BE%E8%AE%B24.gif)
+![使用next数组KMP匹配](/assets/img/blog/ext/kmp-simplified-4.gif)
 
 构造next数组[^1]
 

@@ -31,7 +31,7 @@ struct Node {
 
 例如：
 
-![Example 1](https://assets.leetcode.com/uploads/2019/02/14/116_sample.png)
+![Example 1](/assets/img/blog/ext/116_sample.png)
 
 > 输入：root = [1,2,3,4,5,6,7]
 > 输出：[1,#,2,3,#,4,5,6,7,#]

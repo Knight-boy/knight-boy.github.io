@@ -32,7 +32,7 @@ Promise based HTTP client for the browser and [node.js](https://nodejs.org).
 
 ## Browser Support
 
-| ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) |
+| ![Chrome](/assets/img/blog/ext/logos-chrome.png) | ![Firefox](/assets/img/blog/ext/logos-firefox.png) | ![Safari](/assets/img/blog/ext/logos-safari.png) | ![Opera](/assets/img/blog/ext/logos-opera.png) | ![Edge](/assets/img/blog/ext/logos-edge.png) | ![IE](/assets/img/blog/ext/logos-ie.png) |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Latest ✔                                                     | Latest ✔                                                     | Latest ✔                                                     | Latest ✔                                                     | Latest ✔                                                     | 11 ✔                                                         |
 
