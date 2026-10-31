@@ -6,6 +6,6 @@ menu: true
 order: 1
 description: >
   All posts by year of publication.
-  You can filter by [Origin](https://www.knightboy.cn/origin/),[Master](https://www.knightboy.cn/master/),[C++](https://www.knightboy.cn/cplusplus/),[Algorithm](https://www.knightboy.cn/algorithm/).
+  You can filter by [Origin](https://www.knightboy.cn/origin/),[Master](https://www.knightboy.cn/master/),[C++](https://www.knightboy.cn/cplusplus/),[Algorithm](https://www.knightboy.cn/algorithm/),[AI](https://www.knightboy.cn/ai/).
 ---
 
