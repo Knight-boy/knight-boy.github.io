@@ -24,11 +24,11 @@ title:                 我的个人博客
 # A short description (~150 chars) of the page used for the meta description tag.
 # Can use markdown, but no more than one paragraph (enforced by `>`)
 description:           >
-  记录代码与生活随笔。
+  记录算法、前端开发与生活所感的个人博客。
 
 # A shorter description for the sidebar.
 tagline:               >
-  代码与生活的随笔
+  记录代码与生活随笔
 
 # A list of keywords for your blog
 keywords:              []
