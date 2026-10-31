@@ -4,7 +4,7 @@ order: 5
 image: /assets/img/blog/hydejack-8.png
 ---
 
-# About
+# 关于
 ## Hydejack
 
 The "Best Jekyll Theme by a Mile".
