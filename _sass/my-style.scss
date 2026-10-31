@@ -368,14 +368,14 @@ html.sidebar-collapsed .sidebar-toggle .icon-arrow-left2 {
 
 // ============================================================================
 // Compact typography (tighter rhythm, same font sizes).
-// Applied to `.markdown` (Hydejack's prose container) so the sidebar and
-// navbar keep the theme's original spacing.
+// Scope: article prose (`article.page.post` — the actual wrapper this theme
+// renders; it has no `.markdown` class).
 // ============================================================================
 body {
   line-height: 1.62;
 }
 
-.markdown {
+article.post {
   p,
   ul,
   ol,
@@ -404,7 +404,7 @@ body {
 // ============================================================================
 // Rounded corners for article media and code blocks.
 // ============================================================================
-.markdown {
+article.post {
   img,
   video,
   pre,
