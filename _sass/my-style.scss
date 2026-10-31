@@ -412,10 +412,60 @@ body {
     border-radius: 0.65rem;
   }
 
-  // The highlight block paints its own background — clip children so the
-  // rounded corners are not overdrawn by inner rects.
-  .highlight {
+// ============================================================================
+// Code block header bar (markup injected from my-scripts.html):
+// language label on the left, copy-to-clipboard button on the right.
+// Sits in normal flow above the <pre> inside `.highlight`; the pre-existing
+// `overflow: hidden` + border-radius on `.highlight` keeps the corners clean.
+// ============================================================================
+.highlight {
+  .cb-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding: 0.3rem 0.75rem;
+
+    font-size: 0.68rem;
+    line-height: 1;
+
+    background: var(--gray-bg);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .cb-lang {
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .cb-copy {
+    flex: none;
+    padding: 0.28rem 0.6rem;
+
+    font: inherit;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+
+    color: var(--menu-text);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 0.4rem;
+    line-height: 1;
+
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .cb-copy:hover,
+  .cb-copy:focus {
+    color: var(--body-color);
+    border-color: var(--body-color);
+    outline: none;
   }
 }
 

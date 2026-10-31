@@ -335,6 +335,138 @@ It has two modes:
       apply(!!(e && e.detail));
     });
   }(window, document);
+
+  /* === Code blocks: language label + copy button ==========================
+     Decorates every `.highlight` block inside the article prose with a small
+     header bar: the highlighted language (detected from the `language-foo`
+     class Rouge emits) on the left, a copy-to-clipboard button on the right.
+     Runs after the initial load and after every hy-push-state navigation —
+     blocks already carrying a bar (marked with data-cb) are skipped. */
+  !function (w, d) {
+    var LANGS = {
+      'c++': 'C++', 'cpp': 'C++', 'cc': 'C++', 'cxx': 'C++',
+      'c#': 'C#', 'csharp': 'C#', 'cs': 'C#', 'java': 'Java', 'javascript': 'JavaScript', 'js': 'JavaScript',
+      'typescript': 'TypeScript', 'ts': 'TypeScript', 'python': 'Python', 'py': 'Python',
+      'golang': 'Go', 'go': 'Go', 'rust': 'Rust', 'rs': 'Rust', 'ruby': 'Ruby', 'rb': 'Ruby',
+      'php': 'PHP', 'swift': 'Swift', 'kotlin': 'Kotlin', 'kt': 'Kotlin', 'c': 'C',
+      'shell': 'Shell', 'bash': 'Shell', 'sh': 'Shell', 'zsh': 'Shell',
+      'powershell': 'PowerShell', 'pwsh': 'PowerShell', 'ps1': 'PowerShell',
+      'html': 'HTML', 'xhtml': 'XHTML', 'xml': 'XML', 'erb': 'ERB',
+      'css': 'CSS', 'scss': 'SCSS', 'sass': 'Sass', 'less': 'Less', 'stylus': 'Stylus',
+      'json': 'JSON', 'yaml': 'YAML', 'yml': 'YAML', 'toml': 'TOML', 'ini': 'INI',
+      'markdown': 'Markdown', 'md': 'Markdown', 'sql': 'SQL', 'mysql': 'SQL',
+      'diff': 'Diff', 'text': 'Text', 'plaintext': 'Text', 'txt': 'Text',
+      'dockerfile': 'Dockerfile', 'docker': 'Dockerfile', 'objectivec': 'Objective-C',
+      'latex': 'LaTeX', 'tex': 'LaTeX', 'matlab': 'MATLAB', 'cmake': 'CMake',
+      'makefile': 'Makefile', 'make': 'Makefile', 'coffee': 'CoffeeScript',
+      'coffeescript': 'CoffeeScript', 'lua': 'Lua', 'perl': 'Perl', 'scala': 'Scala',
+      'haskell': 'Haskell', 'erlang': 'Erlang', 'elixir': 'Elixir', 'clojure': 'Clojure',
+      'commonlisp': 'Common Lisp', 'vim': 'Vim', 'viml': 'Vim', 'gradle': 'Gradle',
+      'groovy': 'Groovy', 'dart': 'Dart', 'r': 'R', 'batch': 'Batch', 'bat': 'Batch'
+    };
+
+    function detectLang(block) {
+      var m = (block.className || '').match(/language-([\w#+.-]+)/);
+      var scope = block;
+      if (!m) {
+        var inner = block.querySelector('[class*="language-"]');
+        if (inner) m = (inner.className || '').match(/language-([\w#+.-]+)/);
+      }
+      if (!m) {
+        var p = block.parentElement;
+        while (p && !m && p !== d.body) {
+          m = (p.className || '').match(/language-([\w#+.-]+)/);
+          p = p.parentElement;
+        }
+      }
+      if (!m) return '\u4EE3\u7801';
+      var key = m[1].toLowerCase();
+      /* Rouge writes c++ / c# as `language-c#` etc.; keep the literal key as-is. */
+      if (key === 'c%23') return 'C#';
+      if (LANGS[key]) return LANGS[key];
+      return key.toUpperCase();
+    }
+
+    function legacyCopy(text) {
+      var ta = d.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      ta.style.top = '0';
+      d.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = d.execCommand('copy'); } catch (err) { ok = false; }
+      d.body.removeChild(ta);
+      return ok;
+    }
+
+    function copyCode(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var btn = e.currentTarget;
+      if (btn.getAttribute('data-busy')) return;
+      var block = btn.parentNode.parentNode;
+      var pre = block.querySelector('pre');
+      var text = pre ? (pre.textContent || '').replace(/\n$/, '') : '';
+      if (!text) return;
+      var label = btn.textContent;
+      btn.setAttribute('data-busy', '1');
+      var flash = function () { btn.textContent = '\u5DF2\u590D\u5236'; };
+      var reset = function () {
+        btn.removeAttribute('data-busy');
+        btn.textContent = label;
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText && w.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () {
+          flash();
+          w.setTimeout(reset, 1200);
+        }, function () {
+          legacyCopy(text);
+          flash();
+          w.setTimeout(reset, 1200);
+        });
+      } else {
+        legacyCopy(text);
+        flash();
+        w.setTimeout(reset, 1200);
+      }
+    }
+
+    function decorate() {
+      var blocks = d.querySelectorAll('#_main .markdown .highlight');
+      for (var i = 0; i < blocks.length; i++) {
+        var block = blocks[i];
+        if (block.getAttribute('data-cb')) continue;
+        block.setAttribute('data-cb', '1');
+
+        var bar = d.createElement('div');
+        bar.className = 'cb-bar';
+
+        var lang = d.createElement('span');
+        lang.className = 'cb-lang';
+        lang.textContent = detectLang(block);
+
+        var btn = d.createElement('button');
+        btn.type = 'button';
+        btn.className = 'cb-copy';
+        btn.textContent = '\u590D\u5236';
+        btn.addEventListener('click', copyCode);
+
+        bar.appendChild(lang);
+        bar.appendChild(btn);
+        block.insertBefore(bar, block.firstChild);
+      }
+    }
+
+    var pushStateEl = d.getElementsByTagName('hy-push-state')[0];
+    decorate();
+    if (pushStateEl) {
+      pushStateEl.addEventListener('hy-push-state-load', decorate);
+      pushStateEl.addEventListener('hy-push-state-after', decorate);
+    }
+  }(window, document);
 </script>
 {% comment %}
 <!-- Example for the CloudFlare mail protection script.
