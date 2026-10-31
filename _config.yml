@@ -19,12 +19,12 @@ baseurl:               ''
 lang:                  zh-cn
 
 # The title of your blog. Used in the sidebar and the browser tab.
-title:                 Knight's Blog
+title:                 我的个人博客
 
 # A short description (~150 chars) of the page used for the meta description tag.
 # Can use markdown, but no more than one paragraph (enforced by `>`)
 description:           >
-  记录算法、前端开发与生活所感的个人博客。
+  记录代码与生活随笔。
 
 # A shorter description for the sidebar.
 tagline:               >
