@@ -438,6 +438,9 @@ It has two modes:
       var blocks = d.querySelectorAll('#_main .highlight');
       for (var i = 0; i < blocks.length; i++) {
         var block = blocks[i];
+        /* Rouge nests `.highlight` twice (outer div + inner pre). Only the
+           outermost element gets a bar — skip anything inside one. */
+        if (block.closest && block.closest('.highlight') !== block) continue;
         if (block.getAttribute('data-cb')) continue;
         block.setAttribute('data-cb', '1');
 
