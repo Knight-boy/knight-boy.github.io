@@ -10,28 +10,28 @@
 
 # Free version
 # ---------------------------------------------------------------------------------------
-home:                  Home
-pages:                 Pages
+home:                  主页
+pages:                 页面
 posts:                 笔记
 about:                 关于
 related_posts:         相关笔记
-other_projects:        Other Projects
+other_projects:        其他项目
 comments:              评论
-jump_to:               Jump to
-navigation:            Navigation
-social:                Social
-links:                 Links
-pagination:            Pagination
-newer:                 Newer
-older:                 Older
-back:                  Back
-permalink:             Permalink
+jump_to:               跳转
+navigation:            导航
+social:                社交
+links:                 链接
+pagination:            分页
+newer:                 较新
+older:                 较早
+back:                  返回
+permalink:             固定链接
 permalink_icon:        icon-link
 templates:             Templates (for web app)
 present:               present
 
-loading:               Loading…
-redirecting:           Redirecting…
+loading:               加载中…
+redirecting:           跳转中…
 
 continue_reading:      >
   继续阅读...<!--post_title-->
@@ -42,38 +42,38 @@ cookies_banner:
   okay:                好
 
 not_found:
-  title:               '404: Page Not Found'
+  title:               '404：页面不存在'
   message:             |
-    Sorry, we've misplaced that URL or it's pointing to something that doesn't exist.
-    <!--home_link--> to try finding it again.
-  home_link:           Head back home
+    抱歉，该链接已被移动，或指向一个不存在的地方。
+    请<!--home_link-->重新找找看。
+  home_link:           回到主页
 
 error:
-  title:               Error
+  title:               出错了
   message:             |
-    Sorry, an error occurred while loading <!--link-->.
+    抱歉，加载 <!--link--> 时发生了错误。
 
 # Separators
 # ---------------------------------------------------------------------------------------
 colon:                 ':'
 separator:             '|'
-category_start:        'in '
+category_start:        '收录于 '
 category_spearator:    ' / '
-tag_start:             'on '
-tag_separator:         ', '
+tag_start:             '标签 '
+tag_separator:         '、'
 from_to_separator:     '–'
 
 
 # Date formats
 # ---------------------------------------------------------------------------------------
 date_formats:
-  post:                '%d %b %Y'
-  related_post:        '%d %b %Y'
+  post:                '%Y年%-m月%-d日'
+  related_post:        '%Y年%-m月%-d日'
   list_group_by:       '%Y'
-  list_entry:          '%d %b'
+  list_entry:          '%-m月%-d日'
   project:             '%Y'
   projects_group_by:   '%Y'
-  resume:              '%b %Y'
+  resume:              '%Y年%m月'
 
 
 # PRO Version
