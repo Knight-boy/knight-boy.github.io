@@ -73,7 +73,7 @@ void removeExtraSpaces(string& s) {
 
 思路：双指针反转单词
 
-![反转单词hello](/assets/img/blog/ext/sina-p0fvi91p.gif)
+![反转单词hello](/assets/img/blog/ext/sina-p0fvi91p.webp)
 
 ```c++
 void reverseString(vector<char>& s) {
