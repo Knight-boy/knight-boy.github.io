@@ -128,18 +128,13 @@ defaults:
 google_analytics:      G-BWECVTLEHF
 baidu_analytics:       1588cf7e6529b6563ce0bf499ffb08d6
 
-# Setting a disqus shortname will enable the comment section on
-# pages with `comments: true` in the front matter.
-# valine
-valine:
+# Waline comment system (replaces Valine/LeanCloud — LeanCloud announced it
+# will cease external services; server is deployed on Vercel).
+# See: https://waline.js.org — pages with `comments: true` in the front matter
+# render the comment section from _includes/my-comments.html.
+waline:
   enable: true
-  appid: 3o1jzA0gJVUlcoKEpLtLK3uE-gzGzoHsz
-  appkey: zPeaCmqF1O3KlX8k5gcMSDBw
-  avatar: ''
-  placeholder: 'Leave your email and you will receive a reply!'
-  guest_info: nick,mail,link
-  pageSize: 10
-  visitor: true
+  serverurl: https://waline.knightboy.cn
   
 # Setting a tinyletter username will enable the newsletter subscription box.
 # tinyletter:            <tinyletter_username>

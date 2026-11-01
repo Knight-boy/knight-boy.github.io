@@ -1,21 +1,18 @@
-{% if site.valine.enable %}
-<div id="disqus_thread"></div>
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script type="text/javascript">
-  var GUEST = ['nick','mail','link'];
-  var guest = '{{site.valine.guest_info}}';
-  guest = guest.split(',').filter(function(item){
-    return GUEST.indexOf(item)>-1;
-  });
-  new Valine({
-    el: '#disqus_thread',
-    appId: '{{site.valine.appid}}',
-    appKey: '{{site.valine.appkey}}',
-    placeholder: '{{site.valine.placeholder}}',
-    avatar: '{{site.valine.avatar}}',
-    meta: guest,
-    pageSize: '{{site.valine.pageSize}}' || 10,
-    visitor: '{{site.valine.visitor}}',
+{% if site.waline.enable %}
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<div id="waline-thread"></div>
+<script type="module">
+  import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+  init({
+    el: '#waline-thread',
+    serverURL: '{{ site.waline.serverurl }}',
+    /* Hydejack's dark toggle puts `dark-mode` on <body> — Waline re-renders
+       dark whenever the selector matches. */
+    dark: 'body.dark-mode',
+    /* anonymous comments like Valine: all three fields optional */
+    meta: ['nick', 'mail', 'link'],
+    /* pageview: counts this page + fills every .waline-pageview-count span */
+    pageview: true,
   });
 </script>
 {% endif %}
