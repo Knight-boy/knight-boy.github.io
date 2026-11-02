@@ -940,6 +940,113 @@ It has two modes:
     }
   }(window, document);
 
+  /* === Image lightbox =====================================================
+     Any image inside the article opens in a fullscreen viewer on click.
+     The candidate list is refreshed after every hy-push-state navigation;
+     arrows / keyboard navigation appear when the article has more than one
+     previewable image. Clicking the backdrop, the image itself or Esc
+     closes it. Avatar-sized images are excluded. */
+  !function (w, d) {
+    var overlay = null, view = null, cap = null, prevBtn = null, nextBtn = null;
+    var list = [];
+    var cur = 0;
+    var open = false;
+
+    function candidates() {
+      var out = [];
+      var imgs = d.querySelectorAll('#_main article img');
+      for (var i = 0; i < imgs.length; i++) {
+        var im = imgs[i];
+        if (im.classList.contains('avatar')) continue;
+        if (!im.currentSrc && !im.getAttribute('src')) continue;
+        out.push(im);
+      }
+      return out;
+    }
+
+    function build() {
+      overlay = d.createElement('div');
+      overlay.className = 'lightbox-overlay';
+      view = d.createElement('img');
+      view.className = 'lightbox-view';
+      view.alt = '';
+      cap = d.createElement('div');
+      cap.className = 'lightbox-cap';
+      prevBtn = d.createElement('a');
+      prevBtn.className = 'lightbox-btn lightbox-prev no-hover';
+      prevBtn.href = 'javascript:;';
+      prevBtn.textContent = '\u2039';
+      prevBtn.setAttribute('aria-label', '\u4E0A\u4E00\u5F20');
+      nextBtn = d.createElement('a');
+      nextBtn.className = 'lightbox-btn lightbox-next no-hover';
+      nextBtn.href = 'javascript:;';
+      nextBtn.textContent = '\u203A';
+      nextBtn.setAttribute('aria-label', '\u4E0B\u4E00\u5F20');
+      overlay.appendChild(view);
+      overlay.appendChild(cap);
+      overlay.appendChild(prevBtn);
+      overlay.appendChild(nextBtn);
+      d.body.appendChild(overlay);
+
+      overlay.addEventListener('click', function (e) {
+        if (e.target === view || e.target === overlay) close();
+      });
+      prevBtn.addEventListener('click', function (e) { e.preventDefault(); go(-1); });
+      nextBtn.addEventListener('click', function (e) { e.preventDefault(); go(1); });
+      d.addEventListener('keydown', function (e) {
+        if (!open) return;
+        if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+        if (e.key === 'ArrowLeft') go(-1);
+        if (e.key === 'ArrowRight') go(1);
+      });
+    }
+
+    function show(i) {
+      var src = (list[i].currentSrc || list[i].getAttribute('src') || '');
+      if (!src) return;
+      cur = i;
+      view.src = src;
+      view.alt = list[i].alt || '';
+      cap.textContent = list.length > 1 ? (i + 1) + ' / ' + list.length : '';
+      overlay.classList[list.length > 1 ? 'remove' : 'add']('single');
+      overlay.classList.add('open');
+      open = true;
+      /* keep the page from scrolling underneath */
+      d.body.style.overflow = 'hidden';
+    }
+
+    function go(step) {
+      if (!open || !list.length) return;
+      show((cur + step + list.length) % list.length);
+    }
+
+    function close() {
+      if (!open) return;
+      overlay.classList.remove('open');
+      open = false;
+      d.body.style.overflow = '';
+      view.src = '';
+    }
+
+    function onClick(e) {
+      var img = e.target;
+      if (!img || img.tagName !== 'IMG') return;
+      var art = img.closest && img.closest('#_main article');
+      if (!art) return;
+      list = candidates();
+      var found = -1;
+      for (var i = 0; i < list.length; i++) {
+        if (list[i] === img) { found = i; break; }
+      }
+      if (found < 0) return;
+      e.preventDefault();
+      if (!overlay) build();
+      show(found);
+    }
+
+    d.addEventListener('click', onClick);
+  }(window, document);
+
 </script>
 {% comment %}
 <!-- Example for the CloudFlare mail protection script.

@@ -728,3 +728,89 @@ article.post {
   }
 }
 
+/* === Image lightbox =======================================================
+   The viewer overlay is built by the lightbox IIFE in my-scripts.html:
+   `.lightbox-view` (the enlarged image), `.lightbox-cap` (1 / n counter) and
+   the `‹`/`›` arrows (multi-image articles only, hidden via `.single`).
+   Sits above the navbar (z-index 30) and the search overlay (60). The
+   backdrop is uniformly dark, so no dark-mode variant is needed. */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+
+  display: none; // shown via the `.open` class from the lightbox script
+
+  background: rgba(0, 0, 0, 0.88);
+
+  &.open {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-view {
+    display: block;
+
+    max-width: 92vw;
+    max-height: 84vh;
+    width: auto;
+    height: auto;
+
+    cursor: zoom-out; // clicking the image itself closes the viewer
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+  }
+
+  .lightbox-cap {
+    flex: none;
+
+    margin-top: 0.8rem;
+
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+
+    color: rgba(255, 255, 255, 0.75);
+    user-select: none;
+  }
+
+  .lightbox-btn {
+    position: absolute;
+    top: 50%;
+
+    padding: 0.5rem 0.8rem;
+
+    font-size: 2rem;
+    line-height: 1;
+
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    cursor: pointer;
+    transform: translateY(-50%);
+
+    &:hover,
+    &:focus {
+      color: #fff;
+      outline: none;
+    }
+  }
+
+  .lightbox-prev {
+    left: 0.4rem;
+  }
+
+  .lightbox-next {
+    right: 0.4rem;
+  }
+
+  // single-image articles: no arrows, no counter
+  &.single {
+    .lightbox-btn {
+      display: none;
+    }
+  }
+}
+
