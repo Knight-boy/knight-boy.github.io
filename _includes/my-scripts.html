@@ -514,6 +514,294 @@ It has two modes:
     ok && ok.addEventListener('click', accept);
   }(window, document);
 
+  /* === Site search =========================================================
+     Full-text search over the Liquid-built JSON index at
+     /assets/search-index.json (one record per post: title, url, date,
+     categories, tags, excerpt, truncated body). Zero dependencies: terms are
+     matched with plain indexOf (fully Unicode/Chinese safe); every term must
+     hit the record (AND). Scoring: title 60 + tags 40 + categories 20 +
+     excerpt 20, plus one point per body hit (capped at 50).
+     The button markup lives in _includes/body/menu.html, styles in
+     _sass/my-style.scss. The index is fetched lazily on first query and kept
+     for the lifetime of the page (SPA navigations keep it warm). */
+  !function (w, d) {
+    var INDEX_URL = '/assets/search-index.json';
+    var MAX_RESULTS = 50;
+    var DEBOUNCE = 120;
+    var open = false;
+    var loading = false;
+    var idx = null;
+    var timer = null;
+    var overlay = null, panel = null, input = null, meta = null, results = null;
+    var btn = d.getElementById('_search-toggle');
+    if (!btn) return;
+
+    function esc(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function setMeta(text) {
+      meta.textContent = text;
+    }
+
+    function fetchIndex(cb) {
+      if (idx) { cb(idx); return; }
+      if (loading) return;
+      loading = true;
+      setMeta('\u6b63\u5728\u52a0\u8f7d\u641c\u7d22\u7d22\u5f15\uff0c\u7a0d\u5019\u2026');
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', INDEX_URL, true);
+      xhr.onload = function () {
+        loading = false;
+        var docs = null;
+        try { docs = JSON.parse(xhr.responseText); } catch (e) { docs = null; }
+        if (!docs) { setMeta('\u641c\u7d22\u7d22\u5f15\u52a0\u8f7d\u5931\u8d25\uff0c\u8bf7\u7a0d\u540e\u91cd\u8bd5'); return; }
+        idx = docs;
+        cb(docs);
+      };
+      xhr.onerror = function () {
+        loading = false;
+        setMeta('\u641c\u7d22\u7d22\u5f15\u52a0\u8f7d\u5931\u8d25\uff0c\u8bf7\u68c0\u67e5\u7f51\u7edc\u540e\u91cd\u8bd5');
+      };
+      xhr.send();
+    }
+
+    function countHits(hay, needle) {
+      var n = 0;
+      var p = hay.indexOf(needle);
+      while (p > -1 && n < 50) {
+        n++;
+        p = hay.indexOf(needle, p + needle.length);
+      }
+      return n;
+    }
+
+    function tokenize(q) {
+      var out = [];
+      var arr = String(q).toLowerCase().split(/\s+/);
+      for (var i = 0; i < arr.length; i++) if (arr[i]) out.push(arr[i]);
+      return out;
+    }
+
+    function asList(v) {
+      return v instanceof Array ? v.join(' ') : String(v || '');
+    }
+
+    function search(docs, terms) {
+      var hits = [];
+      for (var i = 0; i < docs.length; i++) {
+        var doc = docs[i];
+        var title = String(doc.t || '').toLowerCase();
+        var tags = asList(doc.g).toLowerCase();
+        var cats = asList(doc.c).toLowerCase();
+        var desc = String(doc.e || '').toLowerCase();
+        var body = String(doc.b || '').toLowerCase();
+        var score = 0;
+        var ok = true;
+        for (var t = 0; t < terms.length; t++) {
+          var term = terms[t];
+          var s = 0;
+          if (title.indexOf(term) > -1) s += 60;
+          if (tags.indexOf(term) > -1) s += 40;
+          if (cats.indexOf(term) > -1) s += 20;
+          if (desc.indexOf(term) > -1) s += 20;
+          s += countHits(body, term);
+          if (!s) { ok = false; break; }
+          score += s;
+        }
+        if (ok) hits.push({ 'doc': doc, 'score': score });
+      }
+      hits.sort(function (a, b) { return b.score - a.score; });
+      return hits;
+    }
+
+    /* Escape an HTML snippet and wrap every term occurrence in <mark>. */
+    function mergeHighlights(text, terms) {
+      var low = text.toLowerCase();
+      var ranges = [];
+      for (var i = 0; i < terms.length; i++) {
+        var term = terms[i];
+        var p = low.indexOf(term);
+        while (p > -1 && ranges.length < 30) {
+          ranges.push([p, p + term.length]);
+          p = low.indexOf(term, p + term.length);
+        }
+      }
+      if (!ranges.length) return esc(text);
+      ranges.sort(function (a, b) { return a[0] - b[0]; });
+      var merged = [ranges[0]];
+      for (var i = 1; i < ranges.length; i++) {
+        var last = merged[merged.length - 1];
+        if (ranges[i][0] <= last[1]) {
+          if (ranges[i][1] > last[1]) last[1] = ranges[i][1];
+        } else {
+          merged.push(ranges[i]);
+        }
+      }
+      var out = '';
+      var pos = 0;
+      for (var j = 0; j < merged.length; j++) {
+        out += esc(text.slice(pos, merged[j][0])) + '<mark>' +
+          esc(text.slice(merged[j][0], merged[j][1])) + '</mark>';
+        pos = merged[j][1];
+      }
+      out += esc(text.slice(pos));
+      return out;
+    }
+
+    /* A body excerpt centered on the first match, capped to ~60 + term + 140
+       chars, with every term occurrence highlighted. */
+    function summarize(doc, terms) {
+      var body = String(doc.b || '');
+      var low = body.toLowerCase();
+      var at = -1;
+      for (var i = 0; i < terms.length; i++) {
+        var p = low.indexOf(terms[i]);
+        if (p > -1 && (at < 0 || p < at)) at = p;
+      }
+      if (at < 0) return mergeHighlights(body.slice(0, 120), terms);
+      var start = Math.max(0, at - 60);
+      var end = Math.min(body.length, at + 140);
+      return (start > 0 ? '\u2026' : '') +
+        mergeHighlights(body.slice(start, end), terms) +
+        (end < body.length ? '\u2026' : '');
+    }
+
+    function render(docs, q) {
+      var terms = tokenize(q);
+      if (!terms.length) {
+        results.innerHTML = '';
+        setMeta('\u8f93\u5165\u5173\u952e\u5b57\uff0c\u6309\u6807\u9898\u3001\u6807\u7b7e\u548c\u6b63\u6587\u641c\u7d22\u5168\u7ad9\u6587\u7ae0');
+        return;
+      }
+      var hits = search(docs, terms);
+      results.innerHTML = '';
+      if (!hits.length) {
+        setMeta('\u672a\u627e\u5230\u4e0e\u300c' + esc(q) + '\u300d\u76f8\u5173\u7684\u6587\u7ae0');
+        return;
+      }
+      setMeta('\u627e\u5230 ' + hits.length + ' \u6761\u4e0e\u300c' + esc(q) + '\u300d\u76f8\u5173\u7684\u6587\u7ae0' +
+        (hits.length > MAX_RESULTS ? '\uff08\u663e\u793a\u524d ' + MAX_RESULTS + ' \u6761\uff09' : ''));
+      var frag = d.createDocumentFragment();
+      var n = Math.min(hits.length, MAX_RESULTS);
+      for (var i = 0; i < n; i++) {
+        var doc = hits[i].doc;
+        var a = d.createElement('a');
+        a.className = 'search-result';
+        a.href = doc.u;
+        var head = d.createElement('div');
+        head.className = 'sr-head';
+        var span = d.createElement('span');
+        span.className = 'sr-title';
+        span.innerHTML = mergeHighlights(String(doc.t), terms);
+        var time = d.createElement('time');
+        time.className = 'sr-date';
+        time.textContent = String(doc.d || '');
+        head.appendChild(span);
+        head.appendChild(time);
+        var sum = d.createElement('p');
+        sum.className = 'sr-sum';
+        sum.innerHTML = summarize(doc, terms);
+        a.appendChild(head);
+        a.appendChild(sum);
+        frag.appendChild(a);
+      }
+      results.appendChild(frag);
+    }
+
+    function runQuery() {
+      fetchIndex(function (docs) { render(docs, input.value); });
+    }
+
+    function onInput() {
+      if (timer) w.clearTimeout(timer);
+      timer = w.setTimeout(function () {
+        timer = null;
+        runQuery();
+      }, DEBOUNCE);
+    }
+
+    function build() {
+      overlay = d.createElement('div');
+      overlay.className = 'search-overlay';
+      panel = d.createElement('div');
+      panel.className = 'search-panel';
+      panel.setAttribute('role', 'dialog');
+      panel.setAttribute('aria-label', '\u5168\u7ad9\u641c\u7d22');
+      var head = d.createElement('div');
+      head.className = 'search-head';
+      head.innerHTML = '<svg class="search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>';
+      input = d.createElement('input');
+      input.type = 'text';
+      input.className = 'search-input';
+      input.placeholder = '\u641c\u7d22\u6587\u7ae0\u2026';
+      input.setAttribute('autocomplete', 'off');
+      var dismiss = d.createElement('a');
+      dismiss.className = 'search-close no-hover';
+      dismiss.href = 'javascript:;';
+      dismiss.textContent = '\u00d7';
+      head.appendChild(input);
+      head.appendChild(dismiss);
+      meta = d.createElement('div');
+      meta.className = 'search-meta';
+      results = d.createElement('div');
+      results.className = 'search-results';
+      panel.appendChild(head);
+      panel.appendChild(meta);
+      panel.appendChild(results);
+      overlay.appendChild(panel);
+      d.body.appendChild(overlay);
+
+      overlay.addEventListener('click', closePanel);
+      panel.addEventListener('click', function (e) { e.stopPropagation(); });
+      dismiss.addEventListener('click', closePanel);
+      input.addEventListener('input', onInput);
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { closePanel(); return; }
+        if (e.key === 'Enter') {
+          var first = results.querySelector('a.search-result');
+          if (first) first.click();
+        }
+      });
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        openPanel();
+      });
+    }
+
+    function openPanel() {
+      if (!overlay) build();
+      if (!open) {
+        overlay.classList.add('open');
+        open = true;
+      }
+      setMeta('\u8f93\u5165\u5173\u952e\u5b57\uff0c\u6309\u6807\u9898\u3001\u6807\u7b7e\u548c\u6b63\u6587\u641c\u7d22\u5168\u7ad9\u6587\u7ae0\uff1b\u6309 Esc \u5173\u95ed');
+      results.innerHTML = '';
+      if (input.value) runQuery();
+      w.setTimeout(function () { input.focus(); }, 0);
+    }
+
+    function closePanel() {
+      if (!overlay || !open) return;
+      overlay.classList.remove('open');
+      open = false;
+      results.innerHTML = '';
+      input.value = '';
+      if (timer) { w.clearTimeout(timer); timer = null; }
+    }
+
+    d.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { closePanel(); return; }
+      if (e.key === '/' && !open) {
+        var t = e.target;
+        if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable)) return;
+        e.preventDefault();
+        openPanel();
+      }
+    });
+  }(window, document);
+
 </script>
 {% comment %}
 <!-- Example for the CloudFlare mail protection script.

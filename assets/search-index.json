@@ -1,0 +1,15 @@
+---
+---
+[
+{%- for post in site.posts -%}
+{
+  "t": {{ post.title | jsonify }},
+  "u": {{ post.url | relative_url | jsonify }},
+  "d": {{ post.date | date: "%Y-%m-%d" | jsonify }},
+  "c": {{ post.categories | jsonify }},
+  "g": {{ post.tags | default: "" | jsonify }},
+  "e": {{ post.excerpt | strip_html | normalize_whitespace | truncate: 200, "" | jsonify }},
+  "b": {{ post.content | strip_html | normalize_whitespace | truncate: 16000, "" | jsonify }}
+}{% unless forloop.last %},{% endunless %}
+{%- endfor -%}
+]
