@@ -22,8 +22,8 @@ navigation:            导航
 social:                社交
 links:                 链接
 pagination:            分页
-newer:                 较新
-older:                 较早
+newer:                 下一页
+older:                 上一页
 back:                  返回
 permalink:             固定链接
 permalink_icon:        icon-link
