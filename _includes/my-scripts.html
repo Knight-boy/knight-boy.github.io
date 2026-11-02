@@ -864,7 +864,7 @@ It has two modes:
     function renderOne(mm, block) {
       var pre = block.querySelector('pre');
       var text = ((pre || block).textContent || '').replace(/^\s+/, '').replace(/\s+$/, '');
-      if (!text) return;
+      if (!text) return Promise.resolve();
       /* Rouge's plaintext fallback nests the `language-mermaid` class on
          <code> inside <pre> — replacing only the code element would leave
          the diagram framed by the pre's monospace box, so hoist to the
@@ -880,7 +880,7 @@ It has two modes:
       host.innerHTML = '';
       host.className = 'mermaid-wrap';
       host.appendChild(wrap);
-      mm.run({ 'nodes': [wrap] }).catch(function (err) {
+      return mm.run({ 'nodes': [wrap] }).catch(function (err) {
         /* Parse failure: keep the source visible as an error note. */
         wrap.classList.add('mermaid-error');
         wrap.textContent = String((err && err.message) || 'mermaid render error');
@@ -891,8 +891,16 @@ It has two modes:
       if (!importFn) return;
       var found = findBlocks();
       if (!found.length) return;
+      /* mermaid's renderer keeps GLOBAL state — concurrent run() calls for
+         multiple diagrams corrupt each other's geometry (nodes stacking on
+         the same origin). Always render strictly one diagram at a time. */
       getMermaid().then(function (mm) {
-        for (var i = 0; i < found.length; i++) renderOne(mm, found[i]);
+        var seq = Promise.resolve();
+        for (var i = 0; i < found.length; i++) {
+          (function (block) {
+            seq = seq.then(function () { return renderOne(mm, block); });
+          })(found[i]);
+        }
       }, function () { /* module failed to load: plain code blocks stay */ });
     }
 
@@ -909,7 +917,15 @@ It has two modes:
           wraps[i].removeAttribute('data-processed');
           nodes.push(wraps[i]);
         }
-        mm.run({ 'nodes': nodes }).catch(function () { /* keep the last render */ });
+        /* sequential for the same reason as decorate() */
+        var seq = Promise.resolve();
+        for (var j = 0; j < nodes.length; j++) {
+          (function (wrap) {
+            seq = seq.then(function () {
+              return mm.run({ 'nodes': [wrap] }).catch(function () { /* keep the last render */ });
+            });
+          })(nodes[j]);
+        }
       }, function () { /* module never loaded */ });
     }
 
