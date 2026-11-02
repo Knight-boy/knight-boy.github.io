@@ -473,6 +473,47 @@ It has two modes:
       pushStateEl.addEventListener('hy-push-state-after', decorate);
     }
   }(window, document);
+
+  /* === Cookies banner =====================================================
+     The banner template (`_cookies-banner-template`) ships with the free
+     theme, but the code that mounts it lives in the PRO bundle — so it
+     never actually appeared. This IIFE reproduces that logic: show the
+     banner until the visitor accepts, then persist consent and notify the
+     analytics gate in analytics.html via the `hy--cookies-ok` event. */
+  !function (w, d) {
+    var KEY = 'hy--cookies-ok';
+
+    function accepted() {
+      return d.cookie.indexOf(KEY + '=true') > -1 ||
+        (w.localStorage && w.localStorage.getItem(KEY) === 'true');
+    }
+
+    function accept() {
+      w.localStorage && w.localStorage.setItem(KEY, 'true');
+      var exp = new Date(Date.now() + 31536e6).toUTCString();
+      d.cookie = KEY + '=true; expires=' + exp + '; path=/';
+      var banner = d.getElementById('_cookies-banner');
+      banner && banner.parentNode.removeChild(banner);
+      notifyAnalytics();
+    }
+
+    function notifyAnalytics() {
+      try { d.dispatchEvent(new CustomEvent('hy--cookies-ok', { bubbles: true })); }
+      catch (e) { /* old engines without CustomEvent: consent flag is still stored */ }
+    }
+
+    if (accepted()) { notifyAnalytics(); return; }
+
+    var tpl = d.getElementById('_cookies-banner-template');
+    if (!tpl) return;
+    var banner = tpl.content ? tpl.content.cloneNode(true).firstElementChild : null;
+    if (!banner) return;
+    d.body.appendChild(banner);
+
+    var ok = d.getElementById('_cookies-ok');
+    ok && ok.addEventListener('click', accept);
+  }(window, document);
+
 </script>
 {% comment %}
 <!-- Example for the CloudFlare mail protection script.
