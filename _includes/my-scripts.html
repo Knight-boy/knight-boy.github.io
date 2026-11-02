@@ -865,13 +865,21 @@ It has two modes:
       var pre = block.querySelector('pre');
       var text = ((pre || block).textContent || '').replace(/^\s+/, '').replace(/\s+$/, '');
       if (!text) return;
+      /* Rouge's plaintext fallback nests the `language-mermaid` class on
+         <code> inside <pre> — replacing only the code element would leave
+         the diagram framed by the pre's monospace box, so hoist to the
+         outermost level (the pre itself). */
+      var host = block;
+      if (block.tagName === 'CODE' && block.parentElement && block.parentElement.tagName === 'PRE') {
+        host = block.parentElement;
+      }
       var wrap = d.createElement('div');
       wrap.className = 'mermaid';
       wrap.setAttribute('data-src', text);
       wrap.textContent = text;
-      block.innerHTML = '';
-      block.className = 'mermaid-wrap';
-      block.appendChild(wrap);
+      host.innerHTML = '';
+      host.className = 'mermaid-wrap';
+      host.appendChild(wrap);
       mm.run({ 'nodes': [wrap] }).catch(function (err) {
         /* Parse failure: keep the source visible as an error note. */
         wrap.classList.add('mermaid-error');
