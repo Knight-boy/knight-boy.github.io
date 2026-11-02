@@ -315,9 +315,15 @@ readme_index:
 relative_links:
   collections:         true
 
+# README 已改为 true 的本意是"从正文首行标题反推集合文档标题"。
+# 0.5.4+ 版本里它还有一个副作用: 当 front matter 的 title 与文件名 slug
+# (titleize 后) 相同时会被视为"推断标题"并用正文第一行的标题覆盖，
+# strip_title 同时把正文里的那个标题删掉——中文标题与文件名同名的文章
+# (如 C++17新增特性) 若正文以 `##` 开头就会标题错乱 + 首节标题消失。
+# posts 均写过显式 title, 因此关闭 collections 项, 让 front matter 永远赢。
 titles_from_headings:
   strip_title:         true
-  collections:         true
+  collections:         false
 
 kramdown:
   footnote_backlink:   '&#x21a9;&#xfe0e;'
