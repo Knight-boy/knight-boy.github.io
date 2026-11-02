@@ -705,7 +705,9 @@ article.post {
   }
 
   .mermaid svg {
-    max-width: 100%;
+    /* natural diagram width (the JS turns off mermaid's `useMaxWidth` so
+       wide diagrams keep their proportions); `.mermaid-wrap` scrolls
+       horizontally on narrow screens instead of shrinking the text. */
 
     height: auto;
   }

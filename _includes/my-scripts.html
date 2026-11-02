@@ -829,7 +829,21 @@ It has two modes:
       if (ready) return ready;
       ready = importFn(MJS).then(function (m) {
         var mm = m.default;
-        mm.initialize({ 'startOnLoad': false, 'theme': isDark() ? 'dark' : 'default' });
+        /* `useMaxWidth: true` (the default) stretches/squeezes every diagram
+           into the content column — wide sequence diagrams end up shrunk to
+           illegibility. Natural size + horizontal scroll instead. */
+        mm.initialize({
+          'startOnLoad': false,
+          'theme': isDark() ? 'dark' : 'default',
+          'flowchart': { 'useMaxWidth': false },
+          'sequence': { 'useMaxWidth': false },
+          'gantt': { 'useMaxWidth': false },
+          'class': { 'useMaxWidth': false },
+          'state': { 'useMaxWidth': false },
+          'pie': { 'useMaxWidth': false },
+          'journey': { 'useMaxWidth': false },
+          'gitGraph': { 'useMaxWidth': false }
+        });
         return mm;
       });
       return ready;
