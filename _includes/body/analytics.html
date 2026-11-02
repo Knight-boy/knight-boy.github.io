@@ -1,44 +1,55 @@
-{% if site.google_analytics %}
+{% if site.google_analytics or site.baidu_analytics %}
   <script>!function(w, d) {
-    w.ga=w.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 
-    {% if site.hydejack.cookies_banner %}
-      if (navigator.CookiesOK) {
-        ga('create', '{{ site.google_analytics }}', 'auto');
-      } else if (d.cookie.indexOf("hy--cookies-ok=true") > -1) {
-        ga('create', '{{ site.google_analytics }}', {
-          'storage': 'none',
-          'clientId': localStorage ? localStorage.getItem('ga--client-id') : undefined
-        });
-      } else {
-        ga('create', '{{ site.google_analytics }}', {
-          'storage': 'none'
-        });
-        ga('set', 'forceSSL', true);
-        ga('set', 'anonymizeIp', true);
-      }
-    {% else %}
-      ga('create', '{{ site.google_analytics }}', 'auto');
+    /* Baidu Analytics: hm.js is UA-agnostic and still alive. */
+    {% if site.baidu_analytics %}
+      w.loadJSDeferred('https://hm.baidu.com/hm.js?{{ site.baidu_analytics }}');
     {% endif %}
 
-    var pushStateEl = d.getElementsByTagName('hy-push-state')[0];
-    var timeoutId;
-    pushStateEl.addEventListener('hy-push-state-load', function() {
-      w.clearTimeout(timeoutId);
-      timeoutId = w.setTimeout(function() {
-        ga('set', 'page', w.location.pathname);
-        ga('send', 'pageview');
-      }, 500);
-    });
+    {% if site.google_analytics %}
+      /* GA4 via gtag.js — the theme's original Universal Analytics wiring
+         (analytics.js + ga('create')) stopped recording data when Google
+         retired UA processing, and the configured id is a GA4 property
+         (G-XXXX). Keep the theme's cookies-banner consent gating: GA only
+         starts once the visitor accepted cookies, or immediately when the
+         banner is disabled. */
+      var gaId = '{{ site.google_analytics }}';
 
-    d.addEventListener('hy--cookies-ok', function () {
-      w.ga(function(tracker) {
-        w.ga("set", "anonymizeIp", undefined);
-        localStorage && localStorage.setItem("ga--client-id", tracker.get("clientId"));
+      function startGA4() {
+        w.dataLayer = w.dataLayer || [];
+        w.gtag = function() { w.dataLayer.push(arguments); };
+        var s = d.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+        d.head.appendChild(s);
+        w.gtag('js', new Date());
+        w.gtag('config', gaId, { anonymize_ip: true });
+      }
+
+      var pushStateEl = d.getElementsByTagName('hy-push-state')[0];
+      var timeoutId;
+      pushStateEl.addEventListener('hy-push-state-load', function() {
+        w.clearTimeout(timeoutId);
+        timeoutId = w.setTimeout(function() {
+          if (w.gtag) w.gtag('event', 'page_view', { page_path: w.location.pathname, send_to: gaId });
+        }, 500);
       });
-    });
 
-    w.loadJSDeferred('https://www.google-analytics.com/analytics.js');
-    w.loadJSDeferred('https://hm.baidu.com/hm.js?{{site.baidu_analytics}}');
+      {% if site.hydejack.cookies_banner %}
+        var started = false;
+        function tryStartGA4() {
+          if (started) return;
+          if (d.cookie.indexOf('hy--cookies-ok=true') > -1 || navigator.CookiesOK) {
+            started = true;
+            startGA4();
+          }
+        }
+        tryStartGA4();
+        d.addEventListener('hy--cookies-ok', tryStartGA4);
+      {% else %}
+        startGA4();
+      {% endif %}
+    {% endif %}
+
   }(window, document);</script>
 {% endif %}
