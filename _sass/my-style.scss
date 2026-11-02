@@ -701,7 +701,11 @@ article.post {
   overflow-x: auto;
 
   .mermaid {
-    display: inline-block;
+    /* block (not inline-block): svg elements sized with width="100%" need a
+       definite containing block, otherwise they fall back to the 300px
+       replaced-element default and render tiny. Fixed-width svgs stay
+       centered via the wrap's text-align. */
+    display: block;
   }
 
   .mermaid svg {
