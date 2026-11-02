@@ -691,3 +691,34 @@ article.post {
   }
 }
 
+/* === Mermaid diagrams =====================================================
+   The JS in my-scripts.html swaps ```mermaid code blocks for `.mermaid-wrap`
+   figures containing an inline SVG (sourced from the fenced text). */
+.mermaid-wrap {
+  padding: 1rem 0;
+
+  text-align: center;
+  overflow-x: auto;
+
+  .mermaid {
+    display: inline-block;
+  }
+
+  .mermaid svg {
+    max-width: 100%;
+
+    height: auto;
+  }
+
+  .mermaid-error {
+    padding: 0.75rem;
+
+    font-size: 0.78rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+
+    text-align: left;
+    color: var(--gray-text);
+  }
+}
+

@@ -802,6 +802,106 @@ It has two modes:
     });
   }(window, document);
 
+  /* === Mermaid diagrams ===================================================
+     ```mermaid fences come through Rouge as a plain-text code block wrapped
+     in `.language-mermaid`; this IIFE lazily loads the mermaid ESM bundle
+     from jsdelivr on first use and swaps those blocks for rendered SVG.
+     Browsers without dynamic `import()` keep the plain code block (graceful
+     degradation, same when the CDN is unreachable). Diagrams re-render after
+     every hy-push-state navigation and re-color when the dark theme toggles
+     (the toggle IIFE above runs its click handler first, so `body.dark-mode`
+     is up to date here). */
+  !function (w, d) {
+    var ready = null; /* promise resolving to the mermaid module */
+    var MJS = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    function isDark() {
+      return d.body.classList.contains('dark-mode');
+    }
+
+    /* A top-level dynamic import() would be a SyntaxError on engines without
+       module support and kill THIS ENTIRE script block. Building it inside a
+       Function keeps the failure local and catchable. */
+    var importFn = null;
+    try { importFn = new Function('u', 'return import(u);'); } catch (e) { importFn = null; }
+
+    function getMermaid() {
+      if (ready) return ready;
+      ready = importFn(MJS).then(function (m) {
+        var mm = m.default;
+        mm.initialize({ 'startOnLoad': false, 'theme': isDark() ? 'dark' : 'default' });
+        return mm;
+      });
+      return ready;
+    }
+
+    function findBlocks() {
+      var outer = d.querySelectorAll('#_main .language-mermaid');
+      var out = [];
+      for (var i = 0; i < outer.length; i++) {
+        var el = outer[i];
+        if (el.getAttribute('data-mermaid') === '1') continue;
+        el.setAttribute('data-mermaid', '1');
+        out.push(el);
+      }
+      return out;
+    }
+
+    function renderOne(mm, block) {
+      var pre = block.querySelector('pre');
+      var text = ((pre || block).textContent || '').replace(/^\s+/, '').replace(/\s+$/, '');
+      if (!text) return;
+      var wrap = d.createElement('div');
+      wrap.className = 'mermaid';
+      wrap.setAttribute('data-src', text);
+      wrap.textContent = text;
+      block.innerHTML = '';
+      block.className = 'mermaid-wrap';
+      block.appendChild(wrap);
+      mm.run({ 'nodes': [wrap] }).catch(function (err) {
+        /* Parse failure: keep the source visible as an error note. */
+        wrap.classList.add('mermaid-error');
+        wrap.textContent = String((err && err.message) || 'mermaid render error');
+      });
+    }
+
+    function decorate() {
+      if (!importFn) return;
+      var found = findBlocks();
+      if (!found.length) return;
+      getMermaid().then(function (mm) {
+        for (var i = 0; i < found.length; i++) renderOne(mm, found[i]);
+      }, function () { /* module failed to load: plain code blocks stay */ });
+    }
+
+    /* Re-color already-rendered diagrams when the theme switches. */
+    function rerender() {
+      if (!ready) return; /* nothing rendered yet: theme is picked at first load */
+      ready.then(function (mm) {
+        mm.initialize({ 'theme': isDark() ? 'dark' : 'default' });
+        var wraps = d.querySelectorAll('#_main .mermaid-wrap .mermaid');
+        if (!wraps.length) return;
+        var nodes = [];
+        for (var i = 0; i < wraps.length; i++) {
+          wraps[i].textContent = wraps[i].getAttribute('data-src') || '';
+          wraps[i].removeAttribute('data-processed');
+          nodes.push(wraps[i]);
+        }
+        mm.run({ 'nodes': nodes }).catch(function () { /* keep the last render */ });
+      }, function () { /* module never loaded */ });
+    }
+
+    var themeBtn = d.getElementById('_theme-toggle-mobile');
+    if (themeBtn) themeBtn.addEventListener('click', rerender);
+
+    var pushStateEl = d.getElementsByTagName('hy-push-state')[0];
+    decorate();
+    if (pushStateEl) {
+      pushStateEl.addEventListener('hy-push-state-load', decorate);
+      pushStateEl.addEventListener('hy-push-state-after', decorate);
+    }
+  }(window, document);
+
 </script>
 {% comment %}
 <!-- Example for the CloudFlare mail protection script.
