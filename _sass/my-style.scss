@@ -814,3 +814,12 @@ article.post {
   }
 }
 
+
+/* === last modified date, right-aligned under the post title === */
+.post-date {
+  .post-modified {
+    float: right;
+    color: var(--gray-text);
+    font-size: 0.8em;
+  }
+}

@@ -2,6 +2,7 @@
 layout: post
 title:  "Markdown 语法速查"
 image: /assets/img/blog/Markdown.png
+modified: 2026-11-04
 description: >
   Markdown 写作速查：标题、图片、表格、代码块、按钮、键盘徽标、消息栏与 mermaid 图表的写法一页通。
 author: author2

@@ -69,6 +69,7 @@ from_to_separator:     '–'
 date_formats:
   post:                '%Y年%-m月%-d日'
   related_post:        '%Y年%-m月%-d日'
+  modified:            '%Y年%-m月%-d日'
   list_group_by:       '%Y'
   list_entry:          '%-m月%-d日'
   project:             '%Y'
