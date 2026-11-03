@@ -1,15 +1,15 @@
 ---
 layout: post
-title:  "Markdown Syntax"
+title:  "Markdown 语法速查"
 image: /assets/img/blog/Markdown.png
 description: >
-  Markdown is a easy expression of text.
+  Markdown 写作速查：标题、图片、表格、代码块、按钮、键盘徽标、消息栏与 mermaid 图表的写法一页通。
 author: author2
 comments: true
 ---
-Below is just about everything you'll need to style in the theme. Check the source code to see the many embedded elements within paragraphs.
+本页是本站支持的 Markdown 写法速查，每个小节的展示效果就是实际渲染结果——查看源码即可复制写法。
 
-## HTML Elements
+## 标题与正文
 
 # Heading 1
 
@@ -23,49 +23,52 @@ Below is just about everything you'll need to style in the theme. Check the sour
 
 ###### Heading 6
 
-### Body text
+正文段落里可以用常用的行内样式：**加粗**、*斜体*、~~删除线~~、`行内代码`、[超级链接](https://www.knightboy.cn/)。上标与下标用 HTML 标签：5<sup>3</sup> = 125、水是 H<sub>2</sub>O。
 
-Lorem ipsum dolor sit amet, test link adipiscing elit. **This is strong**. Nullam dignissim convallis est. Quisque aliquam.
+## 图片
 
-![Smithsonian Image](/assets/img/blog/ext/markdown-3d.gif)
+文章里的图片点击可进入全屏预览（灯箱）。一篇文章有多张图时，可以左右箭头或方向键切换，`Esc` 退出。
+
+![Markdown 书写示例](/assets/img/blog/ext/markdown-3d.gif)
 {: .image-right}
 
-*This is emphasized*. Donec faucibus. Nunc iaculis suscipit dui. 5<sup>3</sup> = 125. Water is H<sub>2</sub>O. Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. The New York Times (That’s a citation). Underline.Maecenas ornare tortor. Donec sed tellus eget sapien fringilla nonummy. Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus.
+![Markdown](/assets/img/blog/Markdown.png)
+{: .image}
+一行简单文字即可插图：`![图片说明](图片地址)`，下面那行 `{: .image-right}` 控制浮动方向。
 
-HTML and CSS are our tools. Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus. Praesent mattis, massa quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget metus.
+## 引用与列表
 
-### Blockquotes
+> 引用块的写法：行首加 `>`。可以多行，也可以嵌套。
+>
+> > 这是嵌套引用。
 
-> Lorem ipsum dolor sit amet, test link adipiscing elit. Nullam dignissim convallis est. Quisque aliquam.
+有序列表：
 
-## List Types
-
-### Ordered Lists
 1. Item one
    1. sub item one
    2. sub item two
    3. sub item three
 2. Item two
 
-### Unordered Lists
+无序列表：
+
 * Item one
 * Item two
 * Item three
 
-## Tables
+## 表格
 
 | Header1 | Header2 | Header3 |
 |:--------|:-------:|--------:|
 | cell1   | cell2   | cell3   |
 | cell4   | cell5   | cell6   |
-|----
-| cell1   | cell2   | cell3   |
-| cell4   | cell5   | cell6   |
-|=====
-| Foot1   | Foot2   | Foot3
-{: rules="groups"}
 
-## Code Snippets
+冒号的位置决定对齐方向：`:---` 居左、`:---:` 居中、`---:` 居右。
+
+## 代码块
+
+三个反引号开头结尾，第一个反引号后写语言名（如 `css`）。代码块右上角有语言标签，鼠标悬停出现复制按钮。
+
 ``` css
 #container {
   float: left;
@@ -74,8 +77,36 @@ HTML and CSS are our tools. Mauris a ante. Suspendisse quam sem, consequat at, c
 }
 ```
 
-## Buttons
-Make any link standout more when applying the `.btn` class.
+``` c++
+std::map<std::string, int> ranks;
+auto it = ranks.emplace("bob", 42);
+bool ok = it.second;  /* true, 新插入。 */
+```
+
+## mermaid 图表
+
+本站原生支持 mermaid：把代码块的语言名写成 `mermaid`，网页里会自动渲染成图形。
+
+``` mermaid
+flowchart TD
+    A[写 Markdown 源码] --> B{站点构建}
+    B -->|渲染| C[SVG 图形]
+    B -->|解析失败| D[显示错误源码]
+```
+
+``` mermaid
+sequenceDiagram
+    participant 你 as 写作者
+    participant 站 as 本站
+    你->>站: 提交 mermaid 代码块
+    站-->>你: 网页直接出图
+```
+
+更多图型与写法见《Mermaid 使用教程》。
+
+## 按钮
+
+给链接加 `.btn` 类即可突出显示。
 
 ``` html
 <a href="#" class="btn btn-success">Success Button</a>
@@ -87,15 +118,19 @@ Make any link standout more when applying the `.btn` class.
 <div markdown="0"><a href="#" class="btn btn-danger">Danger Button</a></div>
 <div markdown="0"><a href="#" class="btn btn-info">Info Button</a></div>
 
-## KBD
-You can also use `<kbd>` tag for keyboard buttons.
+## 键盘按键
+
+用 `<kbd>` 标签表示键盘按键：
 
 ``` html
 <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>
 ```
 
-Press <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to move your car. **Midtown Maddness!!**
+按 <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 移动你的车。**Midtown Madness!!**
 
-## Notices
-**Watch out!** You can also add notices by appending `{: .message}` to a paragraph.
+## 消息栏
+
+在段落末尾追加 `{: .message}` 可以生成提示栏，适合放注意事项或摘要：
+
+**注意！** 段落后加 `{: .message}` 即可生成这样的提示栏。
 {: .message}
