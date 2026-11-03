@@ -1,6 +1,7 @@
 ---
 title: "二分搜索"
 date: 2022-07-22
+modified: 2026-10-31
 image: /assets/img/blog/IMG_0326.JPG
 description: >
   search algorithm!

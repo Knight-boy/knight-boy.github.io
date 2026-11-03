@@ -5,6 +5,7 @@ description: >
   Watch out your password!!!
 author: author2
 comments: true
+modified: 2026-10-31
 ---
 
 互联网作为一个面向全世界的开放平台，不可避免会存在很多的漏洞，及时发现并修复漏洞对维护网站稳定性，避免或减少客户损失就显得分外重要，常见的Web攻击方式有：XSS、CSRF、Session攻击、点击劫持、DDos、脚本注入、SQL注入、DNS劫持、端口漏洞扫描、密码暴力破解等。下面简要分析了几种常见的Web攻击类型。

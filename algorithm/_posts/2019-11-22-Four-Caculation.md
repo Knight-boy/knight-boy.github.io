@@ -1,6 +1,7 @@
 ---
 title: "Four caculation"
 date: 2019-11-22
+modified: 2026-10-31
 image: /assets/img/blog/IMG_0269.JPG
 description: >
   BigInteger Caculate

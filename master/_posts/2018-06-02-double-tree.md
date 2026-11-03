@@ -1,6 +1,7 @@
 ---
 title: 完全二叉树的遍历
 date: 2018-06-02
+modified: 2023-03-27
 image: /assets/img/blog/IMG_0381.JPG
 description: >
   tree-search!

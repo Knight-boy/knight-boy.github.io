@@ -1,6 +1,7 @@
 ---
 title:  "块格式化上下文(BFC)"
 date: 2018-08-16
+modified: 2019-04-05
 image: /assets/img/blog/default.png
 description: >
   The picture is not important, the important thing is the content.

@@ -1,6 +1,7 @@
 ---
 title: "浏览器的缓存机制"
 date: 2018-08-13
+modified: 2019-03-24
 image: /assets/img/blog/caching.png
 description: >
   No pain, no gains!

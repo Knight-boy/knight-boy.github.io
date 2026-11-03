@@ -1,6 +1,7 @@
 ---
 title: 最短路算法-bellmanford算法
 date: 2023-06-13
+modified: 2026-10-31
 image: /assets/img/blog/20240819004300.jpg
 description: >
   use bellmanford easily!

@@ -1,6 +1,7 @@
 ---
 title: "Stack Algorithm"
 date: 2021-08-03
+modified: 2023-03-27
 image: /assets/img/blog/IMG_0314.JPG
 description: >
   Stack Algorithm!

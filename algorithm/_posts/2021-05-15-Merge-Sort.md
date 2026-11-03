@@ -1,6 +1,7 @@
 ---
 title: "归并排序"
 date: 2021-05-15
+modified: 2026-10-31
 image: /assets/img/blog/IMG_0291.JPG
 description: >
   merge sort!

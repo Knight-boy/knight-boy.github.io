@@ -1,6 +1,7 @@
 ---
 title: "string algorithm"
 date: 2021-11-02
+modified: 2026-10-31
 image: /assets/img/blog/IMG_0272.JPG
 description: >
   常见字符串求解法

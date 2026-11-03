@@ -5,6 +5,7 @@ description: >
   从地址栏到页面呈现过程，从浏览器多进程到JS单线程，从JS单线程最后到JS运行机制
 author: author2
 comments: true
+modified: 2026-10-31
 ---
 
 ​	来源于[浏览器的工作原理：网络浏览器幕后揭秘](https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/)

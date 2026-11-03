@@ -1,6 +1,7 @@
 ---
 title: "know docker quickly"
 date: 2019-08-19
+modified: 2026-10-31
 image: /assets/img/blog/IMG_0382.JPG
 description: >
   what is docker?

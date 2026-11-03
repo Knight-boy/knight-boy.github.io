@@ -2,6 +2,7 @@
 layout: post
 title: "Slider Window"
 date: 2020-05-15
+modified: 2026-10-31
 image: /assets/img/blog/IMG_0275.JPG
 description: >
   Slider window algorithm!

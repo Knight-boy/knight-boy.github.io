@@ -1,6 +1,7 @@
 ---
 title: "BFS Algorithm"
 date: 2020-05-13
+modified: 2026-10-31
 image: /assets/img/blog/IMG_0317.JPG
 description: >
   an effective bfs algorithm frame!

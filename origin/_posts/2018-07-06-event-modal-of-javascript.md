@@ -1,6 +1,7 @@
 ---
 title: "Javascript中的事件模型"
 date: 2018-07-12
+modified: 2026-10-31
 image: /assets/img/blog/event.jpg
 description: >
   No pain, no gains!

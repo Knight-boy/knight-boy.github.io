@@ -1,6 +1,7 @@
 ---
 title: "CSS选择器的优先级"
 date: 2018-07-11
+modified: 2026-10-31
 image: /assets/img/blog/伪类.png
 description: >
   No pain, no gains!

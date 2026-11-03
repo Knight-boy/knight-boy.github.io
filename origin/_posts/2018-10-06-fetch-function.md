@@ -1,6 +1,7 @@
 ---
 title: "Fetch函数"
 date: 2018-10-06
+modified: 2026-10-31
 image: /assets/img/blog/default.png
 description: >
   Frame model! 

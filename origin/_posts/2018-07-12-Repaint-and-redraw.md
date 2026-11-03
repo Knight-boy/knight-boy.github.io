@@ -1,6 +1,7 @@
 ---
 title: "Repaint and redraw"
 date: 2018-07-12
+modified: 2019-03-24
 image: /assets/img/blog/webkitflow.png
 description: >
   No pain, no gains!

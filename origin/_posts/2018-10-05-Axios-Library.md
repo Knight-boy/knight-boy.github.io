@@ -1,6 +1,7 @@
 ---
 title: "Axios库"
 date: 2018-10-05
+modified: 2026-10-31
 image: /assets/img/blog/axios.png
 description: >
   Frame model! 

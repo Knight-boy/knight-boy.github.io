@@ -1,6 +1,7 @@
 ---
 title: 插入排序
 date: 2020-04-25
+modified: 2023-03-27
 image: /assets/img/blog/IMG_0264.JPG
 description: >
   insert sort!

@@ -1,6 +1,7 @@
 ---
 title: "浏览器兼容性问题"
 date: 2018-09-07
+modified: 2019-03-24
 image: /assets/img/blog/default.png
 description: >
   No pain, no gains!

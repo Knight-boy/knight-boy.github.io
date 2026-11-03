@@ -1,6 +1,7 @@
 ---
 title: "还原MVCPVM模式"
 date: 2018-08-26
+modified: 2019-06-04
 image: /assets/img/blog/MVC1.png
 description: >
   Frame model! 

@@ -1,6 +1,7 @@
 ---
 title: "DFS Algorithm"
 date: 2020-05-11
+modified: 2026-10-31
 image: /assets/img/blog/IMG_0289.JPG
 description: >
   use DFS easily!

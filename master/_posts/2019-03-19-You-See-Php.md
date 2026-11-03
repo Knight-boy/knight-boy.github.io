@@ -1,6 +1,7 @@
 ---
 title: "Php"
 date: 2019-03-19
+modified: 2026-10-31
 image: /assets/img/blog/php-logo.svg
 description: >
   php语言精粹

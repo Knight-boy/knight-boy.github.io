@@ -1,6 +1,7 @@
 ---
 title: "Linux 操作手册"
 date: 2019-03-06
+modified: 2019-11-26
 image: /assets/img/blog/linux.webp
 description: >
   常用命令整理中...

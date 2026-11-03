@@ -1,6 +1,7 @@
 ---
 title: 选择排序
 date: 2020-04-25
+modified: 2026-10-31
 image: /assets/img/blog/IMG_0263.JPG
 description: >
   selection sort!

@@ -5,6 +5,7 @@ description: >
   雅虎公司的优化网站性能的35条规则，被开发者称作'雅虎军规'
 author: author2
 comments: true
+modified: 2018-12-24
 ---
 
 来源于[Yahoo developer website](https://developer.yahoo.com/performance/rules.html?guccounter=1#menu)的加速网站性能的最佳实践！
