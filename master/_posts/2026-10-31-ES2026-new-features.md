@@ -1,6 +1,7 @@
 ---
 title: ES2026(ES17)的新功能
 date: 2026-10-31
+modified: 2026-10-31
 image: /assets/img/blog/es7-es8-cover.png
 description: >
   ECMA2026 New Features!
