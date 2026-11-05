@@ -823,3 +823,90 @@ article.post {
     font-size: 0.8em;
   }
 }
+
+
+/* === 上一篇 / 下一篇导航 ===================================================
+   Markup in _includes/body/post-nav.html, included from _layouts/post.html
+   right after the article. Two half-width cards: left = 上一篇（较早发布）,
+   right = 下一篇（较晚发布）; a missing side renders as an empty placeholder
+   so the present side keeps its half width. Colors come from theme CSS
+   variables, so the dark theme needs no extra rules. */
+.post-nav {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.5rem;
+
+  .post-nav-item {
+    flex: 1 1 0;
+    min-width: 0;
+
+    padding: 0.9rem 1.1rem;
+
+    border: 1px solid var(--border-color, rgba(127, 127, 127, 0.25));
+    border-radius: 8px;
+    background: var(--gray-bg);
+
+    color: inherit;
+    text-decoration: none;
+
+    transition: background 0.2s;
+
+    &:hover,
+    &:focus {
+      background: rgba(127, 127, 127, 0.14);
+      outline: none;
+    }
+
+    // 缺失的一侧：占位但不显示
+    &.empty {
+      visibility: hidden;
+    }
+  }
+
+  .post-nav-label {
+    display: block;
+
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+
+    color: var(--text-muted);
+  }
+
+  .post-nav-title {
+    display: block;
+
+    margin-top: 0.3rem;
+
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.4;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .next {
+    text-align: right;
+  }
+
+  // 窄屏纵向堆叠，标题恢复左对齐
+  @media (max-width: 763px) {
+    flex-direction: column;
+
+    .next {
+      text-align: left;
+    }
+  }
+}
+
+
+/* === 图片尺寸占位 ==========================================================
+   my-scripts.html 的 image-dimensions IIFE 会给正文图片补 width/height 属性
+   （取自然尺寸）。浏览器由这两个属性推导 aspect-ratio，在图片下载完成前就
+   预留正确的空间，消除加载时的布局抖动。height: auto 是必要配套——主题的
+   .content img 只有 max-width: 100%，没有它，固定 height 属性在窄屏下会把
+   图片压变形。头图（.content .img img，specificity 更高）不受影响。 */
+.content img {
+  height: auto;
+}

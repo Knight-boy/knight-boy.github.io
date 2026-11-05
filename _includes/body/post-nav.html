@@ -1,0 +1,46 @@
+{% comment %}
+上一篇 / 下一篇导航。由 _layouts/post.html 在正文之后引入。
+取法：优先同一分类（site.categories 按时间倒序），无分类则退回全站文章。
+约定：上一篇 = 阅读顺序上的前一章（发表较早），下一篇 = 较晚发表。
+列表是新到旧排列，所以当前文章的前一项是"较新"（下一篇），后一项是"较早"（上一篇）。
+{% endcomment %}
+{% assign nav_pool = null %}
+{% if page.categories.first %}
+  {% assign nav_pool = site.categories[page.categories.first] %}
+{% else %}
+  {% assign nav_pool = site.posts %}
+{% endif %}
+
+{% assign newer = null %}
+{% assign older = null %}
+{% assign is_current = false %}
+{% for p in nav_pool %}
+  {% if p.url == page.url %}
+    {% assign is_current = true %}
+  {% elsif is_current %}
+    {% unless older %}{% assign older = p %}{% endunless %}
+  {% else %}
+    {% assign newer = p %}
+  {% endif %}
+{% endfor %}
+
+{% if older or newer %}
+<nav class="post-nav" aria-label="文章导航">
+  {% if older %}
+  <a class="post-nav-item prev" href="{{ older.url | relative_url }}">
+    <span class="post-nav-label">&larr; 上一篇</span>
+    <span class="post-nav-title">{{ older.title }}</span>
+  </a>
+  {% else %}
+  <span class="post-nav-item prev empty"></span>
+  {% endif %}
+  {% if newer %}
+  <a class="post-nav-item next" href="{{ newer.url | relative_url }}">
+    <span class="post-nav-label">下一篇 &rarr;</span>
+    <span class="post-nav-title">{{ newer.title }}</span>
+  </a>
+  {% else %}
+  <span class="post-nav-item next empty"></span>
+  {% endif %}
+</nav>
+{% endif %}
