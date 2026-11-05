@@ -1,8 +1,8 @@
 {% if site.waline.enable %}
-<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+<link rel="stylesheet" href="/assets/vendor/waline/waline.css" />
 <div id="waline-thread"></div>
 <script type="module">
-  import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+  import { init } from '/assets/vendor/waline/waline.js';
   init({
     el: '#waline-thread',
     serverURL: '{{ site.waline.serverurl }}',
