@@ -804,47 +804,52 @@ It has two modes:
 
   /* === Mermaid diagrams ===================================================
      ```mermaid fences come through Rouge as a plain-text code block wrapped
-     in `.language-mermaid`; this IIFE lazily loads the mermaid ESM bundle
-     from jsdelivr on first use and swaps those blocks for rendered SVG.
-     Browsers without dynamic `import()` keep the plain code block (graceful
-     degradation, same when the CDN is unreachable). Diagrams re-render after
+     in `.language-mermaid`; this IIFE lazily loads the self-hosted mermaid
+     UMD bundle (assets/js/vendor/mermaid.min.js — the previous jsdelivr CDN
+     source was unreliable for CN visitors) on first use and swaps those
+     blocks for rendered SVG. Diagrams re-render after
      every hy-push-state navigation and re-color when the dark theme toggles
      (the toggle IIFE above runs its click handler first, so `body.dark-mode`
      is up to date here). */
   !function (w, d) {
     var ready = null; /* promise resolving to the mermaid module */
-    var MJS = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    var MJS = '/assets/js/vendor/mermaid.min.js'; /* UMD build, ~2.4 MB, fetched only on pages that use mermaid */
 
     function isDark() {
       return d.body.classList.contains('dark-mode');
     }
 
-    /* A top-level dynamic import() would be a SyntaxError on engines without
-       module support and kill THIS ENTIRE script block. Building it inside a
-       Function keeps the failure local and catchable. */
-    var importFn = null;
-    try { importFn = new Function('u', 'return import(u);'); } catch (e) { importFn = null; }
+    function init(mm) {
+      /* `useMaxWidth: true` (the default) stretches/squeezes every diagram
+         into the content column — wide sequence diagrams end up shrunk to
+         illegibility. Natural size + horizontal scroll instead. */
+      mm.initialize({
+        'startOnLoad': false,
+        'theme': isDark() ? 'dark' : 'default',
+        'flowchart': { 'useMaxWidth': false },
+        'sequence': { 'useMaxWidth': false },
+        'gantt': { 'useMaxWidth': false },
+        'class': { 'useMaxWidth': false },
+        'state': { 'useMaxWidth': false },
+        'pie': { 'useMaxWidth': false },
+        'journey': { 'useMaxWidth': false },
+        'gitGraph': { 'useMaxWidth': false }
+      });
+    }
 
     function getMermaid() {
       if (ready) return ready;
-      ready = importFn(MJS).then(function (m) {
-        var mm = m.default;
-        /* `useMaxWidth: true` (the default) stretches/squeezes every diagram
-           into the content column — wide sequence diagrams end up shrunk to
-           illegibility. Natural size + horizontal scroll instead. */
-        mm.initialize({
-          'startOnLoad': false,
-          'theme': isDark() ? 'dark' : 'default',
-          'flowchart': { 'useMaxWidth': false },
-          'sequence': { 'useMaxWidth': false },
-          'gantt': { 'useMaxWidth': false },
-          'class': { 'useMaxWidth': false },
-          'state': { 'useMaxWidth': false },
-          'pie': { 'useMaxWidth': false },
-          'journey': { 'useMaxWidth': false },
-          'gitGraph': { 'useMaxWidth': false }
-        });
-        return mm;
+      ready = new Promise(function (resolve, reject) {
+        if (w.mermaid) { init(w.mermaid); resolve(w.mermaid); return; }
+        var s = d.createElement('script');
+        s.src = MJS;
+        s.async = true;
+        s.onload = function () {
+          if (w.mermaid) { init(w.mermaid); resolve(w.mermaid); }
+          else reject(new Error('mermaid loaded but window.mermaid missing'));
+        };
+        s.onerror = function () { reject(new Error('mermaid script failed to load')); };
+        d.head.appendChild(s);
       });
       return ready;
     }
@@ -888,7 +893,6 @@ It has two modes:
     }
 
     function decorate() {
-      if (!importFn) return;
       var found = findBlocks();
       if (!found.length) return;
       /* mermaid's renderer keeps GLOBAL state — concurrent run() calls for
