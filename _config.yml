@@ -86,11 +86,11 @@ google_fonts:          Roboto+Slab:400|Noto+Sans:400,400i,700,700i
 
 # The text font. Expects a string that is a valid CSS font-family value.
 # To change font-weight, see _sass/variables.scss
-font:                  Noto Sans, Helvetica, Arial, sans-serif
+font:                  -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Helvetica, Arial, sans-serif
 
 # The font used for headings. Expects a string that is a valid CSS font-family value.
 # To change font-weight, see _sass/variables.scss
-font_heading:          Roboto Slab, Helvetica, Arial, sans-serif
+font_heading:          Roboto Slab, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif
 
 defaults:
   - scope:
@@ -151,7 +151,9 @@ hydejack:
   project_addons:      [about, newsletter, other]
 
   # If you do not use Google Fonts, set to `true`.
-  no_google_fonts:     false
+  # 2026-11: set to true — fonts are self-hosted (see _sass/my-style.scss
+  # and assets/fonts/); Google Fonts is blocked/slow for CN visitors.
+  no_google_fonts:     true
 
   # Set to `true` if you don't want to show an icon indicating external links
   no_mark_external:    false
