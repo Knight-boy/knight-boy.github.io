@@ -1089,6 +1089,116 @@ It has two modes:
     }
   }(window, document);
 
+  /* === Share buttons ======================================================
+     _includes/body/post-share.html renders a row of buttons below the
+     article. Handlers use document-level delegation, so they survive
+     hy-push-state navigation, and the share URL/title are read at click
+     time rather than baked into the markup. WeChat shares via a scan
+     code: the self-hosted qrcode-generator bundle is lazy-loaded on
+     first use, same pattern as mermaid. Native share (more) is only
+     revealed where navigator.share exists. */
+  !function (w, d) {
+    var QRSRC = '/assets/vendor/qrcode/qrcode.js';
+    var qrReady = null; /* promise resolving once window.qrcode is available */
+
+    function pageUrl() {
+      return w.location.origin + w.location.pathname;
+    }
+
+    function openPopup(url) {
+      w.open(url, 'share', 'width=640,height=480,toolbar=no,menubar=no,scrollbars=yes');
+    }
+
+    function copyLink() {
+      var url = pageUrl();
+      var fallback = function () {
+        var ta = d.createElement('textarea');
+        ta.value = url;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        d.body.appendChild(ta);
+        ta.select();
+        d.execCommand('copy');
+        d.body.removeChild(ta);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).catch(fallback);
+      } else fallback();
+    }
+
+    function loadQr() {
+      if (qrReady) return qrReady;
+      qrReady = new Promise(function (resolve, reject) {
+        if (w.qrcode) { resolve(w.qrcode); return; }
+        var s = d.createElement('script');
+        s.src = QRSRC;
+        s.async = true;
+        s.onload = function () {
+          if (w.qrcode) resolve(w.qrcode);
+          else reject(new Error('qrcode loaded but window.qrcode missing'));
+        };
+        s.onerror = function () { reject(new Error('qrcode script failed to load')); };
+        d.head.appendChild(s);
+      });
+      return qrReady;
+    }
+
+    function showWechatQr(url) {
+      loadQr().then(function (qrcode) {
+        /* overlay is rebuilt on every use; clicking anywhere dismisses */
+        var overlay = d.createElement('div');
+        overlay.className = 'share-qr-overlay';
+        var box = d.createElement('div');
+        box.className = 'share-qr-box';
+        var cap = d.createElement('p');
+        cap.textContent = '微信扫一扫，分享这篇文章';
+        box.appendChild(cap);
+        var wrap = d.createElement('div');
+        wrap.className = 'share-qr-svg';
+        var qr = qrcode(0, 'M');
+        qr.addData(url);
+        qr.make();
+        wrap.innerHTML = qr.createSvgTag({ cellSize: 4, margin: 8 });
+        box.appendChild(wrap);
+        overlay.appendChild(box);
+        overlay.addEventListener('click', function () {
+          d.body.removeChild(overlay);
+        });
+        d.body.appendChild(overlay);
+      }).catch(function () {});
+    }
+
+    function onClick(e) {
+      if (!e.target || !e.target.closest) return;
+      var btn = e.target.closest('[data-share]');
+      if (!btn) return;
+      var kind = btn.getAttribute('data-share');
+      var url = encodeURIComponent(pageUrl());
+      var title = encodeURIComponent(d.title);
+      if (kind === 'copy') {
+        copyLink();
+        btn.textContent = '已复制';
+        setTimeout(function () { btn.textContent = '复制链接'; }, 1600);
+      } else if (kind === 'native') {
+        if (navigator.share) navigator.share({ url: pageUrl(), title: d.title });
+      } else if (kind === 'wechat') {
+        showWechatQr(pageUrl());
+      } else if (kind === 'weibo') {
+        openPopup('https://service.weibo.com/share/share.php?url=' + url + '&title=' + title + '&searchpic=false');
+      } else if (kind === 'qzone') {
+        openPopup('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + url + '&title=' + title);
+      }
+    }
+
+    /* reveal the native share button only where the API exists (mobile) */
+    if (navigator.share) {
+      var nb = d.querySelector('[data-share="native"]');
+      if (nb) nb.hidden = false;
+    }
+
+    d.addEventListener('click', onClick);
+  }(window, document);
+
 </script>
 {% comment %}
 <!-- Example for the CloudFlare mail protection script.

@@ -1,0 +1,17 @@
+{% comment %}
+分享栏，由 _layouts/post.html 在正文之后引入。服务端只渲染按钮外壳；
+URL 和文案在点击时从 location/document 读取（hy-push-state 导航后自动正确）。
+点击行为在 _includes/my-scripts.html 的 share IIFE 里统一接管：
+  copy   → 复制链接;
+  wechat → 弹出二维码（懒加载自托管 /assets/vendor/qrcode/qrcode.js）;
+  weibo / qq → 打开对应平台的分享弹窗;
+  native → navigator.share（JS 检测到才显示按钮）。
+{% endcomment %}
+<div class="share-row" role="group" aria-label="分享本文">
+  <span class="share-label">分享：</span>
+  <button type="button" class="share-btn" data-share="copy">复制链接</button>
+  <button type="button" class="share-btn" data-share="native" hidden>更多</button>
+  <button type="button" class="share-btn" data-share="wechat">微信</button>
+  <button type="button" class="share-btn" data-share="weibo">微博</button>
+  <button type="button" class="share-btn" data-share="qzone">QQ</button>
+</div>

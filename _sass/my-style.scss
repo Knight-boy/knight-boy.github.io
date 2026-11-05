@@ -910,3 +910,82 @@ article.post {
 .content img {
   height: auto;
 }
+
+
+/* === Share row ============================================================
+   Buttons rendered by _includes/body/post-share.html below the article.
+   Click handling lives in the share IIFE in my-scripts.html. Colors come
+   from theme CSS variables, so it adapts to the dark theme for free. */
+.share-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+
+  margin-top: 2rem;
+
+  .share-label {
+    font-size: 0.82rem;
+
+    color: var(--text-muted);
+  }
+
+  .share-btn {
+    padding: 0.28rem 0.85rem;
+
+    border: 1px solid var(--border-color, rgba(127, 127, 127, 0.25));
+    border-radius: 999px;
+    background: transparent;
+
+    font-size: 0.82rem;
+
+    color: inherit;
+    cursor: pointer;
+
+    transition: background 0.2s;
+
+    &:hover,
+    &:focus {
+      background: rgba(127, 127, 127, 0.14);
+      outline: none;
+    }
+  }
+}
+
+/* --- WeChat QR overlay (created on click from the share IIFE) ------------- */
+.share-qr-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+}
+
+.share-qr-box {
+  padding: 1.4rem 1.4rem 1.1rem;
+
+  border-radius: 10px;
+
+  /* the QR itself must stay on a light background to remain scannable in
+     the dark theme, hence the explicit #fff instead of a theme variable */
+  background: #fff;
+  cursor: default;
+
+  p {
+    margin: 0 0 0.8rem;
+
+    font-size: 0.88rem;
+    text-align: center;
+
+    color: #333;
+  }
+
+  .share-qr-svg svg {
+    display: block;
+  }
+}
