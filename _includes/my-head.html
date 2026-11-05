@@ -24,5 +24,5 @@ Fallback in case JavaScript isn't enabled. Fill in `href`. You may have to adjus
 {% endcomment %}
 {% comment %} og:image 兜底：本 include 在 head/meta.html（jekyll-seo-tag）之后，
 带 image 的文章 seo-tag 的 og:image 排在前面，爬虫取第一个；缺图页面用这张默认横幅。 {% endcomment %}
-<meta property="og:image" content="{{ '/assets/img/blog/og-default.jpg' | relative_url }}">
-<meta name="twitter:image" content="{{ '/assets/img/blog/og-default.jpg' | relative_url }}">
+<meta property="og:image" content="{{ '/assets/img/blog/og-default.jpg' | absolute_url }}">
+<meta name="twitter:image" content="{{ '/assets/img/blog/og-default.jpg' | absolute_url }}">
