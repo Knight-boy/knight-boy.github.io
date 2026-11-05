@@ -1177,8 +1177,10 @@ It has two modes:
       var title = encodeURIComponent(d.title);
       if (kind === 'copy') {
         copyLink();
-        btn.textContent = '已复制';
-        setTimeout(function () { btn.textContent = '复制链接'; }, 1600);
+        /* the label lives in .share-txt so the icon span is untouched */
+        var label = btn.querySelector('.share-txt') || btn;
+        label.textContent = '已复制';
+        setTimeout(function () { label.textContent = '复制链接'; }, 1600);
       } else if (kind === 'native') {
         if (navigator.share) navigator.share({ url: pageUrl(), title: d.title });
       } else if (kind === 'wechat') {

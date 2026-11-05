@@ -2,16 +2,19 @@
 分享栏，由 _layouts/post.html 在正文之后引入。服务端只渲染按钮外壳；
 URL 和文案在点击时从 location/document 读取（hy-push-state 导航后自动正确）。
 点击行为在 _includes/my-scripts.html 的 share IIFE 里统一接管：
-  copy   → 复制链接;
+  copy   → 复制链接（icon-link）;
+  native → navigator.share（icon-earth，JS 检测到才显示）;
   wechat → 弹出二维码（懒加载自托管 /assets/vendor/qrcode/qrcode.js）;
-  weibo / qq → 打开对应平台的分享弹窗;
-  native → navigator.share（JS 检测到才显示按钮）。
+  weibo  → 微博分享弹窗（icon-sina-weibo）;
+  qzone  → QQ 分享弹窗（FontAwesome QQ 当前字形，inline SVG）。
+微信/QQ 没有现成字形，用 inline SVG 按官方品牌路径绘制。
+文案包在 .share-txt 里，JS 改「已复制」时只动它，不碰图标。
 {% endcomment %}
 <div class="share-row" role="group" aria-label="分享本文">
   <span class="share-label">分享：</span>
-  <button type="button" class="share-btn" data-share="copy">复制链接</button>
-  <button type="button" class="share-btn" data-share="native" hidden>更多</button>
-  <button type="button" class="share-btn" data-share="wechat">微信</button>
-  <button type="button" class="share-btn" data-share="weibo">微博</button>
-  <button type="button" class="share-btn" data-share="qzone">QQ</button>
+  <button type="button" class="share-btn" data-share="copy"><span class="icon-link" aria-hidden="true"></span><span class="share-txt">复制链接</span></button>
+  <button type="button" class="share-btn" data-share="native" hidden><span class="icon-earth" aria-hidden="true"></span><span class="share-txt">更多</span></button>
+  <button type="button" class="share-btn" data-share="wechat"><svg class="share-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/></svg><span class="share-txt">微信</span></button>
+  <button type="button" class="share-btn" data-share="weibo"><span class="icon-sina-weibo" aria-hidden="true"></span><span class="share-txt">微博</span></button>
+  <button type="button" class="share-btn" data-share="qzone"><svg class="share-svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"/></svg><span class="share-txt">QQ</span></button>
 </div>

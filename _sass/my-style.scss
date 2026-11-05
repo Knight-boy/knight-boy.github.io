@@ -931,6 +931,10 @@ article.post {
   }
 
   .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42em;
+
     padding: 0.28rem 0.85rem;
 
     border: 1px solid var(--border-color, rgba(127, 127, 127, 0.25));
@@ -948,6 +952,22 @@ article.post {
     &:focus {
       background: rgba(127, 127, 127, 0.14);
       outline: none;
+    }
+
+    /* icomoon glyphs sit on a tight line-height:1 grid; a slight bump keeps
+       them visually level with the button text */
+    > [class^="icon-"] {
+      font-size: 1.02em;
+    }
+
+    /* inline-SVG brand glyphs (wechat path licensed CC0 / qq from
+       FontAwesome Free), sized to match the icomoon font icons */
+    .share-svg {
+      height: 0.92em;
+      width: auto;
+      flex: none;
+
+      fill: currentColor;
     }
   }
 }
