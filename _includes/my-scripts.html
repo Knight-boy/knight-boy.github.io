@@ -1047,6 +1047,44 @@ It has two modes:
     d.addEventListener('click', onClick);
   }(window, document);
 
+  /* === Image dimensions ===================================================
+     Markdown body images ship without width/height attributes, so the page
+     reflows as each image loads (layout shift). This pass fills in the
+     natural dimensions as soon as they are known — immediately for cached
+     images, on load otherwise. Combined with `height: auto` for .content
+     img in my-style.scss, the attributes act as an aspect-ratio hint that
+     reserves the right space before the pixels arrive. Also adds
+     decoding=async (native lazy loading itself is already applied by the
+     theme pipeline). Re-runs after every hy-push-state navigation. */
+  !function (w, d) {
+    function fill(im) {
+      if (im.naturalWidth > 0 && !im.hasAttribute('width')) {
+        im.setAttribute('width', im.naturalWidth);
+        im.setAttribute('height', im.naturalHeight);
+      }
+    }
+
+    function enhance() {
+      var imgs = d.querySelectorAll('#_main img');
+      for (var i = 0; i < imgs.length; i++) {
+        var im = imgs[i];
+        if (im.closest && im.closest('hy-img')) continue;
+        if (im.classList.contains('avatar')) continue;
+        if (im.hasAttribute('width') && im.hasAttribute('height')) continue;
+        if (!im.hasAttribute('decoding')) im.setAttribute('decoding', 'async');
+        if (im.complete) fill(im);
+        else im.addEventListener('load', function () { fill(this); });
+      }
+    }
+
+    var pushStateEl = d.getElementsByTagName('hy-push-state')[0];
+    enhance();
+    if (pushStateEl) {
+      pushStateEl.addEventListener('hy-push-state-load', enhance);
+      pushStateEl.addEventListener('hy-push-state-after', enhance);
+    }
+  }(window, document);
+
 </script>
 {% comment %}
 <!-- Example for the CloudFlare mail protection script.
