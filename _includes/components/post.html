@@ -23,8 +23,11 @@
       <em class="post-meta-item-text">浏览量</em>
       <span class="waline-pageview-count" data-path="{{ post.url | relative_url }}"></span>
       {% if no_link_title %}{% if post.modified %}
-      {% assign modified_format = site.data.strings.date_formats.modified | default:'%Y年%-m月%-d日' %}
-      <time class="post-modified" datetime="{{ post.modified | date_to_xmlschema }}">最近修改 {{ post.modified | date:modified_format }}</time>
+      {% assign modified_tip = post.modified | date:'%Y年%-m月%-d日' %}
+      <time class="post-modified" datetime="{{ post.modified | date_to_xmlschema }}" title="上次更新 {{ modified_tip }}" data-tip="上次更新 {{ modified_tip }}">
+        <svg class="modified-svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 6.5v5.3l3.4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span>最近修改</span>
+      </time>
       {% endif %}{% endif %}
     </p>
 
