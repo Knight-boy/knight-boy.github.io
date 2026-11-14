@@ -536,6 +536,14 @@ It has two modes:
     var btn = d.getElementById('_search-toggle');
     if (!btn) return;
 
+    /* Register the button listener eagerly: build() runs lazily on first
+       open, so any listener created inside build() would leave the very
+       first click dead (nothing triggers the lazy init). */
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      openPanel();
+    });
+
     function esc(s) {
       return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
         .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -763,10 +771,6 @@ It has two modes:
           var first = results.querySelector('a.search-result');
           if (first) first.click();
         }
-      });
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        openPanel();
       });
     }
 
