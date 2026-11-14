@@ -102,10 +102,15 @@ $font-family:         {{ site.font         | default:"Noto Sans, Helvetica, Aria
   @import "my-inline";
   @import "my-style";
 
-  {% unless site.hydejack.no_google_fonts or site.no_google_fonts %}
+  {% if site.hydejack.no_google_fonts or site.no_google_fonts %}
+    {% comment %} Self-hosted fonts: keep the webfont names in the base stack
+       (see styles/inline.scss for rationale). {% endcomment %}
+    {% assign font = font %}
+    {% assign font_heading = font_heading %}
+  {% else %}
     {% assign font = font | split:',' | shift | join:',' %}
     {% assign font_heading = font_heading | split:',' | shift | join:',' %}
-  {% endunless %}
+  {% endif %}
 
   html { font-family: {{ font | default:"serif" }}; }
   h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: {{ font_heading | default:"serif" }}; }

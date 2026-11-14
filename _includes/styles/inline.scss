@@ -52,10 +52,19 @@ $font-family:         {{ site.font         | default:"Noto Sans, Helvetica, Aria
 @import "my-inline";
 // @import "my-style";
 
-{% unless site.hydejack.no_google_fonts or site.no_google_fonts %}
+{% if site.hydejack.no_google_fonts or site.no_google_fonts %}
+  {% comment %}
+  /* Self-hosted fonts: the webfonts are served from this site via @font-face
+     (my-style.scss), so the base stack keeps the webfont names from first
+     paint. The FontFaceObserver JS that adds `.font-active` is disabled
+     alongside Google Fonts, making the shift-based fallback unnecessary. */
+  {% endcomment %}
+  {% assign font2 = font %}
+  {% assign font_heading2 = font_heading %}
+{% else %}
   {% assign font2 = font | split:',' | shift | join:',' %}
   {% assign font_heading2 = font_heading | split:',' | shift | join:',' %}
-{% endunless %}
+{% endif %}
 
 html { font-family: {{ font2 | default:"serif" }}; }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: {{ font_heading2 | default:"serif" }}; }
