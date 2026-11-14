@@ -14,6 +14,13 @@
 })();
 </script>
 {% comment %}
+/* Preload the two first-paint font files (body regular + heading) so text
+   doesn't wait for the CSS-driven font discovery. crossorigin is required
+   for font preloads even for same-origin resources. */
+{% endcomment %}
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/noto-sans-latin.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/roboto-slab-latin-400.woff2">
+{% comment %}
 <!--
 Example for preloading custom assets:
 Fill in `href`. You may have to adjust `as` and `onload`/`rel`, depending on content.

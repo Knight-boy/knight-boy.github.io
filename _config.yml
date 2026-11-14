@@ -151,7 +151,10 @@ hydejack:
   project_addons:      [about, newsletter, other]
 
   # If you do not use Google Fonts, set to `true`.
-  no_google_fonts:     false
+  # 2026-11-15: true — fonts are self-hosted via @font-face in _sass/my-style.scss
+  # (latin subset woff2 in assets/fonts/). Family names in `font`/`font_heading`
+  # are unchanged, so rendering is identical, only the download source differs.
+  no_google_fonts:     true
 
   # Set to `true` if you don't want to show an icon indicating external links
   no_mark_external:    false
