@@ -7,6 +7,7 @@
 ### 2026-11-15
 
 * 页脚文案“Maintained by”改为“Powered by”
+* 字体自托管：Noto Sans 与 Roboto Slab 的 latin 子集 woff2（共约 89KB）移入 `assets/fonts/`，关闭 Google Fonts 引用，首屏字体加 preload；同步修正 `no_google_fonts` 下的字体栈 Liquid 守卫，观感不变
 
 ### 2026-11-14
 
