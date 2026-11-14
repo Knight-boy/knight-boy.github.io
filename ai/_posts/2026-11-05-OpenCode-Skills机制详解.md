@@ -1,6 +1,7 @@
 ---
-title: "OpenCode Skills 机制详解"
+title: "Skills 机制详解"
 date: 2026-11-05
+image: /assets/img/blog/w3m.png
 modified: 2026-11-05
 description: >
   OpenCode 的 Skills 扩展机制：按需加载的说明书如何节省上下文、SKILL.md 的结构与 front matter、发现位置与优先级、权限控制，以及与 Agent、命令、AGENTS.md 的分工。附本站真实技能案例。

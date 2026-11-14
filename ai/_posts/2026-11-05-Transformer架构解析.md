@@ -1,6 +1,7 @@
 ---
 title: "Transformer 架构解析"
 date: 2026-11-05
+image: /assets/img/blog/20240819004803.jpg
 modified: 2026-11-05
 description: >
   拆开 Transformer 本体：总体结构与三种形态、embedding 与位置编码、自注意力的 QKV 完整机制与因果掩码、多头并行、前馈网络与残差归一化、输出侧的投影与采样，以及它为什么战胜了 RNN。
