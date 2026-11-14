@@ -53,8 +53,8 @@ copyright:             >
 legal:
    - title:             站点声明
      href:              /impress/
-   - title:             Cookies 政策
-     href:              /cookies-policy/
+   - title:             隐私政策
+     href:              /privacy-policy/
 
 # Format of the permalinks
 permalink:             /:categories/:year-:month-:day-:title/
