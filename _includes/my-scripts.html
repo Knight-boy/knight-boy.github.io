@@ -282,17 +282,30 @@ It has two modes:
 
   /* === Floating back-to-top ===============================================
      Pinned to the bottom-right (markup in `_includes/body/menu.html`,
-     styles in my-style.scss). Shows only after scrolling past ~one screen. */
+     styles in my-style.scss). Shows only after scrolling past ~one screen.
+     The SVG ring around it doubles as a reading-progress indicator: the
+     circle carries pathLength="100", so its dash offset maps 0..100 to
+     "empty..full" and we only have to write one number per frame. */
   !function (w, d) {
     var btn = d.getElementById('_back-to-top');
     if (!btn) return;
+    var bar = btn.querySelector('.btt-ring-bar');
     var ticking = false;
 
     function update() {
       ticking = false;
-      var y = w.pageYOffset || d.documentElement.scrollTop || 0;
-      var threshold = Math.round((d.documentElement.clientHeight || 600) * 0.6);
+      var doc = d.documentElement;
+      var y = w.pageYOffset || doc.scrollTop || 0;
+      var viewport = doc.clientHeight || 600;
+      var threshold = Math.round(viewport * 0.6);
       btn.classList[y > threshold ? 'add' : 'remove']('show');
+      if (bar) {
+        var max = (doc.scrollHeight || 0) - viewport;
+        var progress = max > 0 ? y / max : 0;
+        if (progress < 0) progress = 0;
+        if (progress > 1) progress = 1;
+        bar.style.strokeDashoffset = String(100 - progress * 100);
+      }
     }
 
     function onScroll() {
@@ -311,6 +324,8 @@ It has two modes:
     });
 
     w.addEventListener('scroll', onScroll, { 'passive': true });
+    /* Page height changes on resize (and on late image loads), so refresh. */
+    w.addEventListener('resize', onScroll, { 'passive': true });
     update();
   }(window, document);
 

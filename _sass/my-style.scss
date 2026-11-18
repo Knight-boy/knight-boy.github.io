@@ -275,6 +275,40 @@ a.back-to-top .icon-arrow-top2 {
   text-shadow: 0 0 .5px currentColor;
 }
 
+// Reading-progress ring hugging the button (SVG in `body/menu.html`).
+// The track is the faint full circle, the bar is the coloured arc whose
+// `stroke-dashoffset` is written from `my-scripts.html` (0..100 scale via
+// pathLength). The negative top/left offsets keep it 0.375rem outside the
+// 2.75rem button, and everything is in rem so it scales with Hydejack's
+// responsive root font size.
+a.back-to-top .btt-ring {
+  position: absolute;
+  top: -0.375rem;
+  left: -0.375rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  pointer-events: none;
+  transform: rotate(-90deg); // start the arc at 12 o'clock
+}
+
+a.back-to-top .btt-ring-track,
+a.back-to-top .btt-ring-bar {
+  fill: none;
+  stroke-width: 2.4;
+}
+
+a.back-to-top .btt-ring-track {
+  stroke: var(--text-muted);
+  stroke-opacity: 0.3;
+}
+
+a.back-to-top .btt-ring-bar {
+  stroke: var(--body-color);
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+
 // ============================================================================
 // Drawer open state (mirrored into `html.drawer-open` from my-scripts):
 // when the drawer overlay spans the page, the TOC button and panel would
