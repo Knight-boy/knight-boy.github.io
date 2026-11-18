@@ -132,6 +132,7 @@ html.dark-mode-early body {
   }
 
   .highlight {
+    --cb-code-bg: #20242a;
     color: #d7dce1;
 
     .n, .nf, .nn, .o, .p {
@@ -423,8 +424,11 @@ article.post {
   }
 
   .highlight pre {
-    margin-left: 0;
-    margin-right: 0;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .highlight .cb-body {
     border-radius: 0 0 0.65rem 0.65rem;
   }
 }
@@ -491,6 +495,108 @@ article.post {
     color: var(--body-color);
     border-color: var(--body-color);
     outline: none;
+  }
+}
+
+// ============================================================================
+// Code block line numbers + collapse.
+// `my-scripts.html` wraps the <pre> in `.cb-body`, prepends a `.cb-linenos`
+// gutter, and — for blocks longer than ~20 lines — adds a toggle to `.cb-bar`.
+// ============================================================================
+.highlight {
+  --cb-code-bg: var(--gray-bg);
+
+  .cb-body {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    border-radius: 0 0 0.65rem 0.65rem;
+    overflow: hidden;
+  }
+
+  .cb-body pre {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .cb-linenos {
+    flex: none;
+    padding: 1rem 0.55rem 1rem 0.7rem;
+
+    font-family: var(--code-font-family);
+    font-size: 0.85em;
+    line-height: 1.4;
+    text-align: right;
+    white-space: pre;
+    font-variant-numeric: tabular-nums;
+
+    color: var(--text-muted);
+    background: var(--cb-code-bg);
+    border-right: 1px solid var(--border-color);
+
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .cb-actions {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .cb-toggle {
+    flex: none;
+    padding: 0.28rem 0.6rem;
+
+    font: inherit;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+
+    color: var(--menu-text);
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 0.4rem;
+    line-height: 1;
+
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .cb-toggle:hover,
+  .cb-toggle:focus {
+    color: var(--body-color);
+    border-color: var(--body-color);
+    outline: none;
+  }
+
+  &.cb-collapsed {
+    .cb-linenos,
+    pre {
+      max-height: 23rem;
+    }
+
+    .cb-linenos {
+      overflow: hidden;
+    }
+
+    pre {
+      /* Keep the horizontal scrollbar; only vertical overflow is clipped. */
+      overflow-y: hidden;
+    }
+  }
+
+  &.cb-collapsed .cb-body::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3.5rem;
+    pointer-events: none;
+    background: linear-gradient(to bottom, transparent, var(--cb-code-bg));
   }
 }
 

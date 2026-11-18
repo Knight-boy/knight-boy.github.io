@@ -407,7 +407,8 @@ It has two modes:
       e.stopPropagation();
       var btn = e.currentTarget;
       if (btn.getAttribute('data-busy')) return;
-      var block = btn.parentNode.parentNode;
+      var block = btn.closest ? btn.closest('.highlight') : null;
+      if (!block) return;
       var pre = block.querySelector('pre');
       var text = pre ? (pre.textContent || '').replace(/\n$/, '') : '';
       if (!text) return;
@@ -434,6 +435,36 @@ It has two modes:
       }
     }
 
+    var COLLAPSE_LINES = 20;
+
+    function countLines(pre) {
+      var text = (pre.textContent || '').replace(/\n$/, '');
+      return text ? text.split('\n').length : 0;
+    }
+
+    function buildGutter(lines) {
+      var gutter = d.createElement('div');
+      gutter.className = 'cb-linenos';
+      gutter.setAttribute('aria-hidden', 'true');
+      var nums = [];
+      for (var n = 1; n <= lines; n++) nums.push(n);
+      /* A single text node keeps the gutter cheap; `white-space: pre` and
+         the same line-height as the code keep every number on its line. */
+      gutter.textContent = nums.join('\n');
+      return gutter;
+    }
+
+    function toggleCode(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var btn = e.currentTarget;
+      var block = btn.closest ? btn.closest('.highlight') : null;
+      if (!block) return;
+      var collapsed = block.classList.toggle('cb-collapsed');
+      btn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      btn.textContent = collapsed ? '\u5C55\u5F00' : '\u6536\u8D77';
+    }
+
     function decorate() {
       var blocks = d.querySelectorAll('#_main .highlight');
       for (var i = 0; i < blocks.length; i++) {
@@ -444,7 +475,12 @@ It has two modes:
            the class). Skip any block whose ANCESTORS already have one — the
            outermost element is the only one that gets a bar. */
         if (block.parentElement && block.parentElement.closest && block.parentElement.closest('.highlight')) continue;
+        /* Mermaid fences are replaced by the diagram IIFE below; adding a
+           bar/gutter here would leave orphaned chrome after the swap. */
+        if ((block.className || '').indexOf('language-mermaid') > -1 || block.querySelector('.language-mermaid')) continue;
         if (block.getAttribute('data-cb')) continue;
+        var pre = block.querySelector('pre');
+        if (!pre) continue;
         block.setAttribute('data-cb', '1');
 
         var bar = d.createElement('div');
@@ -454,15 +490,37 @@ It has two modes:
         lang.className = 'cb-lang';
         lang.textContent = detectLang(block);
 
+        var actions = d.createElement('span');
+        actions.className = 'cb-actions';
+
+        var lines = countLines(pre);
+        if (lines > COLLAPSE_LINES) {
+          var toggle = d.createElement('button');
+          toggle.type = 'button';
+          toggle.className = 'cb-toggle';
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.textContent = '\u5C55\u5F00';
+          toggle.addEventListener('click', toggleCode);
+          actions.appendChild(toggle);
+          block.classList.add('cb-collapsed');
+        }
+
         var btn = d.createElement('button');
         btn.type = 'button';
         btn.className = 'cb-copy';
         btn.textContent = '\u590D\u5236';
         btn.addEventListener('click', copyCode);
 
+        actions.appendChild(btn);
         bar.appendChild(lang);
-        bar.appendChild(btn);
+        bar.appendChild(actions);
         block.insertBefore(bar, block.firstChild);
+
+        var body = d.createElement('div');
+        body.className = 'cb-body';
+        block.insertBefore(body, pre);
+        body.appendChild(pre);
+        if (lines) body.insertBefore(buildGutter(lines), pre);
       }
     }
 
