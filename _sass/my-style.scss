@@ -278,15 +278,17 @@ a.back-to-top .icon-arrow-top2 {
 // Reading-progress ring hugging the button (SVG in `body/menu.html`).
 // The track is the faint full circle, the bar is the coloured arc whose
 // `stroke-dashoffset` is written from `my-scripts.html` (0..100 scale via
-// pathLength). The negative top/left offsets keep it 0.375rem outside the
-// 2.75rem button, and everything is in rem so it scales with Hydejack's
-// responsive root font size.
+// pathLength). Centre it with 50% + negative margins: absolutely positioned
+// children resolve percentages against the *padding* box, so a top/left
+// offset would land 1px off because of the button's border. Everything is
+// in rem so it scales with Hydejack's responsive root font size.
 a.back-to-top .btt-ring {
   position: absolute;
-  top: -0.375rem;
-  left: -0.375rem;
+  top: 50%;
+  left: 50%;
   width: 3.5rem;
   height: 3.5rem;
+  margin: -1.75rem 0 0 -1.75rem; // half of width/height
   pointer-events: none;
   transform: rotate(-90deg); // start the arc at 12 o'clock
 }
